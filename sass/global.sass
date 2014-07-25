@@ -92,17 +92,23 @@ a,a:link
 
 // layout
 
-nav#sidebar
-  width: 360px
+#sidebar
+  width: 20rem
   position: absolute
   left: 0
   top: 0
   bottom: 0
   +background-image(linear-gradient(left, #efefef, #e1e1e1))
 
+  #nav>.ui.menu, #toc>.ui.menu
+    background-color: rgba(#fff,0.7)
+
+  #toc>.ui.menu
+    width: 100%
+
 #wrapper
   position: absolute
-  left: 360px
+  left: 20rem
   top: 0
   bottom: 0
   right: 0

@@ -7,31 +7,63 @@ block body
 
 
   nav#sidebar
+
     nav#nav
-      .ui.menu
+      .ui.menu.collapsed.mode.hidden
+        a.item.expand.button
+          i.icon.arrow.right
+      .ui.menu.expanded.mode
         .ui.dropdown.item
           i.icon.home
           i.icon.dropdown
           .menu
-            .item MozTW 官網
-        a.item
+            .item g0v 官網
+        a.item.view.help
           i.icon.help
-        a.item
+        a.item.view.source
           i.icon.github
-        a.right.item
+        a.right.item.collapse.button
           i.icon.arrow.left
+
     nav#topbar
       .ui.secondary.pointing.menu
-        a.item Mozilla 台灣社群
+        .item.expanded.mode 3du.tw
         .right.menu
-          a.item
+          a.item.view.table
             i.icon.pencil
+    nav#toc
+      .ui.vertical.menu
+        a.item.link.sample
+          span.expanded.mode 7/26 萌典演講後小松
+          i.icon.file
 
   #wrapper
 
-    iframe#iframe(src="https://g0v.hackpad.com/8-moed5ct?r=2#8-moed5ct")
+    iframe#iframe(src="https://g0v.hackpad.com/726--rGMTn4s6Di9")
 
 block script
-  //-script.
-    $("#navbar .home").addClass("active");
-    $("#sidebar .all").addClass("active");
+  script.
+    $("#nav .collapse.button").on("click tap", function(){
+      $("#sidebar").width("3rem");
+      $("#wrapper").css("left","3rem");
+      $(".expanded.mode").hide();
+      $(".collapsed.mode").show();
+      });
+    $("#nav .expand.button").on("click tap", function(){
+      $("#sidebar").width("20rem");
+      $("#wrapper").css("left","20rem");
+      $(".expanded.mode").show();
+      $(".collapsed.mode").hide();
+      });
+    $("#nav .view.help").on("click tap", function(){
+      $("#iframe").attr("src","http://newshelper.g0v.tw/")
+      });
+    $("#nav .view.source").on("click tap", function(){
+      $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today")
+      });
+    $("#topbar .view.table").on("click tap", function(){
+      $("#iframe").attr("src","https://ethercalc.org/3du")
+      });
+    $("#toc .link.sample").on("click tap", function(){
+      $("#iframe").attr("src","https://g0v.hackpad.com/726--rGMTn4s6Di9")
+      });
