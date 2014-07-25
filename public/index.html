@@ -105,7 +105,7 @@
           var got_title = false
           var depth = 0 // if depth == 1, link should in accordion
           
-          var link_tpl_source ='<a href="{{url}}" target="iframe" class="item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
+          var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
           var link_tpl = Handlebars.compile(link_tpl_source);
           
           var add_link = function(row){
