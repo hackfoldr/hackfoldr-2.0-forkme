@@ -1,4 +1,4 @@
-g0v tour guide 零時政府導覽小精靈（名稱暫訂）
+The New Hackfoldr for MozTW
 ============
 Using:
 * Sass

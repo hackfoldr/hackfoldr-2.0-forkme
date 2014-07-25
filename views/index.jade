@@ -1,7 +1,7 @@
 extends _template
 
 block title
-  | moztw
+  | Mozilla MakerSpace
 
 block body
 
@@ -83,14 +83,14 @@ block script
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").show();
-      $("#sidebar i.icon").addClass("collpased");
+      $("#sidebar i.icon").addClass("collapsed");
       });
     $("#nav .expand.button").on("click tap", function(){
       $("#sidebar").width("20rem");
       $("#wrapper").css("padding-left","20rem");
-      $(".expanded.mode").show();
+      $(".expanded.mode").css("display","");
       $(".collapsed.mode").hide();
-      $("#sidebar i.icon").removeClass("collpased");
+      $("#sidebar i.icon").removeClass("collapsed");
       });
 
     // about me buttons
@@ -100,6 +100,9 @@ block script
     $("#nav .view.source").on("click tap", function(){
       $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
       });
+
+    // firefox fix for iframe initial size
+    $("#wrapper .frame").addClass("normal size");
 
     // zoom in buttons
     $("#nav .zoom.dropdown .normal").on("click tap", function(){
