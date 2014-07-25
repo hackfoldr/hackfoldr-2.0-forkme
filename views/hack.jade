@@ -1,0 +1,159 @@
+extends _template
+
+block title
+  | hackspace
+
+block body
+
+  nav#nav
+    .ui.menu.inverted
+      a.item.panel(href="hack-panel.html") g0v 黑客
+      //-.ui.dropdown.item 坑
+        i.icon.dropdown
+        .menu
+          .item(href="") 我挖的
+            .ui.label 0
+          .item(href="") 我正在填
+            .ui.label.orange 2/3
+          .item(href="") 我感興趣的
+            .ui.label.orange 0/5
+            i.icon.right.arrow
+            .menu
+              .item(href="") 介面設計
+                .ui.label.orange 0/5
+              .item(href="") 企畫
+                .ui.label 0
+              .item(href="") 設定
+                i.icon.setting
+          .item(href="") 所有坑
+            .ui.label.orange 10/999
+      .ui.dropdown.item 坑
+        i.icon.dropdown
+        .menu
+          .item(href="",ng-show="login=='done'") 動民主
+          .item(href="",ng-show="login=='done'") 零時通關
+          .item(href="",ng-show="login=='done'") 公民分類帽
+          .item(href="") 所有坑
+            .ui.label 999
+          .item(href="") 所有專案
+            .ui.label 99
+          .item(href="") 所有零感
+            .ui.label 88
+          .item(href="",ng-show="login=='done'") 設定
+            i.icon.setting
+      .ui.dropdown.item 資源
+        i.icon.dropdown
+        .menu
+          .item(href="") 文創授權中心
+            i.icon.external.url.sign
+          .item(href="") 軟體應用中心
+            i.icon.external.url.sign
+          .item(href="") 資料集
+            i.icon.external.url.sign
+          .item(href="") API
+            i.icon.external.url.sign
+          .item(href="") 模版
+            i.icon.external.url.sign
+          .item(href="") 教學文件
+            i.icon.external.url.sign
+          .item(href="") 國策智庫
+            i.icon.external.url.sign
+          .item(href="") g0v 黑客
+            .ui.label 500
+          .item(href="") 相關公民團體
+            .ui.label 20
+          .item(href="") 相關募資平台
+            .ui.label 10
+      .ui.dropdown.item 協作
+        i.icon.dropdown
+        .menu
+          .item(href="") github 動態
+            i.icon.external.url.sign
+          .item(href="") hackpad 動態
+            i.icon.external.url.sign
+          .item(href="") hackfoldr 動態
+            i.icon.external.url.sign
+          .item(href="") google drive 動態
+            i.icon.external.url.sign
+      .ui.dropdown.item 討論
+        i.icon.dropdown
+        .menu
+          .item(href="") irc 聊天室
+          .item(href="") google groups 郵件群組
+          .item(href="") discourse 新後勤中心
+          .item(href="") facebook 後勤中心
+            i.icon.external.url.sign
+          .item(href="") google+ 社群
+            i.icon.external.url.sign
+      .ui.dropdown.item 松
+        i.icon.dropdown
+        .menu
+          .item(href="") 即將舉行
+            .ui.label.teal 1
+          .item 歷屆大松
+            i.icon.right.arrow
+            .menu
+              .item(href="") hackath8n
+              .item(href="") hackath7n
+              .item(href="") hackath6n
+              .item(href="") hackath5n
+              .item(href="") hackath4n
+              .item(href="") hackath3n
+              .item(href="") hackath2n
+              .item(href="") hackath1n
+              .item(href="") hackath0n
+          .item(href="") 歷屆萌典松
+          .item(href="") 小松
+          .item(href="") 行事曆
+      .ui.dropdown.item 我
+        i.icon.dropdown
+        .menu
+          a(href="hack-panel-resume.html",ng-show="login=='done'").item.resume.login.done 黑客履歷
+          a(href="hack-panel-leve1up.html").item.leve1up leve1up
+          a(href="hack-panel-hat.html").item.hat 分類帽
+          a(href="hack-panel-guide.html").item.guide 零時導遊
+      .right.menu
+        a.item(href="",ng-show="login=='no'",ng-click="login='yes'").login.no 登入
+        .ui.dropdown.item(ng-show="login=='done'").login.done ETBlue
+          i.icon.dropdown
+          .menu
+            .item 顯示於列表
+              .ui.label.green 是
+            .item 小天使模式
+              .ui.label.green 開啟
+            .item 新坑通知
+              .ui.label.red 關閉
+            .item(href="") 設定
+              i.icon.setting
+            a(ng-click="login='no'").item 登出
+        .ui.dropdown.item 中文
+          i.icon.dropdown
+          .menu
+            .item 中文
+            .item English
+        a.item(href="g0v.tw-achievement-culture.html") 官網
+          i.icon.right
+
+  block hackspace
+
+    section#guide
+      include _hack-login
+
+      div(ng-show="login=='yes'")
+        p
+          a(href="hack-guide-software.html") [mockup comments] 假設 user 成功登入，且是新帳號，前往技術部的問候
+            i.icon.right.arrow
+        p
+          a(href="hack-panel.html",ng-click="login='done'") [mockup comments] 假設 user 成功登入，且是舊帳號，前往個人主控台
+            i.icon.right.arrow
+        p
+          a(href="",ng-click="login='no'") [mockup comments] 假設 user 選擇保持匿名，隱藏本登入區塊，但 nav bar 出現登入按鈕
+            i.icon.up.arrow
+
+      .ui.horizontal.divider(ng-show="login=='yes'") 或
+
+      p 直接填坑！試試手氣吧：
+
+      include _hack-lucky
+
+      p [mockup comments] 按了好手氣後，會隨機顯示最新一期零時坑報中的該部門底下的三個坑，同樣按鈕再按一次可以洗牌

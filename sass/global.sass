@@ -1,0 +1,177 @@
+@import compass/css3
+
+html
+  font-size: 18px
+  font-family: '微軟正黑體', sans-serif
+  color: #333
+
+html, body, div, nav, section, article, header, footer, h1, h2, h3, h4
+  margin: 0
+  padding: 0
+  line-height: 1em
+  +box-sizing(border-box)
+
+p
+  line-height: 1.5em
+
+a,a:link
+  text-decoration: none
+  color: inherit
+  &.with.padding
+    padding: 0.5em
+  &.block.display
+    display: block
+
+.ui.menu
+  margin: 0
+
+#nav .ui.menu
+  .menu .item
+    i.icon
+      margin: 0 0 0 1rem
+
+// patch semantic ui black active button bug
+.ui.button.black.active
+  background-color: #5C6166
+  color: #FFF
+
+// make semantic ui avatar images fit in menu and buttons
+.ui.menu .item, .ui.button
+  .avatar
+    +box-sizing(border-box)
+    margin: -0.5rem 0.5rem -0.5rem 0
+
+// add a custom color of label
+.ui.label.white
+  background: none
+
+// float element
+.float.right
+  float: right
+
+.align.right
+  text-align: right
+
+.single.line
+  line-height: 1em
+
+.light.yellow
+  background-color: rgba(yellow,0.1)
+
+.mobile.hide
+  @media screen and (max-width: 960px)
+    display: none
+
+.hidden
+  display: none
+
+.indent
+  margin-left: 2rem
+
+.ui.label, i.icon
+  &.right.margin
+    margin-right: 0.5rem
+  &.left.margin
+    margin-left: 0.5rem
+
+.ui.label
+  line-height: 1em
+  i.icon
+    margin: 0 0 0 0.5em
+
+.light.gray.extended.block
+  background-color: rgba(#000,0.03)
+  +border-bottom-radius(0.3rem)
+
+.two.line.height
+  line-height: 2em
+
+.no.margin
+  margin: 0
+
+
+// layout
+
+nav#sidebar
+  width: 360px
+  position: absolute
+  left: 0
+  top: 0
+  bottom: 0
+  +background-image(linear-gradient(left, #efefef, #e1e1e1))
+
+#wrapper
+  position: absolute
+  left: 360px
+  top: 0
+  bottom: 0
+  right: 0
+  +box-shadow(0 0 0.5rem rgba(#000,0.5))
+
+  #iframe
+    width: 100%
+    height: 100%
+    margin: 0 0 -5px 0
+    border: 0
+
+// old
+#software
+  .ui.image
+    width: 5rem
+    height: 5rem
+    float: left
+    margin-left: 1rem
+  .summary
+    margin-left: 7rem
+    .platform
+      .label
+        margin: 0.2rem
+#moc
+  .item
+    margin: 1rem
+  .download.ui.label
+    position: absolute
+    z-index: 9
+    left: -1rem
+
+#guide
+  margin: 1rem
+
+#panel
+  margin: 1rem
+  position: relative
+  @media screen and (max-width: 960px)
+    margin: 0
+  #menu
+    position: absolute
+    .section
+      &.title
+        padding: 0.5rem
+      &.menu
+        margin-bottom: 0.5rem
+  #content
+    margin-left: 17rem
+    @media screen and (max-width: 960px)
+      margin-left: 0
+    #pit-selector, #project-selector
+      padding: 1rem 0
+      @media screen and (max-width: 960px)
+        padding: 1rem
+      .ui.form
+        margin-bottom: -1rem
+  #pit-id
+    td.detail
+      padding: 0.5rem
+    #social-share
+      padding: 1rem
+  #project-list
+    .action.buttons
+      margin: -0.5rem -0.5rem 0 0
+
+#panel, #guide
+  tr.detail
+    .ui.divider
+      margin: 0.25rem 0
+    p
+      line-height: 2rem
+      margin: 0

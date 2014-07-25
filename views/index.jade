@@ -1,0 +1,37 @@
+extends _template
+
+block title
+  | moztw
+
+block body
+
+
+  nav#sidebar
+    nav#nav
+      .ui.menu
+        .ui.dropdown.item
+          i.icon.home
+          i.icon.dropdown
+          .menu
+            .item MozTW 官網
+        a.item
+          i.icon.help
+        a.item
+          i.icon.github
+        a.right.item
+          i.icon.arrow.left
+    nav#topbar
+      .ui.secondary.pointing.menu
+        a.item Mozilla 台灣社群
+        .right.menu
+          a.item
+            i.icon.pencil
+
+  #wrapper
+
+    iframe#iframe(src="https://g0v.hackpad.com/8-moed5ct?r=2#8-moed5ct")
+
+block script
+  //-script.
+    $("#navbar .home").addClass("active");
+    $("#sidebar .all").addClass("active");

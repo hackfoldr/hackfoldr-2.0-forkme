@@ -1,0 +1,59 @@
+extends hack
+
+block hackspace
+  #guide.ui.form.segment(ng-init="login='done'")
+    p 嗨，ETBlue！您有軟體開發類的技能嗎？ - 來自技術部的問候
+    .inline.field
+      .ui.radio.checkbox
+        input#choice1(name="",type="radio")
+        label(for="choice1") 有，包括：
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") 資訊相關法律顧問
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") web / mobile app 企畫
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") 介面 / 視覺設計
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") web 前端工程
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") web 後端工程
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") 系統程式
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") iOS app 程式
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") Android app 程式
+    .inline.field.indent
+      .ui.checkbox
+        input#check1(name="",type="checkbox")
+        label(for="check1") 其他：
+      input(type="text",size="50",placeholder="以半形逗點 , 隔開")
+    .inline.field
+      .ui.radio.checkbox
+        input#choice1(name="",type="radio")
+        label(for="choice1") 沒有耶哈哈哈哈……問點別的，好嗎？
+    .ui.right.icon.labeled.button.green 下一步
+      i.icon.right.arrow
+
+  p
+    a(href="hack-guide-software-detail.html") [mockup comments] 假設 user 選有，且包含法律以外任一項，前往技術部細項頁面
+      i.icon.right.arrow
+  p
+    a(href="hack-guide-culture.html") [mockup comments] 假設 user 選沒有，或選有但只包含法律，前往文化部的問候
+      i.icon.right.arrow

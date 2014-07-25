@@ -1,0 +1,239 @@
+extends hack-panel
+
+block content
+  nav.ui.menu(ng-init="projectView='all';projectViewMode='normal'")
+    a(href="",ng-click="projectView='mine'",ng-class="{active:projectView=='mine'}",ng-show="login=='done'").item 我的
+      .ui.label.blue {{ projectCount.ongoing }}
+    a(href="",ng-class="{active:projectView=='all'}",ng-click="projectView='all'").item 所有專案
+      .ui.label 99
+    .right.menu
+      .item
+        .ui.icon.input
+          input(type="text",placeholder="搜尋...",ng-model="keyword")
+          i.search.link.icon
+
+  section#all(ng-show="projectView=='all' || login!='done'",ng-init="showFilter=false")
+    .ui.fluid.basic.accordion
+      .title.active
+        i.icon.dropdown
+        | 分類瀏覽
+      .content.active
+        .ui.menu
+          .ui.small.button.item 顯示適合我的
+          .ui.small.button.item 顯示所有
+          a.item(ng-click="showFilter=!showFilter") 設定詳細條件
+            i.icon.arrow.down(ng-show="showFilter==false")
+            i.icon.arrow.up(ng-show="showFilter==true")
+          .right.menu
+            .ui.icon.button.item
+              i.icon.left.arrow
+            .ui.dropdown.item 1
+              i.icon.dropdown
+              .menu
+                .item 1
+                .item 2
+                .item 3
+                .item 4
+            .ui.icon.button.item
+              i.icon.right.arrow
+        #project-selector(ng-show="showFilter==true").light.gray.extended.block
+          .ui.four.column.stackable.divided.grid
+            .column
+              .ui.form
+                .inline.field
+                  .ui.radio.checkbox
+                    input(checked="",type="checkbox")
+                    label 所有領域
+                .inline.field
+                  .ui.radio.checkbox
+                    input(type="checkbox")
+                    label 特定領域
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 新民主
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 立法院
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 媒體
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 教育
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 開放政府資料
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 勞工
+            //-.column
+              .ui.form
+                .inline.field
+                  .ui.radio.checkbox
+                    input(checked="",type="checkbox")
+                    label 所有形式
+                .inline.field
+                  .ui.radio.checkbox
+                    input(type="checkbox")
+                    label 特定形式
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 文創作品
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 應用軟體
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 資料集
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label api
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 模版
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 教學文件
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 政策智庫
+            .column
+              .ui.form
+                .inline.field
+                  .ui.radio.checkbox
+                    input(checked="",type="checkbox")
+                    label 所有部門
+                .inline.field
+                  .ui.radio.checkbox
+                    input(type="checkbox")
+                    label 特定部門
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label g0v 技術部
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label g0v 文化部
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label g0v 研究院
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label g0v 工人院
+            .column
+              .ui.form
+                .inline.field
+                  .ui.radio.checkbox
+                    input(checked="",type="checkbox")
+                    label 所有需求
+                .inline.field
+                  .ui.radio.checkbox
+                    input(type="checkbox")
+                    label 特定需求
+                .indent
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 前端
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 後端
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 資料
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label ios app
+                  .inline.field
+                    .ui.checkbox
+                      input(type="checkbox")
+                      label 設計
+            .column
+              .ui.form
+                .inline.field
+                  .ui.radio.checkbox
+                    input(checked="",type="checkbox")
+                    label 所有技術 / 工具
+                .inline.field
+                  .ui.radio.checkbox
+                    input(type="checkbox")
+                    label 特定技術 / 工具
+                .indent
+        #project-list
+          include _hack-project-select
+      .title
+        i.icon.dropdown
+        | 統計
+      .content
+        p 某種 data visulization 顯示各專案各類型個部門多少坑… etc.
+
+  section#mine(ng-show="projectView=='mine'")
+    .wrapper.for.angular.show.hide(ng-hide="login!='done'")
+      .ui.fluid.basic.accordion
+        .title.active(ng-click="projectViewMode='normal'")
+          i.icon.dropdown
+          | 進行中
+          .ui.label.blue {{ projectCount.ongoing }}
+        .content.active
+          table#project-list.ui.table.segment
+            tbody.ui.basic.accordion
+              //-include _hack-project-select-software
+              //-include _hack-project-select-culture
+        .title(ng-click="projectViewMode='archive'")
+          i.icon.dropdown
+          | 封存
+          .ui.label {{ projectCount.archived }}
+        .content
+          table#project-list.ui.table.segment
+            tbody.ui.basic.accordion
+              //-include _hack-project-select-software
+              //-include _hack-project-select-culture
+        .title
+          i.icon.dropdown
+          | 統計
+        .content
+          p 某種 data visulization 顯示各專案各類型個部門多少坑… etc.
+
+block script
+  script.
+    $("#nav .panel").addClass("active");
+    $("#menu .project").addClass("active");
+    $(".add.to").click(function(){
+      $(this).addClass("disabled");
+    });
+    $(".mark.as.done, .mark.as.active, .remove.from").click(function(){
+      $(this).addClass("disabled");
+      $(this).parents("tr").hide(2000);
+    });
+    $("#project-list .expand.button").click(function(){
+      $(this).toggleClass("active");
+      $(this).parents(".ui.segment").find("tr.hidden").toggle();
+    });
+
