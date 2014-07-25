@@ -1,9 +1,0 @@
-.align.right
-  .ui.icon.button.small.green(ng-show="pitView=='all'",ng-click="pitCount.ongoing=pitCount.ongoing+1").add.to
-    i.icon.add
-  .ui.icon.button.small.green(ng-show="pitView=='mine' && pitViewMode=='normal'",ng-click="pitCount.ongoing=pitCount.ongoing-1; pitCount.archived=pitCount.archived+1").mark.as.done
-    i.icon.checkmark.checked
-  .ui.icon.button.small(ng-show="pitView=='mine' && pitViewMode=='archive'",ng-click="pitCount.ongoing=pitCount.ongoing+1; pitCount.archived=pitCount.archived-1").mark.as.active
-    i.icon.undo
-  .ui.icon.button.small.black(ng-show="pitView=='mine'").remove.from
-    i.icon.remove

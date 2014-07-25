@@ -1,7 +1,0 @@
-
-<div class="align right">
-  <div ng-show="pitView=='all'" ng-click="pitCount.ongoing=pitCount.ongoing+1" class="ui icon button small green add to"><i class="icon add"></i></div>
-  <div ng-show="pitView=='mine' &amp;&amp; pitViewMode=='normal'" ng-click="pitCount.ongoing=pitCount.ongoing-1; pitCount.archived=pitCount.archived+1" class="ui icon button small green mark as done"><i class="icon checkmark checked"></i></div>
-  <div ng-show="pitView=='mine' &amp;&amp; pitViewMode=='archive'" ng-click="pitCount.ongoing=pitCount.ongoing+1; pitCount.archived=pitCount.archived-1" class="ui icon button small mark as active"><i class="icon undo"></i></div>
-  <div ng-show="pitView=='mine'" class="ui icon button small black remove from"><i class="icon remove"></i></div>
-</div>
