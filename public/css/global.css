@@ -178,4 +178,9 @@ a, a:link {
   -webkit-transform-origin: 0 0;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003139}}
+#toc .ui.accordion > .content {
+  padding: 0;
+}
+
 /*# sourceMappingURL=global.css.map */

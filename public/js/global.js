@@ -1,3 +1,3 @@
 $('.ui.dropdown').dropdown();
 //$('.ui.checkbox').checkbox();
-//$('.ui.accordion').accordion();
+$('.ui.accordion').accordion();

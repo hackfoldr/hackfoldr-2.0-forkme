@@ -41,6 +41,30 @@ block body
         a.item.link.sample
           span.expanded.mode 7/26 萌典演講後小松
           i.icon.file
+        .ui.accordion
+          .title.header.item.folder.sample
+            span.expanded.mode 討論區
+            i.icon.folder.closed
+            i.icon.folder.open.hidden
+          .content.menu
+            a.item.link.sample
+              span.expanded.mode google groups
+              i.icon.file
+            a.item.link.sample
+              span.expanded.mode google+ community
+              i.icon.file
+        .ui.accordion
+          .title.header.item.folder.sample
+            span.expanded.mode 歷屆黑客松
+            i.icon.folder.closed
+            i.icon.folder.open.hidden
+          .content.menu
+            a.item.link.sample
+              span.expanded.mode 7/26 萌典演講後小松
+              i.icon.file
+            a.item.link.sample
+              span.expanded.mode 7/26 萌典演講後小松
+              i.icon.file
 
   #wrapper
 
@@ -49,6 +73,7 @@ block body
 
 block script
   script.
+    $(".hidden").hide();
     $("#nav .collapse.button").on("click tap", function(){
       $("#sidebar").width("3rem");
       $("#wrapper").css("padding-left","3rem");
@@ -83,4 +108,7 @@ block script
       });
     $("#toc .link.sample").on("click tap", function(){
       $("#iframe").attr("src","https://g0v.hackpad.com/726--rGMTn4s6Di9")
+      });
+    $("#toc .folder.sample").on("click tap", function(){
+      $(this).children(".folder").toggle()
       });
