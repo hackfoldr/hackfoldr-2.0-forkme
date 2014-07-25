@@ -32,7 +32,7 @@ block body
 
     nav#topbar
       .ui.secondary.pointing.menu
-        .item.expanded.mode 3du.tw
+        .item.item-title.expanded.mode
         .right.menu
           a.link.item.view.table
             i.icon.pencil
@@ -40,33 +40,6 @@ block body
             i.icon.repeat
     nav#toc
       .ui.vertical.menu
-        a.item.link.sample
-          span.expanded.mode 7/26 萌典演講後小松
-          i.icon.file
-        .ui.accordion
-          .title.header.item.folder.sample
-            span.expanded.mode 討論區
-            i.icon.folder.closed
-            i.icon.folder.open.hidden
-          .content.menu
-            a.item.link.sample
-              span.expanded.mode google groups
-              i.icon.file
-            a.item.link.sample
-              span.expanded.mode google+ community
-              i.icon.file
-        .ui.accordion
-          .title.header.item.folder.sample
-            span.expanded.mode 歷屆黑客松
-            i.icon.folder.closed
-            i.icon.folder.open.hidden
-          .content.menu
-            a.item.link.sample
-              span.expanded.mode 7/26 萌典演講後小松
-              i.icon.file
-            a.item.link.sample
-              span.expanded.mode 7/26 萌典演講後小松
-              i.icon.file
 
   #wrapper
 
@@ -129,9 +102,79 @@ block script
       });
 
 
-    $("#toc .link.sample").on("click tap", function(){
-      $("#iframe").attr("src","https://g0v.hackpad.com/726--rGMTn4s6Di9");
-      });
-    $("#toc .folder.sample").on("click tap", function(){
-      $(this).children(".folder").toggle();
-      });
+    $.get('https://ethercalc.org/_/3du/csv').pipe(CSV.parse).done(function(rows){
+      var got_title = false
+      var depth = 0 // if depth == 1, link should in accordion
+
+      var link_tpl_source ='<a href="{{url}}" class="item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
+      var link_tpl = Handlebars.compile(link_tpl_source);
+
+      var add_link = function(row){
+        try{
+          var link_options = JSON.parse(row[2]);
+        }catch(e){
+          var link_options = {};
+        }
+        var context = {url: row[0], subject: row[1]};
+        var $link_el = $(link_tpl(context));
+        for(key in link_options){
+          $link_el.attr(key, link_options[key]);
+        }
+        if(depth == 1){
+          $('#toc .ui.accordion:last').find('.menu').append($link_el)
+        }else{
+          $('#toc .ui.vertical').append($link_el)
+        }
+      }
+      
+      var accordion_tpl_source = '<div class="ui accordion"><div class="title header item "><span class="expanded mode">{{title}}</span><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+      var accordion_tpl = Handlebars.compile(accordion_tpl_source);
+
+      var add_accordion = function(row){
+        try{
+          var options = JSON.parse(row[2]);
+        }catch(e){
+          var options = {};
+        }
+        var context = {title: row[1] };
+        var $accordion_el = $(accordion_tpl(context));
+        
+        $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
+          $accordion_el.find('.folder').toggle()
+        }})
+        
+        if(options.expand){
+          $accordion_el.accordion('open',0)
+        }
+      }
+
+      $.each(rows, function(row_index, row){
+        // if 1st and 2nd is empty then this a empty row 
+        if(row[0].trim().length === 0 && row[1].trim().length === 0){
+          return
+        }
+        
+        // now we have soming thing, should get title first
+        if(!got_title){
+
+          // TODO: need opt....
+          $.each(row, function(col_index, col){
+            col =  col.trim()
+
+            // get the MAGIC title 
+            if(!got_title && !col.match(/^#/) && col.length > 0) {
+              $('#topbar .item-title').html(col);
+              got_title = true;
+            }
+          })
+
+        } else {
+          if(row[0].length == 0){ // folder 
+            depth = 1
+            add_accordion(row)
+          }else{ // link
+            add_link(row)
+          }
+        }
+      }) 
+    })
