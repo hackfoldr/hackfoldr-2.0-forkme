@@ -16,10 +16,10 @@ block body
           i.icon.home
           i.icon.dropdown
           .menu
-            .item g0v 官網
-        a.item.view.help
+            a.link.item g0v 官網
+        a.link.item.view.help
           i.icon.help
-        a.item.view.source
+        a.link.item.view.source
           i.icon.github
         a.right.item.collapse.button
           i.icon.arrow.left
@@ -34,8 +34,10 @@ block body
       .ui.secondary.pointing.menu
         .item.expanded.mode 3du.tw
         .right.menu
-          a.item.view.table
+          a.link.item.view.table
             i.icon.pencil
+          a.item.refresh.table.hidden
+            i.icon.repeat
     nav#toc
       .ui.vertical.menu
         a.item.link.sample
@@ -81,41 +83,52 @@ block script
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").show();
-      $("#sidebar i.icon").addClass("collpased")
+      $("#sidebar i.icon").addClass("collpased");
       });
     $("#nav .expand.button").on("click tap", function(){
       $("#sidebar").width("20rem");
       $("#wrapper").css("padding-left","20rem");
       $(".expanded.mode").show();
       $(".collapsed.mode").hide();
-      $("#sidebar i.icon").removeClass("collpased")
+      $("#sidebar i.icon").removeClass("collpased");
       });
 
     // about me buttons
     $("#nav .view.help").on("click tap", function(){
-      $("#iframe").attr("src","http://newshelper.g0v.tw/")
+      $("#iframe").attr("src","http://newshelper.g0v.tw/");
       });
     $("#nav .view.source").on("click tap", function(){
-      $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today")
+      $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
       });
 
     // zoom in buttons
     $("#nav .zoom.dropdown .normal").on("click tap", function(){
-      $(".frame, #iframe").removeClass("large larger").addClass("normal size")
+      $(".frame, #iframe").removeClass("large larger").addClass("normal size");
       });
     $("#nav .zoom.dropdown .large").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal larger").addClass("large size")
+      $(".frame, #iframe").removeClass("normal larger").addClass("large size");
       });
     $("#nav .zoom.dropdown .larger").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal large").addClass("larger size")
+      $(".frame, #iframe").removeClass("normal large").addClass("larger size");
       });
 
+    // edit table
     $("#topbar .view.table").on("click tap", function(){
-      $("#iframe").attr("src","https://ethercalc.org/3du")
+      $("#iframe").attr("src","https://ethercalc.org/3du");
+      $("#topbar .table.item").toggle();
       });
+    $("#topbar .refresh.table").on("click tap", function(){
+      location.reload(true);
+      });
+    $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
+      $("#topbar .view.table").show();
+      $("#topbar .refresh.table").hide();
+      });
+
+
     $("#toc .link.sample").on("click tap", function(){
-      $("#iframe").attr("src","https://g0v.hackpad.com/726--rGMTn4s6Di9")
+      $("#iframe").attr("src","https://g0v.hackpad.com/726--rGMTn4s6Di9");
       });
     $("#toc .folder.sample").on("click tap", function(){
-      $(this).children(".folder").toggle()
+      $(this).children(".folder").toggle();
       });
