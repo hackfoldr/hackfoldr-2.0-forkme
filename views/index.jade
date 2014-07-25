@@ -74,18 +74,24 @@ block body
 block script
   script.
     $(".hidden").hide();
+
+    // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
       $("#sidebar").width("3rem");
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").show();
+      $("#sidebar i.icon").addClass("collpased")
       });
     $("#nav .expand.button").on("click tap", function(){
       $("#sidebar").width("20rem");
       $("#wrapper").css("padding-left","20rem");
       $(".expanded.mode").show();
       $(".collapsed.mode").hide();
+      $("#sidebar i.icon").removeClass("collpased")
       });
+
+    // about me buttons
     $("#nav .view.help").on("click tap", function(){
       $("#iframe").attr("src","http://newshelper.g0v.tw/")
       });
@@ -93,6 +99,7 @@ block script
       $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today")
       });
 
+    // zoom in buttons
     $("#nav .zoom.dropdown .normal").on("click tap", function(){
       $(".frame, #iframe").removeClass("large larger").addClass("normal size")
       });

@@ -272,3 +272,7 @@
 2014-07-25 15:17:19 overwrite public/css/global.css.map 
 2014-07-25 15:19:24 overwrite public/css/global.css 
 2014-07-25 15:19:24 overwrite public/css/global.css.map 
+2014-07-25 15:50:53     error sass/global.sass (Line 74: Invalid CSS after "none": expected expression (e.g. 1px, bold), was ";")
+2014-07-25 15:50:53 overwrite public/css/global.css 
+2014-07-25 15:51:03 overwrite public/css/global.css 
+2014-07-25 15:51:03 overwrite public/css/global.css.map 
