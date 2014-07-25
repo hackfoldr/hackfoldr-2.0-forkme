@@ -107,17 +107,17 @@ angular.module 'app.controllers' <[ui.state ngCookies]>
     $scope.collapsed = false
     $scope.sidebar = !$scope.sidebar
 
-.directive 'resize' <[$window]> ++ ($window) ->
-  (scope, element, attrs) ->
-    refresh-size = ->
-      scope.width = $window.innerWidth
-      scope.height = $window.innerHeight
-      scope.content-height = $window.innerHeight - $ element .offset!top
-
-    angular.element $window .bind 'resize' ->
-      scope.$apply refresh-size
-
-    refresh-size!
+# .directive 'resize' <[$window]> ++ ($window) ->
+#   (scope, element, attrs) ->
+#     refresh-size = ->
+#       scope.width = $window.innerWidth
+#       scope.height = $window.innerHeight
+#       scope.content-height = $window.innerHeight - $ element .offset!top
+# 
+#     angular.element $window .bind 'resize' ->
+#       scope.$apply refresh-size
+# 
+#     refresh-size!
 
 .directive 'ngxIframe' <[$parse]> ++ ($parse) ->
   link: ($scope, element, attrs) ->

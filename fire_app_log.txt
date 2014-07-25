@@ -290,3 +290,5 @@
 2014-07-25 19:15:20 overwrite public/css/global.css.map 
 2014-07-25 19:16:22 overwrite public/css/global.css 
 2014-07-25 19:16:22 overwrite public/css/global.css.map 
+2014-07-25 21:17:42     error livescripts/controllers.ls: Error: Parse error on line 5: Unexpected 'CREMENT'
+2014-07-25 21:17:42 overwrite public/js/controllers.js
