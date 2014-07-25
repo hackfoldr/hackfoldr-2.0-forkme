@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- libraries-->
+    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <!-- custom files-->
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <title>hackspace | g0v</title>
+  </head>
+  <body ng-app="g0v-tw" ng-init="login='yes'">
+    <nav id="nav">
+      <div class="ui menu inverted"><a href="hack-panel.html" class="item panel">g0v 黑客</a>
+        <div class="ui dropdown item">坑<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" ng-show="login=='done'" class="item">動民主</div>
+            <div href="" ng-show="login=='done'" class="item">零時通關</div>
+            <div href="" ng-show="login=='done'" class="item">公民分類帽</div>
+            <div href="" class="item">所有坑
+              <div class="ui label">999</div>
+            </div>
+            <div href="" class="item">所有專案
+              <div class="ui label">99</div>
+            </div>
+            <div href="" class="item">所有零感
+              <div class="ui label">88</div>
+            </div>
+            <div href="" ng-show="login=='done'" class="item">設定<i class="icon setting"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">資源<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">文創授權中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">軟體應用中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">資料集<i class="icon external url sign"></i></div>
+            <div href="" class="item">API<i class="icon external url sign"></i></div>
+            <div href="" class="item">模版<i class="icon external url sign"></i></div>
+            <div href="" class="item">教學文件<i class="icon external url sign"></i></div>
+            <div href="" class="item">國策智庫<i class="icon external url sign"></i></div>
+            <div href="" class="item">g0v 黑客
+              <div class="ui label">500</div>
+            </div>
+            <div href="" class="item">相關公民團體
+              <div class="ui label">20</div>
+            </div>
+            <div href="" class="item">相關募資平台
+              <div class="ui label">10</div>
+            </div>
+          </div>
+        </div>
+        <div class="ui dropdown item">協作<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">github 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">hackpad 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">hackfoldr 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">google drive 動態<i class="icon external url sign"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">討論<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">irc 聊天室</div>
+            <div href="" class="item">google groups 郵件群組</div>
+            <div href="" class="item">discourse 新後勤中心</div>
+            <div href="" class="item">facebook 後勤中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">google+ 社群<i class="icon external url sign"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">松<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">即將舉行
+              <div class="ui label teal">1</div>
+            </div>
+            <div class="item">歷屆大松<i class="icon right arrow"></i>
+              <div class="menu">
+                <div href="" class="item">hackath8n</div>
+                <div href="" class="item">hackath7n</div>
+                <div href="" class="item">hackath6n</div>
+                <div href="" class="item">hackath5n</div>
+                <div href="" class="item">hackath4n</div>
+                <div href="" class="item">hackath3n</div>
+                <div href="" class="item">hackath2n</div>
+                <div href="" class="item">hackath1n</div>
+                <div href="" class="item">hackath0n</div>
+              </div>
+            </div>
+            <div href="" class="item">歷屆萌典松</div>
+            <div href="" class="item">小松</div>
+            <div href="" class="item">行事曆</div>
+          </div>
+        </div>
+        <div class="ui dropdown item">我<i class="icon dropdown"></i>
+          <div class="menu"><a href="hack-panel-resume.html" ng-show="login=='done'" class="item resume login done">黑客履歷</a><a href="hack-panel-leve1up.html" class="item leve1up">leve1up</a><a href="hack-panel-hat.html" class="item hat">分類帽</a><a href="hack-panel-guide.html" class="item guide">零時導遊</a></div>
+        </div>
+        <div class="right menu"><a href="" ng-show="login=='no'" ng-click="login='yes'" class="item login no">登入</a>
+          <div ng-show="login=='done'" class="ui dropdown item login done">ETBlue<i class="icon dropdown"></i>
+            <div class="menu">
+              <div class="item">顯示於列表
+                <div class="ui label green">是</div>
+              </div>
+              <div class="item">小天使模式
+                <div class="ui label green">開啟</div>
+              </div>
+              <div class="item">新坑通知
+                <div class="ui label red">關閉</div>
+              </div>
+              <div href="" class="item">設定<i class="icon setting"></i></div><a ng-click="login='no'" class="item">登出</a>
+            </div>
+          </div>
+          <div class="ui dropdown item">中文<i class="icon dropdown"></i>
+            <div class="menu">
+              <div class="item">中文</div>
+              <div class="item">English</div>
+            </div>
+          </div><a href="g0v.tw-achievement-culture.html" class="item">官網<i class="icon right"></i></a>
+        </div>
+      </div>
+    </nav>
+    <div id="panel" ng-init="login='done';pitCount={ongoing:10,archived:99};projectCount={ongoing:3,archived:39};ideaCount={ongoing:5,archived:59}">
+      <div id="login" ng-show="login=='yes'" class="ui form segment light yellow">
+        <p>黑客，歡迎！登入為：</p>
+        <div ng-click="login='done'" class="ui icon labeled button">github<i class="icon github"></i></div>
+        <div ng-click="login='done'" class="ui icon labeled button">google<i class="icon google plus"></i></div>
+        <div ng-click="login='done'" class="ui icon labeled button">twitter<i class="icon twitter"></i></div>
+        <div ng-click="login='done'" class="ui icon labeled button">facebook<i class="icon facebook"></i></div>
+        <div ng-click="login='no'" class="ui icon right labeled button">不登入，保持匿名，以策安全<i class="icon hide"></i></div>
+      </div>
+      <nav id="menu" class="mobile hide">
+        <div class="section title">填坑</div>
+        <div class="section ui vertical menu inverted"><a href="hack-panel-pit.html" class="item pit">坑
+            <div class="ui label">999</div>
+            <div ng-show="login=='done'" class="ui label red">{{ pitCount.ongoing }}</div></a><a href="hack-panel-project.html" class="item project">專案
+            <div class="ui label">99</div>
+            <div ng-show="login=='done'" class="ui label blue">{{ projectCount.ongoing }}</div></a><a href="hack-panel-idea.html" class="item idea">零感
+            <div class="ui label">88</div>
+            <div ng-show="login=='done'" class="ui label green">{{ ideaCount.ongoing }}</div></a></div>
+        <div class="section title">填坑材料</div>
+        <div class="section ui vertical menu inverted"><a href="hack-panel-achievement.html" class="item">g0v 現有成果
+            <div class="ui label">100</div></a><a href="hack-panel-g0ver.html" class="item g0ver">g0v 黑客
+            <div class="ui label">500</div></a><a href="hack-panel-ngo.html" class="item">相關公民團體
+            <div class="ui label">20</div></a><a href="hack-panel-fund.html" class="item">相關募資平台
+            <div class="ui label">10</div></a></div>
+        <div class="section title">填坑管道</div>
+        <div class="section ui vertical menu inverted"><a href="hack-panel-colaboration.html" class="item">協作平台
+            <div class="ui label">4</div></a><a href="hack-panel-discussion.html" class="item">討論平台
+            <div class="ui label">5</div></a><a href="hack-panel-event.html" class="item">黑客松
+            <div class="ui label">30</div>
+            <div class="ui label teal">1</div></a></div>
+        <div class="section title">我的</div>
+        <div class="section ui vertical menu inverted"><a href="hack-panel-resume.html" ng-show="login=='done'" class="item resume login done">黑客履歷</a><a href="hack-panel-leve1up.html" class="item leve1up">leve1up</a><a href="hack-panel-hat.html" class="item hat">分類帽</a><a href="hack-panel-guide.html" class="item guide">零時導遊</a></div>
+      </nav>
+      <section id="content">
+        <nav ng-init="projectView='all';projectViewMode='normal'" class="ui menu"><a href="" ng-click="projectView='mine'" ng-class="{active:projectView=='mine'}" ng-show="login=='done'" class="item">我的
+            <div class="ui label blue">{{ projectCount.ongoing }}</div></a><a href="" ng-class="{active:projectView=='all'}" ng-click="projectView='all'" class="item">所有專案
+            <div class="ui label">99</div></a>
+          <div class="right menu">
+            <div class="item">
+              <div class="ui icon input">
+                <input type="text" placeholder="搜尋..." ng-model="keyword"><i class="search link icon"></i>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <section id="all" ng-show="projectView=='all' || login!='done'" ng-init="showFilter=false">
+          <div class="ui fluid basic accordion">
+            <div class="title active"><i class="icon dropdown"></i>分類瀏覽</div>
+            <div class="content active">
+              <div class="ui menu">
+                <div class="ui small button item">顯示適合我的</div>
+                <div class="ui small button item">顯示所有</div><a ng-click="showFilter=!showFilter" class="item">設定詳細條件<i ng-show="showFilter==false" class="icon arrow down"></i><i ng-show="showFilter==true" class="icon arrow up"></i></a>
+                <div class="right menu">
+                  <div class="ui icon button item"><i class="icon left arrow"></i></div>
+                  <div class="ui dropdown item">1<i class="icon dropdown"></i>
+                    <div class="menu">
+                      <div class="item">1</div>
+                      <div class="item">2</div>
+                      <div class="item">3</div>
+                      <div class="item">4</div>
+                    </div>
+                  </div>
+                  <div class="ui icon button item"><i class="icon right arrow"></i></div>
+                </div>
+              </div>
+              <div id="project-selector" ng-show="showFilter==true" class="light gray extended block">
+                <div class="ui four column stackable divided grid">
+                  <div class="column">
+                    <div class="ui form">
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input checked="" type="checkbox">
+                          <label>所有領域</label>
+                        </div>
+                      </div>
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input type="checkbox">
+                          <label>特定領域</label>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>新民主</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>立法院</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>媒體</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>教育</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>開放政府資料</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>勞工</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="ui form">
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input checked="" type="checkbox">
+                          <label>所有部門</label>
+                        </div>
+                      </div>
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input type="checkbox">
+                          <label>特定部門</label>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>g0v 技術部</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>g0v 文化部</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>g0v 研究院</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>g0v 工人院</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="ui form">
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input checked="" type="checkbox">
+                          <label>所有需求</label>
+                        </div>
+                      </div>
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input type="checkbox">
+                          <label>特定需求</label>
+                        </div>
+                      </div>
+                      <div class="indent">
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>前端</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>後端</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>資料</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>ios app</label>
+                          </div>
+                        </div>
+                        <div class="inline field">
+                          <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>設計</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="ui form">
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input checked="" type="checkbox">
+                          <label>所有技術 / 工具</label>
+                        </div>
+                      </div>
+                      <div class="inline field">
+                        <div class="ui radio checkbox">
+                          <input type="checkbox">
+                          <label>特定技術 / 工具</label>
+                        </div>
+                      </div>
+                      <div class="indent"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="project-list">
+                <div class="ui segment">
+                  <div class="action buttons float right"><a class="ui icon labeled button small green add to">追蹤<i class="icon add"></i></a><a class="ui icon right labeled button small expand">看更多細節<i class="icon down arrow"></i></a><a href="hack-panel-project_ID.html" class="ui icon right labeled button small">專案頁面<i class="icon right arrow"></i></a></div>
+                  <h3><a href="">動民主</a><i class="icon right arrow margin right"></i><a href="">公民臉書</a></h3>
+                  <p class="expand detail">抓取各公民行動 web service 的 api，匯集成個人化的動態牆，目的是讓使用者不需要在多個網站之間跑來跑去就能接收更新訊息，也讓各服務不需要擔心使用者忘記回流的問題。</p>
+                  <table class="ui table">
+                    <tr class="hidden">
+                      <td class="two wide">相關領域</td>
+                      <td class="two line height"><a href="" class="ui label">新民主</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">產出形式</td>
+                      <td class="two line height"><a href="" class="ui label">website</a><a href="" class="ui label">mobile app</a><a href="" class="ui label">api</a><a href="" class="ui label">api spec doc</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">所需技能</td>
+                      <td class="two line height"><a href="" class="ui label">企畫</a><a href="" class="ui label">設計</a><a href="" class="ui label">前端</a><a href="" class="ui label">後端</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">使用工具</td>
+                      <td class="two line height"><a href="" class="ui label">moqups</a><a href="" class="ui label">sass</a><a href="" class="ui label">compass</a><a href="" class="ui label">semantic ui</a><a href="" class="ui label">gulp</a><a href="" class="ui label">angular js</a><a href="" class="ui label">firebase</a><a href="" class="ui label">adobe illustrator</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">授權</td>
+                      <td class="two line height"><a href="" class="ui label">MIT</a><a href="" class="ui label">CC By</a></td>
+                    </tr>
+                    <tr>
+                      <td class="two wide">目前成果</td>
+                      <td class="two line height"><a href="" class="ui label">wireframe</a><a href="" class="ui label">mockup</a><a href="" class="ui label">prototype</a><a href="" class="ui label">beta</a></td>
+                    </tr>
+                    <tr>
+                      <td class="two wide">協作平台</td>
+                      <td class="two line height"><a href="" class="ui label">hackfoldr</a><a href="" class="ui label">github</a><a href="" class="ui label">google drive</a><a href="" class="ui label">google calendar</a></td>
+                    </tr>
+                    <tr>
+                      <td class="two wide">討論平台</td>
+                      <td class="two line height"><a href="" class="ui label">google groups</a><a href="" class="ui label">google+ community</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">追蹤者</td>
+                      <td class="two line height"><a href="" class="ui label">poga</a><a href="" class="ui label">ipa</a><a href="" class="ui label">etblue</a><a href="" class="ui label">pm5</a><a href="" class="ui label">soidid</a><a href="" class="ui label">yhsiang</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">子專案</td>
+                      <td class="two line height"><a href="" class="ui label">公民臉書後端</a></td>
+                    </tr>
+                    <tr class="hidden">
+                      <td class="two wide">母專案</td>
+                      <td class="two line height"><a href="" class="ui label">動民主</a></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="title"><i class="icon dropdown"></i>統計</div>
+            <div class="content">
+              <p>某種 data visulization 顯示各專案各類型個部門多少坑… etc.</p>
+            </div>
+          </div>
+        </section>
+        <section id="mine" ng-show="projectView=='mine'">
+          <div ng-hide="login!='done'" class="wrapper for angular show hide">
+            <div class="ui fluid basic accordion">
+              <div ng-click="projectViewMode='normal'" class="title active"><i class="icon dropdown"></i>進行中
+                <div class="ui label blue">{{ projectCount.ongoing }}</div>
+              </div>
+              <div class="content active">
+                <table id="project-list" class="ui table segment">
+                  <tbody class="ui basic accordion">
+                  </tbody>
+                </table>
+              </div>
+              <div ng-click="projectViewMode='archive'" class="title"><i class="icon dropdown"></i>封存
+                <div class="ui label">{{ projectCount.archived }}</div>
+              </div>
+              <div class="content">
+                <table id="project-list" class="ui table segment">
+                  <tbody class="ui basic accordion">
+                  </tbody>
+                </table>
+              </div>
+              <div class="title"><i class="icon dropdown"></i>統計</div>
+              <div class="content">
+                <p>某種 data visulization 顯示各專案各類型個部門多少坑… etc.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+    <div id="script">
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="js/global.js"></script>
+      <script>
+        $("#nav .panel").addClass("active");
+        $("#menu .project").addClass("active");
+        $(".add.to").click(function(){
+          $(this).addClass("disabled");
+        });
+        $(".mark.as.done, .mark.as.active, .remove.from").click(function(){
+          $(this).addClass("disabled");
+          $(this).parents("tr").hide(2000);
+        });
+        $("#project-list .expand.button").click(function(){
+          $(this).toggleClass("active");
+          $(this).parents(".ui.segment").find("tr.hidden").toggle();
+        });
+        
+      </script>
+    </div>
+  </body>
+</html>

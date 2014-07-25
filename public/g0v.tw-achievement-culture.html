@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- libraries-->
+    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <!-- custom files-->
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <title>成果 -文創 | g0v</title>
+  </head>
+  <body ng-app="g0v-tw" ng-init="login='yes'">
+    <nav id="nav">
+      <div class="ui menu inverted"><a href="http://g0v.asia/" class="item landing">g0v 零時政府</a>
+        <div class="ui black small button item">twitter</div>
+        <div class="ui black small button item">google+</div>
+        <div class="ui black small button item">facebook</div>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="搜尋..." ng-model="keyword"><i class="search link icon"></i>
+            </div>
+          </div>
+          <div class="ui dropdown item">中文<i class="icon dropdown"></i>
+            <div class="menu"><a class="item">中文</a><a class="item">English</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="ui tiered menu">
+        <div class="menu"><a href="g0v.tw-achievement-software.html" class="teal item achievement">成果</a><a href="g0v.tw-news.html" class="teal item news">新聞</a><a href="g0v.tw-event.html" class="teal item event">活動</a><a href="g0v.tw-about.html" class="teal item about">關於</a><a href="g0v.tw-contact.html" class="teal item contact">聯繫</a><a href="hack.html" class="right item join">加入<i class="icon right"></i></a></div>
+        <nav id="sub-menu" class="ui sub menu"><a href="g0v.tw-achievement-culture.html" class="item moc">文創授權中心</a><a href="g0v.tw-achievement-software.html" class="item software">軟體應用中心</a><a href="" class="item data">資料集</a><a href="" class="item api">API</a><a href="" class="item template">模版</a><a href="" class="item tutorial">教學文件</a><a href="" class="item policy">國策智庫</a></nav>
+      </div>
+    </nav>
+    <section id="content">
+      <div id="moc" class="ui items">
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/newshelper/tuiry/01.png"></div>
+          <div class="content">
+            <div class="meta">tuiry</div>
+            <div class="name">新聞小幫手</div>
+            <div class="description">新聞小幫手專案的虛擬代言人</div>
+          </div>
+        </div>
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/newshelper/tuiry/02.png"></div>
+          <div class="content">
+            <div class="meta">tuiry</div>
+            <div class="name">新聞小幫手</div>
+          </div>
+        </div>
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/newshelper/tuiry/03.png"></div>
+          <div class="content">
+            <div class="meta">tuiry</div>
+            <div class="name">新聞小幫手</div>
+          </div>
+        </div>
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/newshelper/tuiry/04.png"></div>
+          <div class="content">
+            <div class="meta">tuiry</div>
+            <div class="name">新聞小幫手</div>
+          </div>
+        </div>
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/newshelper/tuiry/05.png"></div>
+          <div class="content">
+            <div class="meta">tuiry</div>
+            <div class="name">新聞小幫手</div>
+          </div>
+        </div>
+        <div class="item"><a href="" class="download ui ribbon label blue">PSD</a>
+          <div class="image"><img src="file/moc/illustration/g0v/joyqul/loli.jpg"></div>
+          <div class="content">
+            <div class="meta">飄伶</div>
+            <div class="name">g0v 娘</div>
+            <div class="description">g0v 社群的虛擬代言人</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="script">
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="js/global.js"></script>
+      <script>
+        $("#nav .achievement").addClass("active");
+        $("#sub-menu .moc").addClass("active");
+        
+      </script>
+    </div>
+  </body>
+</html>

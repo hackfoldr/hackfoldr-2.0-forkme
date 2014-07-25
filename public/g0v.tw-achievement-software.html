@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- libraries-->
+    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <!-- custom files-->
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <title>成果 -軟體 | g0v</title>
+  </head>
+  <body ng-app="g0v-tw" ng-init="login='yes'">
+    <nav id="nav">
+      <div class="ui menu inverted"><a href="http://g0v.asia/" class="item landing">g0v 零時政府</a>
+        <div class="ui black small button item">twitter</div>
+        <div class="ui black small button item">google+</div>
+        <div class="ui black small button item">facebook</div>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="搜尋..." ng-model="keyword"><i class="search link icon"></i>
+            </div>
+          </div>
+          <div class="ui dropdown item">中文<i class="icon dropdown"></i>
+            <div class="menu"><a class="item">中文</a><a class="item">English</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="ui tiered menu">
+        <div class="menu"><a href="g0v.tw-achievement-software.html" class="teal item achievement">成果</a><a href="g0v.tw-news.html" class="teal item news">新聞</a><a href="g0v.tw-event.html" class="teal item event">活動</a><a href="g0v.tw-about.html" class="teal item about">關於</a><a href="g0v.tw-contact.html" class="teal item contact">聯繫</a><a href="hack.html" class="right item join">加入<i class="icon right"></i></a></div>
+        <nav id="sub-menu" class="ui sub menu"><a href="g0v.tw-achievement-culture.html" class="item moc">文創授權中心</a><a href="g0v.tw-achievement-software.html" class="item software">軟體應用中心</a><a href="" class="item data">資料集</a><a href="" class="item api">API</a><a href="" class="item template">模版</a><a href="" class="item tutorial">教學文件</a><a href="" class="item policy">國策智庫</a></nav>
+      </div>
+    </nav>
+    <section id="content">
+      <div id="software">
+        <div class="ui horizontal divider">小幫手系列</div>
+        <div class="ui two column stackable grid">
+          <div class="column"><a target="blank" href="http://newshelper.g0v.tw/"><img src="img/newshelper128x128flat.png" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">新聞小幫手</h3>
+              <p class="slogan">揪出問題新聞、守護您的網路閱聽品質</p>
+              <p class="platform"><span class="ui horizontal label green">chrome</span><span class="ui horizontal label green">firefox</span><span class="ui horizontal label green">safari</span><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+          <div class="column"><a target="blank" href="http://jobhelper.g0v.ronny.tw/"><img src="" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">求職小幫手</h3>
+              <p class="slogan">求職網站不會主動告訴你的事情</p>
+              <p class="platform"><span class="ui horizontal label green">chrome</span><span class="ui horizontal label green">firefox</span><span class="ui horizontal label green">safari</span><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="ui horizontal divider">教育部系列</div>
+        <div class="ui two column stackable grid">
+          <div class="column"><a target="blank" href=""><img src="https://www.moedict.tw/icon.png" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">萌典</h3>
+              <p class="slogan">國、閩、客、英、法、德多語言有聲民間版教育部國語辭典</p>
+              <p class="platform"><span class="ui horizontal label teal">android</span><span class="ui horizontal label teal">ios</span><span class="ui horizontal label teal">firefox os</span><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+          <div class="column"><a target="blank" href="https://www.moedict.tw/moetris/"><img src="" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">萌典方塊遊戲：詞彙版</h3>
+              <p class="slogan">挑戰中文詞彙的極限</p>
+              <p class="platform"><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+          <div class="column"><a target="blank" href="https://www.moedict.tw/moetris/#b"><img src="" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">萌典方塊遊戲：注音版</h3>
+              <p class="slogan">挑戰中文注音的極限</p>
+              <p class="platform"><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+          <div class="column"><a target="blank" href="https://www.moedict.tw/moetris/#p"><img src="" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">萌典方塊遊戲：部件版</h3>
+              <p class="slogan">挑戰中文組字的極限</p>
+              <p class="platform"><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+          <div class="column"><a target="blank" href="https://www.moedict.tw/dodo/"><img src="https://www.moedict.tw/dodo/icon.png" class="rounded ui image"></a>
+            <div class="summary">
+              <h3 class="title">萌典啄木鳥（活動已結束）</h3>
+              <p class="slogan">替教育部國語辭典除蟲</p>
+              <p class="platform"><span class="ui horizontal label blue">網頁</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="ui horizontal divider">財政部系列</div>
+        <div class="ui horizontal divider">立法院系列</div>
+        <div class="ui horizontal divider">衛生福利部系列</div>
+      </div>
+    </section>
+    <div id="script">
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="js/global.js"></script>
+      <script>
+        $("#nav .achievement").addClass("active");
+        $("#sub-menu .software").addClass("active");
+        
+      </script>
+    </div>
+  </body>
+</html>

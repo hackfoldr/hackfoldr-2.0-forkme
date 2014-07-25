@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- libraries-->
+    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/angular/1.2.3/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <!-- custom files-->
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <title>hackspace | g0v</title>
+  </head>
+  <body ng-app="g0v-tw" ng-init="login='yes'">
+    <nav id="nav">
+      <div class="ui menu inverted"><a href="hack-panel.html" class="item panel">g0v 黑客</a>
+        <div class="ui dropdown item">坑<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" ng-show="login=='done'" class="item">動民主</div>
+            <div href="" ng-show="login=='done'" class="item">零時通關</div>
+            <div href="" ng-show="login=='done'" class="item">公民分類帽</div>
+            <div href="" class="item">所有坑
+              <div class="ui label">999</div>
+            </div>
+            <div href="" class="item">所有專案
+              <div class="ui label">99</div>
+            </div>
+            <div href="" class="item">所有零感
+              <div class="ui label">88</div>
+            </div>
+            <div href="" ng-show="login=='done'" class="item">設定<i class="icon setting"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">資源<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">文創授權中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">軟體應用中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">資料集<i class="icon external url sign"></i></div>
+            <div href="" class="item">API<i class="icon external url sign"></i></div>
+            <div href="" class="item">模版<i class="icon external url sign"></i></div>
+            <div href="" class="item">教學文件<i class="icon external url sign"></i></div>
+            <div href="" class="item">國策智庫<i class="icon external url sign"></i></div>
+            <div href="" class="item">g0v 黑客
+              <div class="ui label">500</div>
+            </div>
+            <div href="" class="item">相關公民團體
+              <div class="ui label">20</div>
+            </div>
+            <div href="" class="item">相關募資平台
+              <div class="ui label">10</div>
+            </div>
+          </div>
+        </div>
+        <div class="ui dropdown item">協作<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">github 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">hackpad 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">hackfoldr 動態<i class="icon external url sign"></i></div>
+            <div href="" class="item">google drive 動態<i class="icon external url sign"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">討論<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">irc 聊天室</div>
+            <div href="" class="item">google groups 郵件群組</div>
+            <div href="" class="item">discourse 新後勤中心</div>
+            <div href="" class="item">facebook 後勤中心<i class="icon external url sign"></i></div>
+            <div href="" class="item">google+ 社群<i class="icon external url sign"></i></div>
+          </div>
+        </div>
+        <div class="ui dropdown item">松<i class="icon dropdown"></i>
+          <div class="menu">
+            <div href="" class="item">即將舉行
+              <div class="ui label teal">1</div>
+            </div>
+            <div class="item">歷屆大松<i class="icon right arrow"></i>
+              <div class="menu">
+                <div href="" class="item">hackath8n</div>
+                <div href="" class="item">hackath7n</div>
+                <div href="" class="item">hackath6n</div>
+                <div href="" class="item">hackath5n</div>
+                <div href="" class="item">hackath4n</div>
+                <div href="" class="item">hackath3n</div>
+                <div href="" class="item">hackath2n</div>
+                <div href="" class="item">hackath1n</div>
+                <div href="" class="item">hackath0n</div>
+              </div>
+            </div>
+            <div href="" class="item">歷屆萌典松</div>
+            <div href="" class="item">小松</div>
+            <div href="" class="item">行事曆</div>
+          </div>
+        </div>
+        <div class="ui dropdown item">我<i class="icon dropdown"></i>
+          <div class="menu"><a href="hack-panel-resume.html" ng-show="login=='done'" class="item resume login done">黑客履歷</a><a href="hack-panel-leve1up.html" class="item leve1up">leve1up</a><a href="hack-panel-hat.html" class="item hat">分類帽</a><a href="hack-panel-guide.html" class="item guide">零時導遊</a></div>
+        </div>
+        <div class="right menu"><a href="" ng-show="login=='no'" ng-click="login='yes'" class="item login no">登入</a>
+          <div ng-show="login=='done'" class="ui dropdown item login done">ETBlue<i class="icon dropdown"></i>
+            <div class="menu">
+              <div class="item">顯示於列表
+                <div class="ui label green">是</div>
+              </div>
+              <div class="item">小天使模式
+                <div class="ui label green">開啟</div>
+              </div>
+              <div class="item">新坑通知
+                <div class="ui label red">關閉</div>
+              </div>
+              <div href="" class="item">設定<i class="icon setting"></i></div><a ng-click="login='no'" class="item">登出</a>
+            </div>
+          </div>
+          <div class="ui dropdown item">中文<i class="icon dropdown"></i>
+            <div class="menu">
+              <div class="item">中文</div>
+              <div class="item">English</div>
+            </div>
+          </div><a href="g0v.tw-achievement-culture.html" class="item">官網<i class="icon right"></i></a>
+        </div>
+      </div>
+    </nav>
+    <div id="guide" ng-init="login='done'" class="ui form segment">
+      <p>您熟悉哪些軟體開發工具？</p>
+      <p>[mockup comments] ↓假設有選企畫 / UI 會出現</p>
+      <div class="ui horizontal divider">wirefram tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">balsamiq</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">omnigraffle</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">moqups</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選視覺會出現</p>
+      <div class="ui horizontal divider">design tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">adobe firework</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">adobe photoshop</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">adobe illustrator</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">inkscape</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">gimp</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選前端會出現</p>
+      <div class="ui horizontal divider">syntax</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">html5</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">css3</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">javascript</label>
+        </div>
+      </div>
+      <div class="ui horizontal divider">html tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">jade</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">haml</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">slim</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">middleman</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">erb</label>
+        </div>
+      </div>
+      <div class="ui horizontal divider">css tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">sass</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">compass</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">less</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">stylus</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">semantic ui</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">twitter bootstrap</label>
+        </div>
+      </div>
+      <div class="ui horizontal divider">js tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">jquery</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">angular js</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">coffee script</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">livescript</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選後端會出現</p>
+      <div class="ui horizontal divider">language</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">perl</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">python</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">php</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">ruby</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">go</label>
+        </div>
+      </div>
+      <div class="ui horizontal divider">framework</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">django</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">php cake</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">rails</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">sinatra</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選系統程式會出現</p>
+      <div class="ui horizontal divider">language</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">c</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">java</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">scala</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選 iOS / android 會出現</p>
+      <div class="ui horizontal divider">cross plateform tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">rhino</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選 iOS 會出現</p>
+      <div class="ui horizontal divider">ios tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">???</label>
+        </div>
+      </div>
+      <p>[mockup comments] ↓假設有選 Android 會出現</p>
+      <div class="ui horizontal divider">android tool</div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">???</label>
+        </div>
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input id="check1" name="" type="checkbox">
+          <label for="check1">其他：</label>
+        </div>
+        <input type="text" placeholder="以半形逗點 , 隔開">
+      </div>
+      <p><a href="hack-panel-pit.html" ng-click="login=='done'" class="ui right icon labeled button orange">好了，趕快告訴我有哪些坑可以填！<i class="icon right arrow"></i></a></p>
+      <p><a href="hack-guide-art.html" class="ui right icon labeled button green">等一下，我還有其他專長<i class="icon right arrow"></i></a></p>
+    </div>
+    <div id="script">
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="js/global.js"></script>
+    </div>
+  </body>
+</html>

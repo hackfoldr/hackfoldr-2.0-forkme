@@ -144,3 +144,13 @@
 2014-07-25 10:10:47 identical public/css/global.css.map 
 2014-07-25 10:11:07 overwrite public/css/global.css 
 2014-07-25 10:11:07 overwrite public/css/global.css.map 
+2014-07-25 11:45:08    remove .livescript-cache/
+2014-07-25 11:45:08    remove .sass-cache/ 
+2014-07-25 11:45:08    remove public/css/global.css 
+2014-07-25 11:45:08    remove public/css/global.css.map 
+2014-07-25 11:45:08     error livescripts/app.ls: Error: Parse error on line 6: Unexpected 'PARAM('
+2014-07-25 11:45:08    create public/js/app.js
+2014-07-25 11:45:08     error livescripts/controllers.ls: Error: Parse error on line 5: Unexpected 'CREMENT'
+2014-07-25 11:45:08    create public/js/controllers.js
+2014-07-25 11:45:10    create public/css/global.css 
+2014-07-25 11:45:10    create public/css/global.css.map 
