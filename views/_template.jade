@@ -3,7 +3,7 @@ doctype html
 - var usecdn = false
 - var useog = false
 - var lib = { jquery: true, d3js: false, angular: false, bootstrap: false, semantic: true }
-- var assets = "assets"
+- var assets = "/assets"
 - var thumbnail = "http://dummy.thumbnail"
 html
   head
@@ -15,18 +15,18 @@ html
     //-script(type="text/javascript",src="//cdn.firebase.com/v0/firebase-simple-login.js")
     //-script(type="text/javascript",src="//cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js")
 
-    script(type="text/javascript",src="js/global.js")
-    script(type="text/javascript",src="js/csv.js")
-    script(type="text/javascript",src="js/handlebars-v1.3.0.js")
+    script(type="text/javascript",src="/js/global.js")
+    script(type="text/javascript",src="/js/csv.js")
+    script(type="text/javascript",src="/js/handlebars-v1.3.0.js")
       
-    //-script(type="text/javascript",src="js/controllers.js")
+    //-script(type="text/javascript",src="/js/controllers.js")
     //-meta(http-equiv="X-UA-Compatible",content="IE=edge")
     //-meta(name="description",content="")
     //-meta(name="viewport",content="width=device-width, initial-scale=1")
     //-link(rel="stylesheet",href="css/normalize.css")
     //-link(rel="stylesheet",href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700")
-    link(rel="stylesheet",href="css/global.css")
-    //-script(src="js/vendor/tablesort.js")
+    link(rel="stylesheet",href="/css/global.css")
+    //-script(src="/js/vendor/tablesort.js")
     block head
     title
       block title
@@ -38,11 +38,11 @@ html
 
     #script
       script.
-        window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
-      //-script(src="js/vendor/modernizr-2.6.2.min.js")
-      //-script(src="js/vendor/plugins.js")
+        window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')
+      //-script(src="/js/vendor/modernizr-2.6.2.min.js")
+      //-script(src="/js/vendor/plugins.js")
       //-script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js')
       //-script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js')
-      script(type="text/javascript",src="js/global.js")
+      script(type="text/javascript",src="/js/global.js")
       block script
 
