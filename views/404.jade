@@ -44,7 +44,7 @@ block body
   #wrapper
 
     .frame
-      iframe#iframe(name="iframe" src="https://g0v.hackpad.com/726--rGMTn4s6Di9")
+      iframe#iframe(name="iframe")
 
 block script
   script.
@@ -105,7 +105,7 @@ block script
     var paths = location.pathname.split('/')
     var ethercalc_name     = paths[1]
     var current_iframe_url = unescape(unescape(paths[2]))
-
+    var src;
     var history_state={}
     $('#toc').on('click','a', function(event){
       iframe_path = event.target.href;
@@ -140,11 +140,11 @@ block script
           $('#toc .ui.vertical').append($link_el)
         }
         // enable default iframe
-        if(current_iframe_url.match(new RegExp(context.url+"/?"))){
-          $('#iframe').attr('src', current_iframe_url)
+        if(!src || current_iframe_url.match(new RegExp(context.url+"/?"))){
+          src = current_iframe_url;
         }else if(context.url.match(/^https:\/\/.*.hackpad.com\//)){
           if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
-            $('#iframe').attr('src', context.url)
+            src = context.url;
           }
         }
       }
@@ -198,5 +198,6 @@ block script
             add_link(row)
           }
         }
-      }) 
+      });
+      $("#iframe").attr("src",src);
     })
