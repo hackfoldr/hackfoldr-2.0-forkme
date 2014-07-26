@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <!-- libraries-->
-    <script type="text/javascript" src="assets/jquery/1.10.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/0.19.0/css/semantic.min.css">
-    <script type="text/javascript" src="assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <script type="text/javascript" src="/assets/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="/assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
     <!-- custom files-->
-    <script type="text/javascript" src="js/global.js"></script>
-    <script type="text/javascript" src="js/csv.js"></script>
-    <script type="text/javascript" src="js/handlebars-v1.3.0.js"></script>
-    <link rel="stylesheet" href="css/global.css">
+    <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript" src="/js/csv.js"></script>
+    <script type="text/javascript" src="/js/handlebars-v1.3.0.js"></script>
+    <link rel="stylesheet" href="/css/global.css">
     <title>Mozilla MakerSpace | g0v</title>
   </head>
   <body>
@@ -44,8 +44,8 @@
       </div>
     </div>
     <div id="script">
-      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-      <script type="text/javascript" src="js/global.js"></script>
+      <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="/js/global.js"></script>
       <script>
         $(".hidden").hide();
         
@@ -101,7 +101,21 @@
           });
           
           
-        $.get('https://ethercalc.org/_/3du/csv').pipe(CSV.parse).done(function(rows){
+        var paths = location.pathname.split('/')
+        var ethercalc_name     = paths[1]
+        var current_iframe_url = unescape(unescape(paths[2]))
+        
+        var history_state={}
+        $('#toc').on('click','a', function(event){
+          iframe_path = event.target.href;
+            if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
+              iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
+          }
+           history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
+        })
+        
+        $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
+        
           var got_title = false
           var depth = 0 // if depth == 1, link should in accordion
           
@@ -114,7 +128,7 @@
             }catch(e){
               var link_options = {};
             }
-            var context = {url: row[0], subject: row[1]};
+            var context = {url: row[0].trim(), subject: row[1]};
             var $link_el = $(link_tpl(context));
             for(key in link_options){
               $link_el.attr(key, link_options[key]);
@@ -123,6 +137,14 @@
               $('#toc .ui.accordion:last').find('.menu').append($link_el)
             }else{
               $('#toc .ui.vertical').append($link_el)
+            }
+            // enable default iframe
+            if(current_iframe_url.match(new RegExp(context.url+"/?"))){
+              $('#iframe').attr('src', current_iframe_url)
+            }else if(context.url.match(/^https:\/\/.*.hackpad.com\//)){
+              if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
+                $('#iframe').attr('src', context.url)
+              }
             }
           }
           
