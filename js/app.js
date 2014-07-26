@@ -1,1 +1,0 @@
-document.write("C:/Users/ETBlue/Documents/GitHub/maker.moztw.org/livescripts/app.ls: Error: Parse error on line 6: Unexpected 'PARAM('")
