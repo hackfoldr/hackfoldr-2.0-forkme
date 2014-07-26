@@ -294,3 +294,5 @@
 2014-07-25 21:17:42 overwrite public/js/controllers.js
 2014-07-26 02:52:21 overwrite public/css/global.css 
 2014-07-26 02:52:21 overwrite public/css/global.css.map 
+2014-07-26 15:19:01 identical public/css/global.css 
+2014-07-26 15:19:01 overwrite public/css/global.css.map 
