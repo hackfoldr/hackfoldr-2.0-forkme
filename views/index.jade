@@ -102,9 +102,9 @@ block script
       });
 
 
-    var paths = location.pathname.split('/')
+    var paths = location.pathname.split('/') || [];
     var ethercalc_name     = paths[1]
-    var current_iframe_url = unescape(unescape(paths[2]))
+    var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
     var src;
     var history_state={}
     $('#toc').on('click','a', function(event){
@@ -146,7 +146,8 @@ block script
           if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
             src = context.url;
           }
-        }else if(!src) {
+        }
+        if(!src) {
           src = context.url;
         }
       }
