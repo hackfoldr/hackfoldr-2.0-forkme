@@ -14,7 +14,7 @@ Windows
 
 Mockup / Prototype
 ============
-http://etblue.github.io/maker.moztw.org/public/
+https://hackfoldr.github.io/maker.moztw.org/public/
 
 License
 ============
