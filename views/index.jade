@@ -140,12 +140,14 @@ block script
           $('#toc .ui.vertical').append($link_el)
         }
         // enable default iframe
-        if(!src || current_iframe_url.match(new RegExp(context.url+"/?"))){
+        if(current_iframe_url.match(new RegExp(context.url+"/?"))){
           src = current_iframe_url;
         }else if(context.url.match(/^https:\/\/.*.hackpad.com\//)){
           if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
             src = context.url;
           }
+        }else if(!src) {
+          src = context.url;
         }
       }
       
