@@ -139,9 +139,9 @@
               $('#toc .ui.vertical').append($link_el)
             }
             // enable default iframe
-            if(current_iframe_url.match(new RegExp(context.url+"/?"))){
+            if((new RegExp(context.url+"/?")).test(current_iframe_url)){
               src = current_iframe_url;
-            }else if(context.url.match(/^https:\/\/.*.hackpad.com\//)){
+            }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
               if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
                 src = context.url;
               }
