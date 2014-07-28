@@ -24,7 +24,7 @@ module Tilt
       end
 
       pwd = Dir.pwd
-      Dir.chdir('views')
+      #Dir.chdir('views')
       body = Open3.popen3(jade_cmd) do |stdin, stdout, stderr|
         stdin.write data
         stdin.close

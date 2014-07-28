@@ -5,10 +5,10 @@ require './tilt_jade.rb'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "public/css"
+css_dir = "css"
 sass_dir = "sass"
-images_dir = "public/img"
-javascripts_dir = "public/js"
+images_dir = "img"
+javascripts_dir = "js"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
@@ -28,10 +28,10 @@ preferred_syntax = :sass
 
 output_style = :expanded # by Compass.app 
 
-css_dir = "public/css" # by Fire.app 
+css_dir = "css" # by Fire.app 
 sass_dir = "sass" # by Fire.app 
-images_dir = "public/img" # by Fire.app 
-javascripts_dir = "public/js" # by Fire.app 
+images_dir = "img" # by Fire.app 
+javascripts_dir = "js" # by Fire.app 
 fireapp_coffeescripts_dir = "coffeescripts" # by Fire.app 
 fireapp_livescripts_dir = "livescripts" # by Fire.app 
 fireapp_minifyjs_on_build = false # by Fire.app 

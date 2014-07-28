@@ -1,209 +1,157 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <!-- libraries-->
-    <script type="text/javascript" src="../public/assets/jquery/1.10.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../public/assets/semantic-ui/0.19.0/css/semantic.min.css">
-    <script type="text/javascript" src="../public/assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
-    <!-- custom files-->
-    <script type="text/javascript" src="../public/js/global.js"></script>
-    <script type="text/javascript" src="../public/js/csv.js"></script>
-    <script type="text/javascript" src="../public/js/handlebars-v1.3.0.js"></script>
-    <link rel="stylesheet" href="../public/css/global.css">
-    <title>Mozilla MakerSpace | g0v</title>
-  </head>
-  <body>
-    <nav id="sidebar">
-      <nav id="nav">
-        <div class="ui menu collapsed mode hidden"><a class="item expand button"><i class="icon arrow right"></i></a></div>
-        <div class="ui menu expanded mode">
-          <div class="ui dropdown item"><i class="icon home"></i><i class="icon dropdown"></i>
-            <div class="menu"><a class="link item">g0v 官網</a></div>
-          </div><a class="link item view help"><i class="icon help"></i></a><a class="link item view source"><i class="icon github"></i></a><a class="right item collapse button"><i class="icon arrow left"></i></a><a class="right icon item zoom ui dropdown"><i class="icon zoom in"></i>
-            <div class="menu">
-              <div class="item normal">100%</div>
-              <div class="item large">130%</div>
-              <div class="item larger">150%</div>
-            </div></a>
-        </div>
-      </nav>
-      <nav id="topbar">
-        <div class="ui secondary pointing menu">
-          <div class="item item-title expanded mode"></div>
-          <div class="right menu"><a class="link item view table"><i class="icon pencil"></i></a><a class="item refresh table hidden"><i class="icon repeat"></i></a></div>
-        </div>
-      </nav>
-      <nav id="toc">
-        <div class="ui vertical menu"></div>
-      </nav>
-    </nav>
-    <div id="wrapper">
-      <div class="frame">
-        <iframe id="iframe" name="iframe"></iframe>
-      </div>
-    </div>
-    <div id="script">
-      <script>window.jQuery || document.write('<script src="../public/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-      <script type="text/javascript" src="../public/js/global.js"></script>
-      <script>
-        $(".hidden").hide();
+<!DOCTYPE html><html><head><meta charset="utf-8"><!-- libraries--><script type="text/javascript" src="/assets/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" type="text/css" href="/assets/semantic-ui/0.19.0/css/semantic.min.css"><script type="text/javascript" src="/assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script><!-- custom files--><script type="text/javascript" src="/js/global.js"></script><script type="text/javascript" src="/js/csv.js"></script><script type="text/javascript" src="/js/handlebars-v1.3.0.js"></script><link rel="stylesheet" href="/css/global.css"><title> | hackfoldr</title></head><body><nav id="sidebar"><nav id="nav"><div class="ui menu collapsed mode hidden"><a class="item expand button"><i class="icon arrow right"></i></a></div><div class="ui menu expanded mode"><div class="ui dropdown item"><i class="icon home"></i><i class="icon dropdown"></i><div class="menu"><a class="link item">g0v 官網</a></div></div><a class="link item view help"><i class="icon help"></i></a><a class="link item view source"><i class="icon github"></i></a><a class="right item collapse button"><i class="icon arrow left"></i></a><a class="right icon item zoom ui dropdown"><i class="icon zoom in"></i><div class="menu"><div class="item normal">100%</div><div class="item large">130%</div><div class="item larger">150%</div></div></a></div></nav><nav id="topbar"><div class="ui secondary pointing menu"><div class="item item-title expanded mode"></div><div class="right menu"><a class="link item view table"><i class="icon pencil"></i></a><a class="item refresh table hidden"><i class="icon repeat"></i></a></div></div></nav><nav id="toc"><div class="ui vertical menu"></div></nav></nav><div id="wrapper"><div class="frame"><iframe id="iframe" name="iframe"></iframe></div></div><div id="script"><script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script><script type="text/javascript" src="/js/global.js"></script><script>$(".hidden").hide();
+
+// sidebar expansion buttons
+$("#nav .collapse.button").on("click tap", function(){
+  $("#sidebar").width("3rem");
+  $("#wrapper").css("padding-left","3rem");
+  $(".expanded.mode").hide();
+  $(".collapsed.mode").show();
+  $("#sidebar i.icon").addClass("collapsed");
+  });
+$("#nav .expand.button").on("click tap", function(){
+  $("#sidebar").width("20rem");
+  $("#wrapper").css("padding-left","20rem");
+  $(".expanded.mode").css("display","");
+  $(".collapsed.mode").hide();
+  $("#sidebar i.icon").removeClass("collapsed");
+  });
+  
+// about me buttons
+$("#nav .view.help").on("click tap", function(){
+  $("#iframe").attr("src","http://newshelper.g0v.tw/");
+  });
+$("#nav .view.source").on("click tap", function(){
+  $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
+  });
+  
+// firefox fix for iframe initial size
+$("#wrapper .frame").addClass("normal size");
+
+// zoom in buttons
+$("#nav .zoom.dropdown .normal").on("click tap", function(){
+  $(".frame, #iframe").removeClass("large larger").addClass("normal size");
+  });
+$("#nav .zoom.dropdown .large").on("click tap", function(){
+  $(".frame, #iframe").removeClass("normal larger").addClass("large size");
+  });
+$("#nav .zoom.dropdown .larger").on("click tap", function(){
+  $(".frame, #iframe").removeClass("normal large").addClass("larger size");
+  });
+  
+var paths = location.pathname.split('/') || [];
+var ethercalc_name     = paths[1]
+var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
+var src;
+var history_state={}
+
+// edit table
+$("#topbar .view.table").on("click tap", function(){
+  $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
+  $("#topbar .table.item").toggle();
+  });
+$("#topbar .refresh.table").on("click tap", function(){
+  location.reload(true);
+  });
+$("#toc a.link.item, #nav a.link.item").on("click tap", function(){
+  $("#topbar .view.table").show();
+  $("#topbar .refresh.table").hide();
+  });
+  
+  
+$('#toc').on('click','a', function(event){
+  iframe_path = event.target.href;
+    if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
+      iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
+  }
+   history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
+})
+
+$.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
+
+  var got_title = false
+  var depth = 0 // if depth == 1, link should in accordion
+  
+  var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
+  var link_tpl = Handlebars.compile(link_tpl_source);
+  
+  var add_link = function(row){
+    try{
+      var link_options = JSON.parse(row[2]);
+    }catch(e){
+      var link_options = {};
+    }
+    var context = {url: row[0].trim(), subject: row[1]};
+    var $link_el = $(link_tpl(context));
+    for(key in link_options){
+      $link_el.attr(key, link_options[key]);
+    }
+    if(depth == 1){
+      $('#toc .ui.accordion:last').find('.menu').append($link_el)
+    }else{
+      $('#toc .ui.vertical').append($link_el)
+    }
+    // enable default iframe
+    if((new RegExp(context.url+"/?")).test(current_iframe_url)){
+      src = current_iframe_url;
+    }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
+      if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
+        src = context.url;
+      }
+    }
+    if(!src) {
+      src = context.url;
+    }
+  }
+  
+  var accordion_tpl_source = '<div class="ui accordion"><div class="title header item "><span class="expanded mode">{{title}}</span><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+  var accordion_tpl = Handlebars.compile(accordion_tpl_source);
+  
+  var add_accordion = function(row){
+    try{
+      var options = JSON.parse(row[2]);
+    }catch(e){
+      var options = {};
+    }
+    var context = {title: row[1] };
+    var $accordion_el = $(accordion_tpl(context));
+    
+    $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
+      $accordion_el.find('.folder').toggle()
+    }})
+    
+    if(options.expand){
+      $accordion_el.accordion('open',0)
+    }
+  }
+  
+  $.each(rows, function(row_index, row){
+    // if 1st and 2nd is empty then this a empty row 
+    if(row[0].trim().length === 0 && row[1].trim().length === 0){
+      return
+    }
+    
+    // now we have soming thing, should get title first
+    if(!got_title){
+    
+      // TODO: need opt....
+      $.each(row, function(col_index, col){
+        col =  col.trim()
         
-        // sidebar expansion buttons
-        $("#nav .collapse.button").on("click tap", function(){
-          $("#sidebar").width("3rem");
-          $("#wrapper").css("padding-left","3rem");
-          $(".expanded.mode").hide();
-          $(".collapsed.mode").show();
-          $("#sidebar i.icon").addClass("collapsed");
-          });
-        $("#nav .expand.button").on("click tap", function(){
-          $("#sidebar").width("20rem");
-          $("#wrapper").css("padding-left","20rem");
-          $(".expanded.mode").css("display","");
-          $(".collapsed.mode").hide();
-          $("#sidebar i.icon").removeClass("collapsed");
-          });
-          
-        // about me buttons
-        $("#nav .view.help").on("click tap", function(){
-          $("#iframe").attr("src","http://newshelper.g0v.tw/");
-          });
-        $("#nav .view.source").on("click tap", function(){
-          $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
-          });
-          
-        // firefox fix for iframe initial size
-        $("#wrapper .frame").addClass("normal size");
-        
-        // zoom in buttons
-        $("#nav .zoom.dropdown .normal").on("click tap", function(){
-          $(".frame, #iframe").removeClass("large larger").addClass("normal size");
-          });
-        $("#nav .zoom.dropdown .large").on("click tap", function(){
-          $(".frame, #iframe").removeClass("normal larger").addClass("large size");
-          });
-        $("#nav .zoom.dropdown .larger").on("click tap", function(){
-          $(".frame, #iframe").removeClass("normal large").addClass("larger size");
-          });
-          
-        // edit table
-        $("#topbar .view.table").on("click tap", function(){
-          $("#iframe").attr("src","https://ethercalc.org/3du");
-          $("#topbar .table.item").toggle();
-          });
-        $("#topbar .refresh.table").on("click tap", function(){
-          location.reload(true);
-          });
-        $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
-          $("#topbar .view.table").show();
-          $("#topbar .refresh.table").hide();
-          });
-          
-          
-        var paths = location.pathname.split('/') || [];
-        var ethercalc_name     = paths[1]
-        var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
-        var src;
-        var history_state={}
-        $('#toc').on('click','a', function(event){
-          iframe_path = event.target.href;
-            if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
-              iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
-          }
-           history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
-        })
-        
-        $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
-        
-          var got_title = false
-          var depth = 0 // if depth == 1, link should in accordion
-          
-          var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
-          var link_tpl = Handlebars.compile(link_tpl_source);
-          
-          var add_link = function(row){
-            try{
-              var link_options = JSON.parse(row[2]);
-            }catch(e){
-              var link_options = {};
-            }
-            var context = {url: row[0].trim(), subject: row[1]};
-            var $link_el = $(link_tpl(context));
-            for(key in link_options){
-              $link_el.attr(key, link_options[key]);
-            }
-            if(depth == 1){
-              $('#toc .ui.accordion:last').find('.menu').append($link_el)
-            }else{
-              $('#toc .ui.vertical').append($link_el)
-            }
-            // enable default iframe
-            if((new RegExp(context.url+"/?")).test(current_iframe_url)){
-              src = current_iframe_url;
-            }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
-              if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
-                src = context.url;
-              }
-            }
-            if(!src) {
-              src = context.url;
-            }
-          }
-          
-          var accordion_tpl_source = '<div class="ui accordion"><div class="title header item "><span class="expanded mode">{{title}}</span><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
-          var accordion_tpl = Handlebars.compile(accordion_tpl_source);
-          
-          var add_accordion = function(row){
-            try{
-              var options = JSON.parse(row[2]);
-            }catch(e){
-              var options = {};
-            }
-            var context = {title: row[1] };
-            var $accordion_el = $(accordion_tpl(context));
-            
-            $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
-              $accordion_el.find('.folder').toggle()
-            }})
-            
-            if(options.expand){
-              $accordion_el.accordion('open',0)
-            }
-          }
-          
-          $.each(rows, function(row_index, row){
-            // if 1st and 2nd is empty then this a empty row 
-            if(row[0].trim().length === 0 && row[1].trim().length === 0){
-              return
-            }
-            
-            // now we have soming thing, should get title first
-            if(!got_title){
-            
-              // TODO: need opt....
-              $.each(row, function(col_index, col){
-                col =  col.trim()
-                
-                // get the MAGIC title 
-                if(!got_title && !col.match(/^#/) && col.length > 0) {
-                  $('#topbar .item-title').html(col);
-                  got_title = true;
-                }
-              })
-              
-            } else {
-              if(row[0].length == 0){ // folder 
-                depth = 1
-                add_accordion(row)
-              }else{ // link
-                add_link(row)
-              }
-            }
-          });
-          $("#iframe").attr("src",src);
-        })
-      </script>
-    </div>
-  </body>
-</html>
+        // get the MAGIC title 
+        if(!got_title && !col.match(/^#/) && col.length > 0) {
+          $('#topbar .item-title').html(col);
+          got_title = true;
+        }
+      })
+      
+    } else {
+      if(row[0].length == 0){ // folder 
+        depth = 1
+        add_accordion(row)
+      }else{ // link
+        add_link(row)
+      }
+    }
+  });
+  $("#iframe").attr("src",src);
+})</script></div></body></html>
