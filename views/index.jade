@@ -1,7 +1,6 @@
 extends _template
 
 block title
-  | Mozilla MakerSpace
 
 block body
 
@@ -88,9 +87,15 @@ block script
       $(".frame, #iframe").removeClass("normal large").addClass("larger size");
       });
 
+    var paths = location.pathname.split('/') || [];
+    var ethercalc_name     = paths[1]
+    var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
+    var src;
+    var history_state={}
+
     // edit table
     $("#topbar .view.table").on("click tap", function(){
-      $("#iframe").attr("src","https://ethercalc.org/3du");
+      $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
       $("#topbar .table.item").toggle();
       });
     $("#topbar .refresh.table").on("click tap", function(){
@@ -102,11 +107,6 @@ block script
       });
 
 
-    var paths = location.pathname.split('/') || [];
-    var ethercalc_name     = paths[1]
-    var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
-    var src;
-    var history_state={}
     $('#toc').on('click','a', function(event){
       iframe_path = event.target.href;
         if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
