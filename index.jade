@@ -20,25 +20,25 @@ block body
               .title.item 各期黑客松
                 i.icon.dropdown
               .content
-                a.foldr.item(src="g0v-hackath9n") 還我土地 2014-06-21
+                a.item(href="/g0v-hackath9n") 還我土地 2014-06-21
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath8n") 解除戒嚴 2014-04-19
+                a.item(href="/g0v-hackath8n") 解除戒嚴 2014-04-19
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath7n") 自由時代 2014-02-22
+                a.item(href="/g0v-hackath7n") 自由時代 2014-02-22
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath6n") 勞動基準 2013-12-21
+                a.item(href="/g0v-hackath6n") 勞動基準 2013-12-21
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath5n") 美麗島 2013-10-20
+                a.item(href="/g0v-hackath5n") 美麗島 2013-10-20
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath4n") 國民大會 2013-08-10
+                a.item(href="/g0v-hackath4n") 國民大會 2013-08-10
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath3n") 客廳工廠 2013-06-06
+                a.item(href="/g0v-hackath3n") 客廳工廠 2013-06-06
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath2n") 九大建設 2013-03-23
+                a.item(href="/g0v-hackath2n") 九大建設 2013-03-23
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath1n") 公地放領 2013-01-27
+                a.item(href="/g0v-hackath1n") 公地放領 2013-01-27
                   i.icon.exchange
-                a.foldr.item(src="g0v-hackath0n") 動員戡亂 2012-12-01
+                a.item(href="/g0v-hackath0n") 動員戡亂 2012-12-01
                   i.icon.exchange
         .ui.dropdown.item.history
           i.icon.time
@@ -164,7 +164,7 @@ block script
 
           // TODO: need opt....
           $.each(row, function(col_index, col){
-            col =  col.trim()
+            col = col.trim()
 
             // get the MAGIC title 
             if(!got_title && !col.match(/^#/) && col.length > 0) {
@@ -177,9 +177,11 @@ block script
                 foldr_name: col,
                 foldr_id: ethercalc_name
               };
-              //foldr_histories.push(JSON.stringify(current_foldr_history));
 
-              // TODO: Remove all items in foldr_histories that share the same foldr_id before unshift
+              // Remove all items in foldr_histories that share the same foldr_id before unshift
+              foldr_histories = $.grep(foldr_histories, function(value){
+                return value !== JSON.stringify(current_foldr_history);
+              });
               foldr_histories.unshift(JSON.stringify(current_foldr_history));
               localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
             }
@@ -199,7 +201,6 @@ block script
     })
 
     // setup history menu
-    console.log(foldr_histories);
     $.each(foldr_histories, function(index, foldr_history){
       var item = JSON.parse(foldr_history);
       $("#nav .history .menu").append(
