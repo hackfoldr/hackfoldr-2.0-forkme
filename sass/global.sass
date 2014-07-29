@@ -68,6 +68,15 @@ a, a:link
 
   #toc>.ui.menu
     width: 100%
+    border-top: 0.25rem rgba(#000,0.5) solid
+
+  #toc, #topbar
+    &>.ui.menu
+      +box-shadow(0 0 0.25rem rgba(#000,0.25))
+
+  #topbar>.ui.menu
+    position: relative
+    z-index: 2
 
   .collapsed.icon
     float: none
@@ -118,7 +127,7 @@ a, a:link
     margin: 0 0 -5px 0
     border: 0
     position: relative
-    z-index: 2
+    z-index: 3
 
 // zoom iframe content
 
