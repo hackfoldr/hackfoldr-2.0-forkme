@@ -11,11 +11,11 @@ block body
         a.item.expand.button
           i.icon.arrow.right
       .ui.menu.expanded.mode
-        .ui.dropdown.item
+        .ui.dropdown.item.shortcuts
           i.icon.home
           i.icon.dropdown
           .menu
-            a.link.item g0v 官網
+            a.link.item(src="http://g0v.tw") g0v 官網
         a.link.item.view.help(href="http://hack.etblue.tw/welcome-to-hackfoldr",target="_blank")
           i.icon.help
         //-a.link.item.view.source
@@ -48,6 +48,11 @@ block body
 block script
   script.
     $(".hidden").hide();
+
+    // shortcuts menu
+    $("#nav .shortcuts a.link").on("click tap", function(){
+      $("#iframe").attr("src",$(this).attr("src"));
+      });
 
     // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
