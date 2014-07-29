@@ -178,7 +178,9 @@ block script
                 foldr_id: ethercalc_name
               };
               //foldr_histories.push(JSON.stringify(current_foldr_history));
-              foldr_histories.push(JSON.stringify(current_foldr_history));
+
+              // TODO: Remove all items in foldr_histories that share the same foldr_id before unshift
+              foldr_histories.unshift(JSON.stringify(current_foldr_history));
               localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
             }
 
@@ -199,11 +201,12 @@ block script
     // setup history menu
     console.log(foldr_histories);
     $.each(foldr_histories, function(index, foldr_history){
-      JSON.parse(foldr_history, function(key, value){
-        console.log(key);
-        console.log(value);
-        $("#nav .history .menu").append('<a src="'+ key +'" class="foldr item">'+ value +'<i class="icon exchange"></i></a>')
-        });
+      var item = JSON.parse(foldr_history);
+      $("#nav .history .menu").append(
+        $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
+            .text(item.foldr_name)
+            .append($('<i class="icon exchange"></i>'))
+      );
       });
 
     // for semantic ui css specificity
