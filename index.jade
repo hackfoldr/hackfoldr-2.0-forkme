@@ -16,9 +16,9 @@ block body
           i.icon.dropdown
           .menu
             a.link.item g0v 官網
-        a.link.item.view.help
+        a.link.item.view.help(href="http://hack.etblue.tw/welcome-to-hackfoldr",target="_blank")
           i.icon.help
-        a.link.item.view.source
+        //-a.link.item.view.source
           i.icon.github
         a.right.item.collapse.button
           i.icon.arrow.left
@@ -66,12 +66,12 @@ block script
       });
 
     // about me buttons
-    $("#nav .view.help").on("click tap", function(){
-      $("#iframe").attr("src","http://newshelper.g0v.tw/");
-      });
-    $("#nav .view.source").on("click tap", function(){
-      $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
-      });
+    // $("#nav .view.help").on("click tap", function(){
+    //   $("#iframe").attr("src","http://newshelper.g0v.tw/");
+    //   });
+    // $("#nav .view.source").on("click tap", function(){
+    //   $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
+    //   });
 
     // firefox fix for iframe initial size
     $("#wrapper .frame").addClass("normal size");
