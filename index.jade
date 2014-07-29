@@ -11,13 +11,18 @@ block body
         a.item.expand.button
           i.icon.arrow.right
       .ui.menu.expanded.mode
-        .ui.dropdown.item.shortcuts
+        .ui.dropdown.item
           i.icon.home
           i.icon.dropdown
           .menu
             a.link.item(src="http://g0v.tw") g0v 官網
-        a.link.item.view.help(href="http://hack.etblue.tw/welcome-to-hackfoldr",target="_blank")
+        .ui.dropdown.item.about
           i.icon.help
+          .menu
+            a.link.item(src="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr") 使用說明
+              i.icon.file
+            a.item(href="http://hack.etblue.tw/welcome-to-hackfoldr",target="_blank") 開發測試、問題回報
+              i.icon.external.url
         //-a.link.item.view.source
           i.icon.github
         a.right.item.collapse.button
@@ -50,7 +55,7 @@ block script
     $(".hidden").hide();
 
     // shortcuts menu
-    $("#nav .shortcuts a.link").on("click tap", function(){
+    $("#nav a.link").on("click tap", function(){
       $("#iframe").attr("src",$(this).attr("src"));
       });
 

@@ -62,7 +62,8 @@ a, a:link
   left: 0
   top: 0
   bottom: 0
-  overflow: auto
+  overflow-y: auto
+  overflow-x: hidden
   +background-image(linear-gradient(left, #efefef, #e1e1e1))
 
   #nav>.ui.menu, #toc>.ui.menu
@@ -74,6 +75,14 @@ a, a:link
   .collapsed.icon
     float: none
     margin: 0
+
+  #nav .dropdown.about .menu
+    .item
+      z-index: 3
+      width: 14rem
+      i.icon
+        float: right
+        margin-right: 0
 
 #wrapper
   position: absolute
