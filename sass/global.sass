@@ -64,10 +64,7 @@ a, a:link
   bottom: 0
   overflow-y: auto
   overflow-x: hidden
-  +background-image(linear-gradient(left, #efefef, #e1e1e1))
-
-  #nav>.ui.menu, #toc>.ui.menu
-    background-color: rgba(#fff,0.7)
+  +background-image(linear-gradient(left, #e0e0e0, #d0d0d0))
 
   #toc>.ui.menu
     width: 100%
@@ -75,6 +72,15 @@ a, a:link
   .collapsed.icon
     float: none
     margin: 0
+
+  #topbar
+    .title.item
+      font-weight: 700
+    .form.segment
+      background: none
+
+  #nav>.ui.menu
+    background-color: rgba(#fff,0)
 
   #nav
     .dropdown.about .menu

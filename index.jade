@@ -11,7 +11,7 @@ block body
         a.item.expand.button
           i.icon.arrow.right
       .ui.menu.expanded.mode
-        .ui.dropdown.item.shortcuts
+        .ui.dropdown.icon.item.shortcuts
           i.icon.home
           .menu
             a.link.item(src="http://g0v.tw") g0v 官網
@@ -40,15 +40,15 @@ block body
                   i.icon.exchange
                 a.item(href="/g0v-hackath0n") 動員戡亂 2012-12-01
                   i.icon.exchange
-        .ui.dropdown.item.history
+        .ui.dropdown.icon.item.history
           i.icon.time
           .menu
-        .ui.dropdown.item.about
+        .ui.dropdown.icon.item.about
           i.icon.help
           .menu
             a.link.item(src="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr") 使用說明
               i.icon.text.file.outline
-            a.foldr.item(src="welcome-to-hackfoldr") 開發與回報
+            a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
               i.icon.exchange
         //-a.link.item.view.source
           i.icon.github
@@ -62,12 +62,22 @@ block body
             .item.larger 150%
 
     nav#topbar
-      .ui.secondary.pointing.menu
+      .ui.menu
         .item.title.expanded.mode
-        a.right.item.view.table
+        a.right.icon.item.view.table
           i.icon.pencil
-        a.right.item.refresh.table.hidden
+        a.right.icon.item.refresh.table.hidden
           i.icon.repeat
+        a.right.icon.item.add.to.list.expanded.mode
+          i.icon.add
+      .ui.form.segment.no.margin.hidden
+        .field
+          .ui.input
+            input(placeholder="(doc title)",type="text")
+        .field
+          .ui.input
+            input(placeholder="(doc url)",type="text")
+        .ui.submit.button.green.small add to this foldr
     nav#toc
       .ui.vertical.menu
 
@@ -262,4 +272,9 @@ block script
     $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
       $("#topbar .view.table").show();
       $("#topbar .refresh.table").hide();
+      });
+
+    // add current link to foldr
+    $("#topbar .add.to.list").on("click tap", function(){
+      $("#topbar .form").slideToggle();
       });
