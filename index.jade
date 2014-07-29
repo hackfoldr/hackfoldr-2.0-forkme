@@ -7,10 +7,7 @@ block body
   nav#sidebar
 
     nav#nav
-      .ui.menu.collapsed.mode.hidden
-        a.item.expand.button
-          i.icon.arrow.right
-      .ui.menu.expanded.mode
+      .ui.borderless.menu
         .ui.dropdown.icon.item.shortcuts
           i.icon.home
           .menu
@@ -52,7 +49,9 @@ block body
               i.icon.exchange
         //-a.link.item.view.source
           i.icon.github
-        a.right.item.collapse.button
+        a.right.item.expand.button.collapsed.mode.hidden
+          i.icon.arrow.right
+        a.right.item.collapse.button.expanded.mode
           i.icon.arrow.left
         .right.icon.item.zoom.ui.dropdown
           i.icon.zoom.in
@@ -62,13 +61,13 @@ block body
             .item.larger 150%
 
     nav#topbar
-      .ui.menu
-        .item.title.expanded.mode
+      .ui.borderless.menu
+        .item.title
         a.right.icon.item.view.table
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
           i.icon.repeat
-        a.right.icon.item.add.to.list.expanded.mode
+        a.right.icon.item.add.to.list
           i.icon.add
       .ui.form.segment.no.margin.hidden.expanded.mode
         .field
@@ -110,7 +109,7 @@ block script
       var got_title = false
       var depth = 0 // if depth == 1, link should in accordion
 
-      var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon text file outline"></i></a>';
+      var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item">{{subject}}<i class="icon text file outline"></i></a>';
       var link_tpl = Handlebars.compile(link_tpl_source);
 
       var add_link = function(row){
@@ -142,7 +141,7 @@ block script
         }
       }
       
-      var accordion_tpl_source = '<div class="ui accordion"><div class="title header item "><span class="expanded mode">{{title}}</span><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+      var accordion_tpl_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
       var accordion_tpl = Handlebars.compile(accordion_tpl_source);
 
       var add_accordion = function(row){
@@ -233,18 +232,16 @@ block script
 
     // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
-      $("#sidebar").width("3rem");
+      $("#sidebar").css("left","-17rem");
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").show();
-      $("#sidebar i.icon").addClass("collapsed");
       });
     $("#nav .expand.button").on("click tap", function(){
-      $("#sidebar").width("20rem");
+      $("#sidebar").css("left","0");
       $("#wrapper").css("padding-left","20rem");
       $(".expanded.mode").css("display","");
       $(".collapsed.mode").hide();
-      $("#sidebar i.icon").removeClass("collapsed");
       });
 
     // firefox fix for iframe initial size

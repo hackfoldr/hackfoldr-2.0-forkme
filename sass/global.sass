@@ -65,10 +65,12 @@ a, a:link
   overflow-y: auto
   overflow-x: hidden
   +background-image(linear-gradient(left, #e0e0e0, #d0d0d0))
+  +transition-duration(1s)
+  +transition-timing-function(ease)
 
   #toc>.ui.menu
     width: 100%
-    border-top: 0.25rem rgba(#000,0.5) solid
+    border-top: 2px rgba(#000,0.5) solid
 
   #toc, #topbar
     &>.ui.menu
@@ -112,6 +114,8 @@ a, a:link
   right: 0
   width: 100%
   height: 100%
+  +transition-duration(1s)
+  +transition-timing-function(ease)
 
   .frame
     position: relative
