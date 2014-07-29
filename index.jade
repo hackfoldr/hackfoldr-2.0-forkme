@@ -88,9 +88,9 @@ block script
       });
 
     var paths = location.pathname.split('/') || [];
-    var ethercalc_name     = paths[1]
+    var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
-    var src;
+    var iframe_src;
     var history_state={}
 
     // edit table
@@ -141,14 +141,14 @@ block script
         }
         // enable default iframe
         if((new RegExp(context.url+"/?")).test(current_iframe_url)){
-          src = current_iframe_url;
+          iframe_src = current_iframe_url;
         }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
           if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
-            src = context.url;
+            iframe_src = context.url;
           }
         }
-        if(!src) {
-          src = context.url;
+        if(!iframe_src) {
+          iframe_src = context.url;
         }
       }
       
@@ -202,5 +202,5 @@ block script
           }
         }
       });
-      $("#iframe").attr("src",src);
+      $("#iframe").attr("src",iframe_src);
     })
