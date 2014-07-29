@@ -76,13 +76,17 @@ a, a:link
     float: none
     margin: 0
 
-  #nav .dropdown.about .menu
-    .item
-      z-index: 3
-      width: 14rem
-      i.icon
-        float: right
-        margin-right: 0
+  #nav
+    .dropdown.about .menu
+      width: 10rem
+    .dropdown.shortcuts, .dropdown.history
+      .menu
+        width: 12rem
+    .dropdown .menu
+      .item
+        i.icon
+          float: right
+          margin-right: 0
 
 #wrapper
   position: absolute
@@ -151,6 +155,6 @@ a, a:link
     -o-transform-origin: 0 0
     -webkit-transform-origin: 0 0
 
-#toc
+#toc, #nav
   .ui.accordion>.content
     padding: 0

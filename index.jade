@@ -11,23 +11,50 @@ block body
         a.item.expand.button
           i.icon.arrow.right
       .ui.menu.expanded.mode
-        .ui.dropdown.item
+        .ui.dropdown.item.shortcuts
           i.icon.home
-          i.icon.dropdown
           .menu
             a.link.item(src="http://g0v.tw") g0v 官網
+              i.icon.browser
+            .ui.accordion
+              .title.item 各期黑客松
+                i.icon.dropdown
+              .content
+                a.foldr.item(src="g0v-hackath9n") 還我土地 2014-06-21
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath8n") 解除戒嚴 2014-04-19
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath7n") 自由時代 2014-02-22
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath6n") 勞動基準 2013-12-21
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath5n") 美麗島 2013-10-20
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath4n") 國民大會 2013-08-10
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath3n") 客廳工廠 2013-06-06
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath2n") 九大建設 2013-03-23
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath1n") 公地放領 2013-01-27
+                  i.icon.exchange
+                a.foldr.item(src="g0v-hackath0n") 動員戡亂 2012-12-01
+                  i.icon.exchange
+        .ui.dropdown.item.history
+          i.icon.time
+          .menu
         .ui.dropdown.item.about
           i.icon.help
           .menu
             a.link.item(src="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr") 使用說明
-              i.icon.file
-            a.item(href="http://hack.etblue.tw/welcome-to-hackfoldr",target="_blank") 開發測試、問題回報
-              i.icon.external.url
+              i.icon.text.file.outline
+            a.foldr.item(src="welcome-to-hackfoldr") 開發與回報
+              i.icon.exchange
         //-a.link.item.view.source
           i.icon.github
         a.right.item.collapse.button
           i.icon.arrow.left
-        a.right.icon.item.zoom.ui.dropdown
+        .right.icon.item.zoom.ui.dropdown
           i.icon.zoom.in
           .menu
             .item.normal 100%
@@ -36,12 +63,11 @@ block body
 
     nav#topbar
       .ui.secondary.pointing.menu
-        .item.item-title.expanded.mode
-        .right.menu
-          a.link.item.view.table
-            i.icon.pencil
-          a.item.refresh.table.hidden
-            i.icon.repeat
+        .item.title.expanded.mode
+        a.right.item.view.table
+          i.icon.pencil
+        a.right.item.refresh.table.hidden
+          i.icon.repeat
     nav#toc
       .ui.vertical.menu
 
@@ -52,70 +78,14 @@ block body
 
 block script
   script.
-    $(".hidden").hide();
-
-    // shortcuts menu
-    $("#nav a.link").on("click tap", function(){
-      $("#iframe").attr("src",$(this).attr("src"));
-      });
-
-    // sidebar expansion buttons
-    $("#nav .collapse.button").on("click tap", function(){
-      $("#sidebar").width("3rem");
-      $("#wrapper").css("padding-left","3rem");
-      $(".expanded.mode").hide();
-      $(".collapsed.mode").show();
-      $("#sidebar i.icon").addClass("collapsed");
-      });
-    $("#nav .expand.button").on("click tap", function(){
-      $("#sidebar").width("20rem");
-      $("#wrapper").css("padding-left","20rem");
-      $(".expanded.mode").css("display","");
-      $(".collapsed.mode").hide();
-      $("#sidebar i.icon").removeClass("collapsed");
-      });
-
-    // about me buttons
-    // $("#nav .view.help").on("click tap", function(){
-    //   $("#iframe").attr("src","http://newshelper.g0v.tw/");
-    //   });
-    // $("#nav .view.source").on("click tap", function(){
-    //   $("#iframe").attr("src","http://logbot.g0v.tw/channel/g0v.tw/today");
-    //   });
-
-    // firefox fix for iframe initial size
-    $("#wrapper .frame").addClass("normal size");
-
-    // zoom in buttons
-    $("#nav .zoom.dropdown .normal").on("click tap", function(){
-      $(".frame, #iframe").removeClass("large larger").addClass("normal size");
-      });
-    $("#nav .zoom.dropdown .large").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal larger").addClass("large size");
-      });
-    $("#nav .zoom.dropdown .larger").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal large").addClass("larger size");
-      });
 
     var paths = location.pathname.split('/') || [];
     var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
     var iframe_src;
-    var history_state={}
-
-    // edit table
-    $("#topbar .view.table").on("click tap", function(){
-      $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
-      $("#topbar .table.item").toggle();
-      });
-    $("#topbar .refresh.table").on("click tap", function(){
-      location.reload(true);
-      });
-    $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
-      $("#topbar .view.table").show();
-      $("#topbar .refresh.table").hide();
-      });
-
+    var history_state={};
+    //localStorage.setItem("hackfoldr","[]");
+    var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
 
     $('#toc').on('click','a', function(event){
       iframe_path = event.target.href;
@@ -130,7 +100,7 @@ block script
       var got_title = false
       var depth = 0 // if depth == 1, link should in accordion
 
-      var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon file"></i></a>';
+      var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item"><span class="expanded mode">{{subject}}</span><i class="icon text file outline"></i></a>';
       var link_tpl = Handlebars.compile(link_tpl_source);
 
       var add_link = function(row){
@@ -198,9 +168,20 @@ block script
 
             // get the MAGIC title 
             if(!got_title && !col.match(/^#/) && col.length > 0) {
-              $('#topbar .item-title').html(col);
+              $('#topbar .title').html(col);
               got_title = true;
+
+              // add to history menu
+
+              var current_foldr_history = {
+                foldr_name: col,
+                foldr_id: ethercalc_name
+              };
+              //foldr_histories.push(JSON.stringify(current_foldr_history));
+              foldr_histories.push(JSON.stringify(current_foldr_history));
+              localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
             }
+
           })
 
         } else {
@@ -214,3 +195,67 @@ block script
       });
       $("#iframe").attr("src",iframe_src);
     })
+
+    // setup history menu
+    console.log(foldr_histories);
+    $.each(foldr_histories, function(index, foldr_history){
+      JSON.parse(foldr_history, function(key, value){
+        console.log(key);
+        console.log(value);
+        $("#nav .history .menu").append('<a src="'+ key +'" class="foldr item">'+ value +'<i class="icon exchange"></i></a>')
+        });
+      });
+
+    // for semantic ui css specificity
+    $(".hidden").hide();
+
+    // shortcuts menu
+    $("#nav a.foldr").on("click tap", function(){
+      location = "http://hack.etblue.tw/" + $(this).attr("src")
+      });
+    $("#nav a.link").on("click tap", function(){
+      $("#iframe").attr("src",$(this).attr("src"));
+      });
+
+    // sidebar expansion buttons
+    $("#nav .collapse.button").on("click tap", function(){
+      $("#sidebar").width("3rem");
+      $("#wrapper").css("padding-left","3rem");
+      $(".expanded.mode").hide();
+      $(".collapsed.mode").show();
+      $("#sidebar i.icon").addClass("collapsed");
+      });
+    $("#nav .expand.button").on("click tap", function(){
+      $("#sidebar").width("20rem");
+      $("#wrapper").css("padding-left","20rem");
+      $(".expanded.mode").css("display","");
+      $(".collapsed.mode").hide();
+      $("#sidebar i.icon").removeClass("collapsed");
+      });
+
+    // firefox fix for iframe initial size
+    $("#wrapper .frame").addClass("normal size");
+
+    // zoom in buttons
+    $("#nav .zoom.dropdown .normal").on("click tap", function(){
+      $(".frame, #iframe").removeClass("large larger").addClass("normal size");
+      });
+    $("#nav .zoom.dropdown .large").on("click tap", function(){
+      $(".frame, #iframe").removeClass("normal larger").addClass("large size");
+      });
+    $("#nav .zoom.dropdown .larger").on("click tap", function(){
+      $(".frame, #iframe").removeClass("normal large").addClass("larger size");
+      });
+
+    // edit table
+    $("#topbar .view.table").on("click tap", function(){
+      $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
+      $("#topbar .table.item").toggle();
+      });
+    $("#topbar .refresh.table").on("click tap", function(){
+      location.reload(true);
+      });
+    $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
+      $("#topbar .view.table").show();
+      $("#topbar .refresh.table").hide();
+      });

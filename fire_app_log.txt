@@ -334,3 +334,27 @@
 2014-07-29 13:30:10 identical css/global.css.map 
 2014-07-29 13:30:25 overwrite css/global.css 
 2014-07-29 13:30:25 identical css/global.css.map 
+2014-07-29 13:58:02 overwrite css/global.css 
+2014-07-29 13:58:02 overwrite css/global.css.map 
+2014-07-29 13:58:53 overwrite css/global.css 
+2014-07-29 13:58:53 overwrite css/global.css.map 
+2014-07-29 13:58:57 overwrite css/global.css 
+2014-07-29 13:58:57 overwrite css/global.css.map 
+2014-07-29 14:10:03 overwrite css/global.css 
+2014-07-29 14:10:03 overwrite css/global.css.map 
+2014-07-29 14:10:44 identical css/global.css 
+2014-07-29 14:10:44 identical css/global.css.map 
+2014-07-29 14:19:24 overwrite css/global.css 
+2014-07-29 14:19:24 identical css/global.css.map 
+2014-07-29 14:23:26 overwrite css/global.css 
+2014-07-29 14:23:26 identical css/global.css.map 
+2014-07-29 14:24:21 overwrite css/global.css 
+2014-07-29 14:24:21 overwrite css/global.css.map 
+2014-07-29 14:24:33 overwrite css/global.css 
+2014-07-29 14:24:33 identical css/global.css.map 
+2014-07-29 14:26:19     error sass/global.sass (Line 82: The line was indented 2 levels deeper than the previous line.)
+2014-07-29 14:26:19 overwrite css/global.css 
+2014-07-29 14:26:40     error sass/global.sass (Line 82: The line was indented 2 levels deeper than the previous line.)
+2014-07-29 14:26:40 identical css/global.css 
+2014-07-29 14:27:10 overwrite css/global.css 
+2014-07-29 14:27:10 overwrite css/global.css.map 
