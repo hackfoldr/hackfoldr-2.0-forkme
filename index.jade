@@ -11,7 +11,7 @@ block body
         .ui.dropdown.icon.item.shortcuts
           i.icon.home
           .menu
-            a.link.item(src="http://g0v.tw") g0v 官網
+            a.link.item(href="http://g0v.tw",target="iframe") g0v 官網
               i.icon.browser
             .ui.accordion
               .title.item 各期黑客松
@@ -43,7 +43,7 @@ block body
         .ui.dropdown.icon.item.about
           i.icon.help
           .menu
-            a.link.item(src="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr") 使用說明
+            a.link.item(href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr",target="iframe") 使用說明
               i.icon.text.file.outline
             a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
               i.icon.exchange
@@ -95,140 +95,155 @@ block script
     var history_state={};
     //localStorage.setItem("hackfoldr","[]");
     var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
+    //localStorage.setItem("hackfoldr-zoom", JSON.stringify(""));
+    //localStorage.setItem("hackfoldr_zoom", JSON.stringify(""));
+    //localStorage.setItem("hackfoldrzoom", JSON.stringify(""));
+    //localStorage.setItem("hackfoldr-scale", JSON.stringify(""));
+    //console.log(localStorage);
+    var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
+    //console.log(localStorage);
+    //var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-zoom")) || [];
 
-    $('#toc').on('click','a', function(event){
+    $('#toc').on('click tap','a', function(event){
       iframe_path = event.target.href;
         if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
-          iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
+          //iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
+          iframe_path = iframe_path.split(/\//).pop();
       }
        history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
     })
 
-    $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
+    var compile_ethercalc = function(){
+      $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
 
-      var got_title = false
-      var depth = 0 // if depth == 1, link should in accordion
+        var got_title = false
+        var depth = 0 // if depth == 1, link should in accordion
 
-      var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item">{{subject}}<i class="icon text file outline"></i></a>';
-      var link_tpl = Handlebars.compile(link_tpl_source);
+        var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item">{{subject}}<i class="icon text file outline"></i></a>';
+        var link_tpl = Handlebars.compile(link_tpl_source);
 
-      var add_link = function(row){
-        try{
-          var link_options = JSON.parse(row[2]);
-        }catch(e){
-          var link_options = {};
-        }
-        var context = {url: row[0].trim(), subject: row[1]};
-        var $link_el = $(link_tpl(context));
-        for(key in link_options){
-          $link_el.attr(key, link_options[key]);
-        }
-        if(depth == 1){
-          $('#toc .ui.accordion:last').find('.menu').append($link_el)
-        }else{
-          $('#toc .ui.vertical').append($link_el)
-        }
-        // enable default iframe
-        if((new RegExp(context.url+"/?")).test(current_iframe_url)){
-          iframe_src = current_iframe_url;
-        }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
-          if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
+        var add_link = function(row){
+          try{
+            var link_options = JSON.parse(row[2]);
+          }catch(e){
+            var link_options = {};
+          }
+          var context = {url: row[0].trim(), subject: row[1]};
+          var $link_el = $(link_tpl(context));
+          for(key in link_options){
+            $link_el.attr(key, link_options[key]);
+          }
+          if(depth == 1){
+            $('#toc .ui.accordion:last').find('.menu').append($link_el)
+          }else{
+            $('#toc .ui.vertical').append($link_el)
+          }
+          // enable default iframe
+          if((new RegExp(context.url+"/?")).test(current_iframe_url)){
+            iframe_src = current_iframe_url;
+          }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
+            if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
+              iframe_src = context.url;
+            }
+          }
+          if(!iframe_src) {
             iframe_src = context.url;
           }
         }
-        if(!iframe_src) {
-          iframe_src = context.url;
-        }
-      }
-      
-      var accordion_tpl_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
-      var accordion_tpl = Handlebars.compile(accordion_tpl_source);
-
-      var add_accordion = function(row){
-        try{
-          var options = JSON.parse(row[2]);
-        }catch(e){
-          var options = {};
-        }
-        var context = {title: row[1] };
-        var $accordion_el = $(accordion_tpl(context));
         
-        $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
-          $accordion_el.find('.folder').toggle()
-        }})
-        
-        if(options.expand){
-          $accordion_el.accordion('open',0)
-        }
-      }
+        var accordion_tpl_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+        var accordion_tpl = Handlebars.compile(accordion_tpl_source);
 
-      $.each(rows, function(row_index, row){
-        // if 1st and 2nd is empty then this a empty row 
-        if(row[0].trim().length === 0 && row[1].trim().length === 0){
-          return
-        }
-        
-        // now we have soming thing, should get title first
-        if(!got_title){
-
-          // TODO: need opt....
-          $.each(row, function(col_index, col){
-            col = col.trim()
-
-            // get the MAGIC title 
-            if(!got_title && !col.match(/^#/) && col.length > 0) {
-              $('#topbar .title').html(col);
-              got_title = true;
-
-              // add to history menu
-
-              var current_foldr_history = {
-                foldr_name: col,
-                foldr_id: ethercalc_name
-              };
-
-              // Remove all items in foldr_histories that share the same foldr_id before unshift
-              foldr_histories = $.grep(foldr_histories, function(value){
-                return value !== JSON.stringify(current_foldr_history);
-              });
-              foldr_histories.unshift(JSON.stringify(current_foldr_history));
-              localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
-            }
-
-          })
-
-        } else {
-          if(row[0].length == 0){ // folder 
-            depth = 1
-            add_accordion(row)
-          }else{ // link
-            add_link(row)
+        var add_accordion = function(row){
+          try{
+            var options = JSON.parse(row[2]);
+          }catch(e){
+            var options = {};
+          }
+          var context = {title: row[1] };
+          var $accordion_el = $(accordion_tpl(context));
+          
+          $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
+            $accordion_el.find('.folder').toggle()
+          }})
+          
+          if(options.expand){
+            $accordion_el.accordion('open',0)
           }
         }
-      });
-      $("#iframe").attr("src",iframe_src);
-    })
+
+        $.each(rows, function(row_index, row){
+          // if 1st and 2nd is empty then this a empty row 
+          if(row[0].trim().length === 0 && row[1].trim().length === 0){
+            return
+          }
+          
+          // now we have soming thing, should get title first
+          if(!got_title){
+
+            // TODO: need opt....
+            $.each(row, function(col_index, col){
+              col = col.trim()
+
+              // get the MAGIC title 
+              if(!got_title && !col.match(/^#/) && col.length > 0) {
+                $('#topbar .title').html(col);
+                got_title = true;
+
+                // add to history menu
+
+                var current_foldr_history = {
+                  foldr_name: col,
+                  foldr_id: ethercalc_name
+                };
+
+                // Remove all items in foldr_histories that share the same foldr_id before unshift
+                foldr_histories = $.grep(foldr_histories, function(value){
+                  return value !== JSON.stringify(current_foldr_history);
+                });
+                foldr_histories.unshift(JSON.stringify(current_foldr_history));
+                localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+              }
+
+            })
+
+          } else {
+            if(row[0].length == 0){ // folder 
+              depth = 1
+              add_accordion(row)
+            }else{ // link
+              add_link(row)
+            }
+          }
+        });
+
+        // set iframe src attribute
+        $("#iframe").attr("src",iframe_src);
+      })
+    };
+
+    compile_ethercalc();
 
     // setup history menu
     $.each(foldr_histories, function(index, foldr_history){
       var item = JSON.parse(foldr_history);
       $("#nav .history .menu").append(
         $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
-            .text(item.foldr_name)
-            .append($('<i class="icon exchange"></i>'))
+          .text(item.foldr_name)
+          .append($('<i class="icon exchange"></i>'))
       );
-      });
+    });
 
     // for semantic ui css specificity
     $(".hidden").hide();
 
     // shortcuts menu
-    $("#nav a.foldr").on("click tap", function(){
-      location = "http://hack.etblue.tw/" + $(this).attr("src")
-      });
-    $("#nav a.link").on("click tap", function(){
-      $("#iframe").attr("src",$(this).attr("src"));
-      });
+    //$("#nav a.foldr").on("click tap", function(){
+    //  location = "http://hack.etblue.tw/" + $(this).attr("src")
+    //  });
+    //$("#nav a.link").on("click tap", function(){
+    //  $("#iframe").attr("src",$(this).attr("src"));
+    //  });
 
     // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
@@ -248,30 +263,75 @@ block script
     $("#wrapper .frame").addClass("normal size");
 
     // zoom in buttons
+    //console.log(foldr_histories);
+    $(".frame, #iframe").addClass(foldr_scale + " size");
+
+    //$.each(["normal","large","larger"], function(index, scale){
+    //  $("#nav .zoom.dropdown " + scale).on("click tap", function(){
+    //    $(".frame, #iframe").removeClass("normal large larger").addClass(scale + " size");
+    //    foldr_scale = scale;
+    //    localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
+    //    console.log(localStorage);
+    //  });
+    //});
+
+    var set_scale = function(scale){
+      $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
+      localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
+    };
     $("#nav .zoom.dropdown .normal").on("click tap", function(){
-      $(".frame, #iframe").removeClass("large larger").addClass("normal size");
-      });
+      set_scale("normal");
+    });
     $("#nav .zoom.dropdown .large").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal larger").addClass("large size");
-      });
+      set_scale("large");
+    });
     $("#nav .zoom.dropdown .larger").on("click tap", function(){
-      $(".frame, #iframe").removeClass("normal large").addClass("larger size");
-      });
+      set_scale("larger");
+    });
+    //$("#nav .zoom.dropdown .large").on("click tap", function(){
+    //  $(".frame, #iframe").removeClass("normal large larger").addClass("large size");
+    //  foldr_scale = "large";
+    //  localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
+    //  });
+    //$("#nav .zoom.dropdown .larger").on("click tap", function(){
+    //  $(".frame, #iframe").removeClass("normal large larger").addClass("larger size");
+    //  foldr_scale = "larger";
+    //  localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
+    //  });
 
     // edit table
     $("#topbar .view.table").on("click tap", function(){
       $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
       $("#topbar .table.item").toggle();
+      // when leaving ethercalc, show edit icon again
+      // p.s. bind event to document to make dynamic content working
+      $(document).on("click tap", "a.link.item", function(){
+        console.log("triggered");
+        $("#topbar .view.table").show();
+        $("#topbar .refresh.table").hide();
+        // ?? 1.doesn't work 2. don't know if it's necessary to unbind event
+        //$(this).off("click tap", "a.link.item");
       });
+    });
+
+    //$("#iframe").load(function(event){
+    //  console.log(event.target.src);
+    //  $("#topbar .view.table").show();
+    //  $("#topbar .refresh.table").hide();      
+    //  }
+    //);
+
+    // refresh table
+    // TODO: load ethercalc data only instead of loading the whole page
     $("#topbar .refresh.table").on("click tap", function(){
-      location.reload(true);
-      });
-    $("#toc a.link.item, #nav a.link.item").on("click tap", function(){
+      $("#toc .menu").html("");
       $("#topbar .view.table").show();
       $("#topbar .refresh.table").hide();
+      compile_ethercalc();
+      //location.reload(true);
       });
 
     // add current link to foldr
     $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
-      });
+    });
