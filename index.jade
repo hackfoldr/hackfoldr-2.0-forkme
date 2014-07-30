@@ -64,7 +64,7 @@ block body
 
     nav#topbar
       .ui.borderless.menu
-        .item.title
+        a.item.title
         a.right.icon.item.edit.table(target="iframe")
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
@@ -395,6 +395,9 @@ block script
       // change url
       history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
     });
+
+    // add href attr to foldr title
+    $("#topbar .item.title").attr("href",'/'+ethercalc_name);
 
     // make current link item active
 
