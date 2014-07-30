@@ -12,31 +12,31 @@ block body
           i.icon.home
           .menu
             a.link.item(href="http://g0v.tw",target="iframe") g0v 官網
-              i.icon.browser
+              i.icon.globe
             .ui.accordion
               .title.item 各期黑客松
                 i.icon.dropdown
               .content
-                a.item(href="/g0v-hackath9n") 還我土地 2014-06-21
+                a.foldr.item(href="/g0v-hackath9n") 還我土地 2014-06-21
                   i.icon.exchange
-                a.item(href="/g0v-hackath8n") 解除戒嚴 2014-04-19
+                a.foldr.item(href="/g0v-hackath8n") 解除戒嚴 2014-04-19
                   i.icon.exchange
-                a.item(href="/g0v-hackath7n") 自由時代 2014-02-22
+                a.foldr.item(href="/g0v-hackath7n") 自由時代 2014-02-22
                   i.icon.exchange
-                a.item(href="/g0v-hackath6n") 勞動基準 2013-12-21
+                a.foldr.item(href="/g0v-hackath6n") 勞動基準 2013-12-21
                   i.icon.exchange
-                a.item(href="/g0v-hackath5n") 美麗島 2013-10-20
+                a.foldr.item(href="/g0v-hackath5n") 美麗島 2013-10-20
                   i.icon.exchange
-                a.item(href="/g0v-hackath4n") 國民大會 2013-08-10
+                a.foldr.item(href="/g0v-hackath4n") 國民大會 2013-08-10
                   i.icon.exchange
-                a.item(href="/g0v-hackath3n") 客廳工廠 2013-06-06
+                a.foldr.item(href="/g0v-hackath3n") 客廳工廠 2013-06-06
                   i.icon.exchange
-                a.item(href="/g0v-hackath2n") 九大建設 2013-03-23
+                a.foldr.item(href="/g0v-hackath2n") 九大建設 2013-03-23
                   i.icon.exchange
-                a.item(href="/g0v-hackath1n") 公地放領 2013-01-27
-                  i.icon.exchange
-                a.item(href="/g0v-hackath0n") 動員戡亂 2012-12-01
-                  i.icon.exchange
+                a.link.item(href="https://hackpad.com/lIoCjaeMWzC",target="iframe") 公地放領 2013-01-27
+                  i.icon.text.file.outline
+                a.link.item(href="https://hackpad.com/ul6fMthof2S",target="iframe") 動員戡亂 2012-12-01
+                  i.icon.text.file.outline
         .ui.dropdown.icon.item.history
           i.icon.time
           .menu
@@ -47,9 +47,8 @@ block body
               i.icon.text.file.outline
             a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
               i.icon.exchange
-            a.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
+            a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
               i.icon.github
-              i.icon.forward.mail
         //-a.link.item.view.source
           i.icon.github
         a.right.item.expand.button.collapsed.mode.hidden
@@ -96,25 +95,8 @@ block script
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
     var iframe_src;
     var history_state={};
-    //localStorage.setItem("hackfoldr","[]");
     var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
-    //localStorage.setItem("hackfoldr-zoom", JSON.stringify(""));
-    //localStorage.setItem("hackfoldr_zoom", JSON.stringify(""));
-    //localStorage.setItem("hackfoldrzoom", JSON.stringify(""));
-    //localStorage.setItem("hackfoldr-scale", JSON.stringify(""));
-    //console.log(localStorage);
     var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
-    //console.log(localStorage);
-    //var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-zoom")) || [];
-
-    $('#toc').on('click tap','a', function(event){
-      iframe_path = event.target.href;
-        if( iframe_path.match(/^https:\/\/.*.hackpad.com\//) ){
-          //iframe_path = iframe_path.split(/\//).pop().split(/-/).pop();
-          iframe_path = iframe_path.split(/\//).pop();
-      }
-       history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
-    })
 
     var compile_ethercalc = function(){
       $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
@@ -122,8 +104,8 @@ block script
         var got_title = false
         var depth = 0 // if depth == 1, link should in accordion
 
-        var link_tpl_source ='<a href="{{url}}" target="iframe" class="link item">{{subject}}<i class="icon text file outline"></i></a>';
-        var link_tpl = Handlebars.compile(link_tpl_source);
+        var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item">{{subject}}<i class="icon {{icon}}"></i></a>';
+        var link_template = Handlebars.compile(link_template_source);
 
         var add_link = function(row){
           try{
@@ -131,31 +113,92 @@ block script
           }catch(e){
             var link_options = {};
           }
-          var context = {url: row[0].trim(), subject: row[1]};
-          var $link_el = $(link_tpl(context));
+
+          // auto link icon
+          var link_icon = "";
+          var link_type = "link";
+          var link_target = "iframe";
+          var link_url = row[0].trim();
+          if(link_url.match(/^.*.hackpad.com\//)){
+            link_icon = "text file outline";
+          } else if(link_url.match(/^.*.groups.google.com\//)) {
+            link_icon = "users";
+          } else if(link_url.match(/^.*.plus.google.com\//)) {
+            link_icon = "google plus";
+          } else if(link_url.match(/^.*.kktix.cc\//)) {
+            link_icon = "bullhorn";
+          } else if(link_url.match(/^.*.kktix.com\//)) {
+            link_icon = "bullhorn";
+          } else if(link_url.match(/^.*.registrano.com\//)) {
+            link_icon = "bullhorn";
+          } else if(link_url.match(/^.*.docs.google.com\/spreadsheet\//)) {
+            link_icon = "table";
+          } else if(link_url.match(/^.*.docs.google.com\/drawings\//)) {
+            link_icon = "photo";
+          } else if(link_url.match(/^.*.docs.google.com\/document\//)) {
+            link_icon = "text file";
+          } else if(link_url.match(/^.*.github.com\//)) {
+            link_icon = "github";
+          } else if(link_url.match(/^.*.moqups.com\//)) {
+            link_icon = "photo";
+          } else if(link_url.match(/^.*.facebook.com\//)) {
+            link_icon = "facebook";
+          } else if(link_url.match(/^.*.twitter.com\//)) {
+            link_icon = "twitter";
+          } else if(link_url.match(/^.*.tumblr.com\//)) {
+            link_icon = "tumblr";
+          } else if(link_url.match(/^.*.trello.com\//)) {
+            link_icon = "trello";
+          } else if(link_url.match(/^.*.youtube.com\//)) {
+            link_icon = "youtube";
+          } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
+            link_icon = "exchange";
+            //link_url = link_url.split("/")[1].toString();
+            //link_type = "foldr";
+            //link_target = "";
+          } else if(link_url.match(/^.*.hack.etblue.tw\//)) {
+            link_icon = "exchange";
+            //link_url = link_url.split("/")[1].toString();
+            //link_type = "foldr";
+            //link_target = "";
+          } else if(link_url.match(/^.*.hackfoldr.org\//)) {
+            link_icon = "exchange";
+            //link_url = link_url.split("/")[1].toString();
+            //link_type = "foldr";
+            //link_target = "";
+          } else {
+            link_icon = "globe";
+          }
+
+          var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
+          var $link_element = $(link_template(context));
+
           for(key in link_options){
-            $link_el.attr(key, link_options[key]);
+            $link_element.attr(key, link_options[key]);
           }
+
           if(depth == 1){
-            $('#toc .ui.accordion:last').find('.menu').append($link_el)
+            $('#toc .ui.accordion:last').find('.menu').append($link_element)
           }else{
-            $('#toc .ui.vertical').append($link_el)
+            $('#toc .ui.vertical').append($link_element)
           }
+
           // enable default iframe
           if((new RegExp(context.url+"/?")).test(current_iframe_url)){
             iframe_src = current_iframe_url;
           }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
-            if( current_iframe_url === context.url.split(/\//).pop().split(/-/).pop()){
+            if( current_iframe_url === context.url.split(/\//).pop()){
               iframe_src = context.url;
             }
           }
+
           if(!iframe_src) {
             iframe_src = context.url;
           }
         }
         
-        var accordion_tpl_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
-        var accordion_tpl = Handlebars.compile(accordion_tpl_source);
+        var accordion_template_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+        var accordion_template = Handlebars.compile(accordion_template_source);
 
         var add_accordion = function(row){
           try{
@@ -164,7 +207,7 @@ block script
             var options = {};
           }
           var context = {title: row[1] };
-          var $accordion_el = $(accordion_tpl(context));
+          var $accordion_el = $(accordion_template(context));
           
           $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
             $accordion_el.find('.folder').toggle()
@@ -176,11 +219,12 @@ block script
         }
 
         $.each(rows, function(row_index, row){
+
           // if 1st and 2nd is empty then this a empty row 
           if(row[0].trim().length === 0 && row[1].trim().length === 0){
             return
           }
-          
+
           // now we have soming thing, should get title first
           if(!got_title){
 
@@ -223,13 +267,40 @@ block script
         // set iframe src attribute
         $("#iframe").attr("src",iframe_src);
 
-        // when leaving ethercalc, show edit icon again
-        $("#sidebar a.link.item").on("click tap", function(){
+        // link item events
+        $("#sidebar").on("click tap", "a.link.item", function(event){
+          // dynamic url
+          iframe_path = event.target.href;
+          if(iframe_path.match(/^https:\/\/.*.hackpad.com\//)){
+            iframe_path = iframe_path.split(/\//).pop();
+          }
+          history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
+          // when leaving ethercalc, show edit icon again
           $("#topbar .view.table").show();
           $("#topbar .refresh.table").hide();
         });
 
-        // make current link item active
+        // auto new window, and auto new window icon
+        var new_window_icon = "<i class='icon forward mail'></i>";
+        var open_link_in_new_window_or_not = function(){
+          link_url = $(this).attr("href");
+          if(link_url.match(/^.*.plus.google.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.kktix.cc\//)) {
+            return true;
+          } else if(link_url.match(/^.*.kktix.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.registrano.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.github.com\//)) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+        $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
+        $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
+
       });
     };
 
@@ -346,3 +417,6 @@ block script
     $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
     });
+
+    // make current link item active
+
