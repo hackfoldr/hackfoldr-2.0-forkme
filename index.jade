@@ -274,8 +274,10 @@ block script
           }
         });
 
-        // set iframe src attribute
-        $("#iframe").attr("src",iframe_src);
+        // set initial iframe src attribute
+        if(!$("#iframe").attr("src")){
+          $("#iframe").attr("src",iframe_src);
+        }
 
         // auto new window, and auto new window icon
         var new_window_icon = "<i class='icon forward mail'></i>";
@@ -356,21 +358,11 @@ block script
       set_scale("larger");
     });
 
-    //$("#iframe").load(function(event){
-    //  console.log(event.target.src);
-    //  $("#topbar .edit.table").show();
-    //  $("#topbar .refresh.table").hide();      
-    //  }
-    //);
-
     // refresh table
     // load ethercalc data only instead of loading the whole page
     $("#topbar .refresh.table").on("click tap", function(){
       $("#toc .menu").html("");
-      //$("#topbar .edit.table").show();
-      //$("#topbar .refresh.table").hide();
       compile_ethercalc();
-      //location.reload(true);
       });
 
     // add current link to foldr
@@ -396,21 +388,12 @@ block script
 
     // edit table
     $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
-
     $("#sidebar").on("click tap", "#topbar .edit.table", function(){
-      //$("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
+      // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
-      history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent("edit"))) ;
-      // when leaving ethercalc, show edit icon again
-      // p.s. bind event to document to make dynamic content working
-      //$(document).on("click tap", "#sidebar a.link.item", function(){
-      //  console.log("triggered");
-      //  $("#topbar .edit.table").show();
-      //  $("#topbar .refresh.table").hide();
-        // ?? 1.doesn't work 2. don't know if it's necessary to unbind event
-        //$(this).off("click tap", "a.link.item");
-      //});
+      // change url
+      history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
     });
 
     // make current link item active
