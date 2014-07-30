@@ -65,7 +65,7 @@ block body
     nav#topbar
       .ui.borderless.menu
         .item.title
-        a.right.icon.item.view.table
+        a.right.icon.item.edit.table(target="iframe")
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
           i.icon.repeat
@@ -131,12 +131,18 @@ block script
             link_icon = "bullhorn";
           } else if(link_url.match(/^.*.registrano.com\//)) {
             link_icon = "bullhorn";
-          } else if(link_url.match(/^.*.docs.google.com\/spreadsheet\//)) {
+          } else if(link_url.match(/^.*.docs.google.com\/spreadsheet.*/)) {
             link_icon = "table";
-          } else if(link_url.match(/^.*.docs.google.com\/drawings\//)) {
+          } else if(link_url.match(/^.*.docs.google.com\/drawings.*/)) {
             link_icon = "photo";
-          } else if(link_url.match(/^.*.docs.google.com\/document\//)) {
+          } else if(link_url.match(/^.*.docs.google.com\/document.*/)) {
             link_icon = "text file";
+          } else if(link_url.match(/^.*.docs.google.com\/presentation.*/)) {
+            link_icon = "laptop";
+          } else if(link_url.match(/^.*.docs.google.com\/form.*/)) {
+            link_icon = "unordered list";
+          } else if(link_url.match(/^.*.drive.google.com\//)) {
+            link_icon = "cloud";
           } else if(link_url.match(/^.*.github.com\//)) {
             link_icon = "github";
           } else if(link_url.match(/^.*.moqups.com\//)) {
@@ -184,7 +190,11 @@ block script
           }
 
           // enable default iframe
-          if((new RegExp(context.url+"/?")).test(current_iframe_url)){
+          if(current_iframe_url == "edit"){
+            iframe_src = 'https://ethercalc.org/'+ethercalc_name;
+            $("#topbar .edit.table").hide();
+            $("#topbar .refresh.table").show();
+          }else if((new RegExp(context.url+"/?")).test(current_iframe_url)){
             iframe_src = current_iframe_url;
           }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
             if( current_iframe_url === context.url.split(/\//).pop()){
@@ -267,19 +277,6 @@ block script
         // set iframe src attribute
         $("#iframe").attr("src",iframe_src);
 
-        // link item events
-        $("#sidebar").on("click tap", "a.link.item", function(event){
-          // dynamic url
-          iframe_path = event.target.href;
-          if(iframe_path.match(/^https:\/\/.*.hackpad.com\//)){
-            iframe_path = iframe_path.split(/\//).pop();
-          }
-          history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
-          // when leaving ethercalc, show edit icon again
-          $("#topbar .view.table").show();
-          $("#topbar .refresh.table").hide();
-        });
-
         // auto new window, and auto new window icon
         var new_window_icon = "<i class='icon forward mail'></i>";
         var open_link_in_new_window_or_not = function(){
@@ -293,6 +290,12 @@ block script
           } else if(link_url.match(/^.*.registrano.com\//)) {
             return true;
           } else if(link_url.match(/^.*.github.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.drive.google.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.facebook.com\//)) {
+            return true;
+          } else if(link_url.match(/^.*.trello.com\//)) {
             return true;
           } else {
             return false;
@@ -319,14 +322,6 @@ block script
     // for semantic ui css specificity
     $(".hidden").hide();
 
-    // shortcuts menu
-    //$("#nav a.foldr").on("click tap", function(){
-    //  location = "http://hack.etblue.tw/" + $(this).attr("src")
-    //  });
-    //$("#nav a.link").on("click tap", function(){
-    //  $("#iframe").attr("src",$(this).attr("src"));
-    //  });
-
     // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
       $("#sidebar").css("left","-17rem");
@@ -345,17 +340,7 @@ block script
     $("#wrapper .frame").addClass("normal size");
 
     // zoom in buttons
-    //console.log(foldr_histories);
     $(".frame, #iframe").addClass(foldr_scale + " size");
-
-    //$.each(["normal","large","larger"], function(index, scale){
-    //  $("#nav .zoom.dropdown " + scale).on("click tap", function(){
-    //    $(".frame, #iframe").removeClass("normal large larger").addClass(scale + " size");
-    //    foldr_scale = scale;
-    //    localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
-    //    console.log(localStorage);
-    //  });
-    //});
 
     var set_scale = function(scale){
       $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
@@ -370,45 +355,20 @@ block script
     $("#nav .zoom.dropdown .larger").on("click tap", function(){
       set_scale("larger");
     });
-    //$("#nav .zoom.dropdown .large").on("click tap", function(){
-    //  $(".frame, #iframe").removeClass("normal large larger").addClass("large size");
-    //  foldr_scale = "large";
-    //  localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
-    //  });
-    //$("#nav .zoom.dropdown .larger").on("click tap", function(){
-    //  $(".frame, #iframe").removeClass("normal large larger").addClass("larger size");
-    //  foldr_scale = "larger";
-    //  localStorage.setItem("hackfoldr-scale", JSON.stringify(foldr_scale));
-    //  });
-
-    // edit table
-    $("#topbar .view.table").on("click tap", function(){
-      $("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
-      $("#topbar .table.item").toggle();
-      // when leaving ethercalc, show edit icon again
-      // p.s. bind event to document to make dynamic content working
-      //$(document).on("click tap", "#sidebar a.link.item", function(){
-      //  console.log("triggered");
-      //  $("#topbar .view.table").show();
-      //  $("#topbar .refresh.table").hide();
-        // ?? 1.doesn't work 2. don't know if it's necessary to unbind event
-        //$(this).off("click tap", "a.link.item");
-      //});
-    });
 
     //$("#iframe").load(function(event){
     //  console.log(event.target.src);
-    //  $("#topbar .view.table").show();
+    //  $("#topbar .edit.table").show();
     //  $("#topbar .refresh.table").hide();      
     //  }
     //);
 
     // refresh table
-    // TODO: load ethercalc data only instead of loading the whole page
+    // load ethercalc data only instead of loading the whole page
     $("#topbar .refresh.table").on("click tap", function(){
       $("#toc .menu").html("");
-      $("#topbar .view.table").show();
-      $("#topbar .refresh.table").hide();
+      //$("#topbar .edit.table").show();
+      //$("#topbar .refresh.table").hide();
       compile_ethercalc();
       //location.reload(true);
       });
@@ -416,6 +376,41 @@ block script
     // add current link to foldr
     $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
+    });
+
+    // link item events
+    $("#sidebar").on("click tap", "a.link.item", function(event){
+      // dynamic url
+      iframe_path = event.target.href;
+      if(iframe_path.match(/^https:\/\/.*.hackpad.com\//)){
+        iframe_path = iframe_path.split(/\//).pop();
+      }
+      history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
+
+      // when leaving ethercalc, show edit icon again
+      if(event.target.target !== "_blank"){
+        $("#topbar .edit.table").show();
+        $("#topbar .refresh.table").hide();
+      }
+    });
+
+    // edit table
+    $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
+
+    $("#sidebar").on("click tap", "#topbar .edit.table", function(){
+      //$("#iframe").attr("src","https://ethercalc.org/"+ethercalc_name);
+      $("#topbar .edit.table").hide();
+      $("#topbar .refresh.table").show();
+      history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent("edit"))) ;
+      // when leaving ethercalc, show edit icon again
+      // p.s. bind event to document to make dynamic content working
+      //$(document).on("click tap", "#sidebar a.link.item", function(){
+      //  console.log("triggered");
+      //  $("#topbar .edit.table").show();
+      //  $("#topbar .refresh.table").hide();
+        // ?? 1.doesn't work 2. don't know if it's necessary to unbind event
+        //$(this).off("click tap", "a.link.item");
+      //});
     });
 
     // make current link item active
