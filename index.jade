@@ -47,6 +47,9 @@ block body
               i.icon.text.file.outline
             a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
               i.icon.exchange
+            a.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
+              i.icon.github
+              i.icon.forward.mail
         //-a.link.item.view.source
           i.icon.github
         a.right.item.expand.button.collapsed.mode.hidden
@@ -219,7 +222,13 @@ block script
 
         // set iframe src attribute
         $("#iframe").attr("src",iframe_src);
-      })
+
+        // when leaving ethercalc, show edit icon again
+        $("#sidebar a.link.item").on("click tap", function(){
+          $("#topbar .view.table").show();
+          $("#topbar .refresh.table").hide();
+        });
+      });
     };
 
     compile_ethercalc();
@@ -305,13 +314,13 @@ block script
       $("#topbar .table.item").toggle();
       // when leaving ethercalc, show edit icon again
       // p.s. bind event to document to make dynamic content working
-      $(document).on("click tap", "a.link.item", function(){
-        console.log("triggered");
-        $("#topbar .view.table").show();
-        $("#topbar .refresh.table").hide();
+      //$(document).on("click tap", "#sidebar a.link.item", function(){
+      //  console.log("triggered");
+      //  $("#topbar .view.table").show();
+      //  $("#topbar .refresh.table").hide();
         // ?? 1.doesn't work 2. don't know if it's necessary to unbind event
         //$(this).off("click tap", "a.link.item");
-      });
+      //});
     });
 
     //$("#iframe").load(function(event){
