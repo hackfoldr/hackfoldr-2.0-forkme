@@ -36,19 +36,19 @@ block body
 
     nav#topbar
       .ui.borderless.menu
-        a.item.title
+        a.item.foldr.title
         a.right.icon.item.edit.table(target="iframe")
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
           i.icon.repeat
         a.right.icon.item.add.to.list
           i.icon.add
-      .ui.form.segment.no.margin.hidden.expanded.mode
+      form.ui.form.segment.no.margin.hidden.expanded.mode
         .field
           input.new.title(placeholder="想在 foldr 中顯示的名稱",type="text",name="new-pad-name",value="文件標題")
         //-.field
           input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
-        .inline.field
+        //-.inline.field
           input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
           | .hackpad.com
         .ui.submit.button.green.small create and add to foldr
@@ -218,7 +218,7 @@ block script
 
               // get the MAGIC title 
               if(!got_title && !col.match(/^#/) && col.length > 0) {
-                $('#topbar .title').html(col);
+                $('#topbar .foldr.title').html(col);
                 got_title = true;
 
                 // add to history menu
@@ -347,6 +347,7 @@ block script
     $("#topbar .form .submit").on("click tap", function(){
       var new_title = $("#topbar .form .new.title").attr("value");
       //'https://*.hackpad.com/' + encodeURIComponent(new_title)
+      console.log(new_title);
       console.log(encodeURIComponent(new_title));
       });
 
@@ -385,7 +386,7 @@ block script
     });
 
     // add href attr to foldr title
-    $("#topbar a.item.title").attr("href",'/'+ethercalc_name);
+    $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
 
     // make current link item active
 
