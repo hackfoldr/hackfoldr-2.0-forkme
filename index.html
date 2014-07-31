@@ -188,7 +188,7 @@ var compile_ethercalc = function(){
             
             // Remove all items in foldr_histories that share the same foldr_id before unshift
             foldr_histories = $.grep(foldr_histories, function(value){
-              return value !== JSON.stringify(current_foldr_history);
+              return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
             });
             foldr_histories.unshift(JSON.stringify(current_foldr_history));
             localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
