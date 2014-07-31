@@ -45,7 +45,7 @@ block body
           i.icon.add
       form.ui.form.segment.no.margin.hidden.expanded.mode
         .field
-          input.new.title(placeholder="hackpad id 或名稱",type="text",name="new-pad-name",value="文件標題，空白可，符號不能")
+          input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")
         //-.field
           input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
         //-.inline.field
@@ -342,6 +342,8 @@ block script
     // create new hackpad and add to foldr
     $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
+      // add moretext to defalt input value
+      //$.getJSONP('')
     });
 
     $("#topbar .form .submit").on("click tap", function(){
@@ -350,7 +352,7 @@ block script
       var new_hackpad_id = Math.random().toString(36);
       var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
       var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
-      $('#toc .ui.vertical.menu').prepend(new_menu_item);
+      $('#toc .ui.vertical.menu').append(new_menu_item);
       $.ajax({
         url: "https://ethercalc.org/_/"+ethercalc_name,
         type: 'POST',
