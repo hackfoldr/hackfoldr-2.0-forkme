@@ -346,20 +346,19 @@ block script
 
     $("#topbar .form .submit").on("click tap", function(){
       var new_hackpad_title = $("#topbar .form .new.title").val();
-      var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
-      console.log(new_hackpad_id);
-      var new_menu_item = '<a href="https://g0v.hackpad.com/'+new_hackpad_id+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
+      //var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
+      var new_hackpad_id = Math.random().toString(36);
+      var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
+      var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
       $('#toc .ui.vertical.menu').prepend(new_menu_item);
-      //'https://*.hackpad.com/' + encodeURIComponent(new_hackpad_title)
+      $.ajax({
+        url: "https://ethercalc.org/_/"+ethercalc_name,
+        type: 'POST',
+        contentType: 'text/csv',
+        processData: false,
+        data: new_hackpad_url + ',' + new_hackpad_title
       });
-
-    //$.ajax({
-    //    url: "https://ethercalc.org/_/test-74",
-    //    type: 'POST',
-    //    contentType: 'text/csv',
-    //    processData: false,
-    //    data: 'one,two,three'
-    //});
+    });
 
     // link item events
     $("#sidebar").on("click tap", "a.link.item", function(event){
