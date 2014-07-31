@@ -8,6 +8,8 @@ if usecdn
   //- from cdn
   if lib.jquery
     script(type="text/javascript",src="//codeorigin.jquery.com/jquery-1.10.2.min.js")
+  if lib.jquery_ui
+    script(type="text/javascript",src="//code.jquery.com/ui/1.11.0/jquery-ui.js")
   if lib.d3js
     script(type="text/javascript",src="//d3js.org/d3.v3.min.js")
   if lib.angular
@@ -22,6 +24,8 @@ else
   //- from local
   if lib.jquery
     script(type="text/javascript",src="#{assets}/jquery/1.10.2/jquery.min.js")
+  if lib.jquery_ui
+    script(type="text/javascript",src="#{assets}/jquery-ui/1.11.0.custom/jquery-ui.min.js")
   if lib.d3js
     script(type="text/javascript",src="#{assets}/d3js/3.3.11/d3.v3.min.js")
   if lib.angular

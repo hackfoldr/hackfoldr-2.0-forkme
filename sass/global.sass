@@ -69,9 +69,13 @@ a, a:link
   +transition-duration(0.5s)
   +transition-timing-function(ease)
 
-  #toc>.ui.menu
-    width: 100%
-    border-top: 2px rgba(#000,0.5) solid
+  #toc
+    .placeholder
+      height: 2rem
+      line-height: 2rem
+    &>.ui.menu
+      width: 100%
+      border-top: 2px rgba(#000,0.5) solid
 
   #toc, #topbar
     &>.ui.menu

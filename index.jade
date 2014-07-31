@@ -53,7 +53,7 @@ block body
           | .hackpad.com
         .ui.submit.button.green.small create and add to foldr
     nav#toc
-      .ui.vertical.menu
+      .ui.vertical.menu.sortable
 
   #wrapper
 
@@ -119,6 +119,10 @@ block script
             link_icon = "unordered list";
           } else if(link_url.match(/^.*.drive.google.com\//)) {
             link_icon = "cloud";
+          } else if(link_url.match(/^.*.mapsengine.google.com\//)) {
+            link_icon = "map marker";
+          } else if(link_url.match(/^.*.www.google.com\/maps\//)) {
+            link_icon = "map marker";
           } else if(link_url.match(/^.*.github.com\//)) {
             link_icon = "github";
           } else if(link_url.match(/^.*.moqups.com\//)) {
@@ -131,8 +135,18 @@ block script
             link_icon = "tumblr";
           } else if(link_url.match(/^.*.trello.com\//)) {
             link_icon = "trello";
+          } else if(link_url.match(/^.*.youtube.com\/embed\//)) {
+            link_icon = "youtube play";
           } else if(link_url.match(/^.*.youtube.com\//)) {
             link_icon = "youtube";
+          } else if(link_url.match(/^.*.ustream.tv\//)) {
+            link_icon = "facetime video";
+          } else if(link_url.match(/^.*.www.justin.tv\//)) {
+            link_icon = "facetime video";
+          } else if(link_url.match(/^.*.www.ptt.cc\/bbs\//)) {
+            link_icon = "chat outline";
+          } else if(link_url.match(/^.*.disp.cc\//)) {
+            link_icon = "chat outline";
           } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
             link_icon = "exchange";
             //link_url = link_url.split("/")[1].toString();
@@ -280,6 +294,8 @@ block script
             return true;
           } else if(link_url.match(/^.*.trello.com\//)) {
             return true;
+          } else if(link_url.match(/^.*.youtube.com\/playlist.*/)) {
+            return true;
           } else {
             return false;
           }
@@ -397,7 +413,19 @@ block script
       $("#topbar .refresh.table").show();
       // change url
       history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+      // make foldr items sortable
     });
+
+    // sort table
+    //$("#toc .sortable").sortable();
+    //$("#toc .sortable").on("sortchange", function( event, ui ) {
+      //$.ajax({
+      //  contentType: 'text/plain',
+      //  data: 'moveinsert '+'A2:F2'+' A5',
+      //  type: 'POST',
+      //  processData: false 
+      //});
+    //});
 
     // add href attr to foldr title
     $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
