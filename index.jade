@@ -45,7 +45,7 @@ block body
           i.icon.add
       form.ui.form.segment.no.margin.hidden.expanded.mode
         .field
-          input.new.title(placeholder="想在 foldr 中顯示的名稱",type="text",name="new-pad-name",value="文件標題")
+          input.new.title(placeholder="hackpad id 或名稱",type="text",name="new-pad-name",value="文件標題，空白可，符號不能")
         //-.field
           input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
         //-.inline.field
@@ -161,7 +161,7 @@ block script
           if(depth == 1){
             $('#toc .ui.accordion:last').find('.menu').append($link_element)
           }else{
-            $('#toc .ui.vertical').append($link_element)
+            $('#toc .ui.vertical.menu').append($link_element)
           }
 
           // enable default iframe?
@@ -193,7 +193,7 @@ block script
           var context = {title: row[1] };
           var $accordion_el = $(accordion_template(context));
           
-          $accordion_el.appendTo('#toc .ui.vertical').accordion({onChange: function(){
+          $accordion_el.appendTo('#toc .ui.vertical.menu').accordion({onChange: function(){
             $accordion_el.find('.folder').toggle()
           }})
           
@@ -345,10 +345,12 @@ block script
     });
 
     $("#topbar .form .submit").on("click tap", function(){
-      var new_title = $("#topbar .form .new.title").attr("value");
-      //'https://*.hackpad.com/' + encodeURIComponent(new_title)
-      console.log(new_title);
-      console.log(encodeURIComponent(new_title));
+      var new_hackpad_title = $("#topbar .form .new.title").val();
+      var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
+      console.log(new_hackpad_id);
+      var new_menu_item = '<a href="https://g0v.hackpad.com/'+new_hackpad_id+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
+      $('#toc .ui.vertical.menu').prepend(new_menu_item);
+      //'https://*.hackpad.com/' + encodeURIComponent(new_hackpad_title)
       });
 
     //$.ajax({
