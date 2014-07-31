@@ -66,6 +66,7 @@ block script
     var paths = location.pathname.split('/') || [];
     var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
+    var current_foldr_name = "";
     var iframe_src;
     var history_state={};
     var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
@@ -221,8 +222,10 @@ block script
 
         $.each(rows, function(row_index, row){
 
+          var this_row_url = row[0].trim();
+
           // if 1st and 2nd is empty then this a empty row 
-          if(row[0].trim().length === 0 && row[1].trim().length === 0){
+          if(this_row_url.length === 0 && row[1].trim().length === 0){
             return
           }
 
@@ -236,6 +239,7 @@ block script
               // get the MAGIC title 
               if(!got_title && !col.match(/^#/) && col.length > 0) {
                 $('#topbar .foldr.title').html(col);
+                current_foldr_name = col;
                 got_title = true;
 
                 // detect title row index
@@ -262,11 +266,15 @@ block script
             })
 
           } else {
-            if(row[0].length == 0){ // folder 
+            if(this_row_url.length == 0){ // folder 
               depth = 1
-              add_accordion(row)
+              add_accordion(row);
             }else{ // link
-              add_link(row)
+              add_link(row);
+              // set initial page title
+              if(this_row_url == iframe_src){
+                $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+              }
             }
           }
         });
@@ -308,13 +316,14 @@ block script
         // auto expand active items
         var link_is_current_url_or_not = function(){
           link_url = $(this).attr("href");
-          if(link_url == current_iframe_url){
+          if(link_url == iframe_src){
             return true;
           } else {
             return false;
           }
         };
         $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
+
       });
     };
 
@@ -414,6 +423,9 @@ block script
       if(event.target.target !== "_blank"){
         $("#topbar .edit.table").show();
         $("#topbar .refresh.table").hide();
+
+      // reset page title
+      $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
       }
     });
 
