@@ -10,33 +10,7 @@ block body
       .ui.borderless.menu
         .ui.dropdown.icon.item.shortcuts
           i.icon.home
-          .menu
-            a.link.item(href="http://g0v.tw",target="iframe") g0v 官網
-              i.icon.globe
-            .ui.accordion
-              .title.item 各期黑客松
-                i.icon.dropdown
-              .content
-                a.foldr.item(href="/g0v-hackath9n") 還我土地 2014-06-21
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath8n") 解除戒嚴 2014-04-19
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath7n") 自由時代 2014-02-22
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath6n") 勞動基準 2013-12-21
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath5n") 美麗島 2013-10-20
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath4n") 國民大會 2013-08-10
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath3n") 客廳工廠 2013-06-06
-                  i.icon.exchange
-                a.foldr.item(href="/g0v-hackath2n") 九大建設 2013-03-23
-                  i.icon.exchange
-                a.link.item(href="https://hackpad.com/lIoCjaeMWzC",target="iframe") 公地放領 2013-01-27
-                  i.icon.text.file.outline
-                a.link.item(href="https://hackpad.com/ul6fMthof2S",target="iframe") 動員戡亂 2012-12-01
-                  i.icon.text.file.outline
+          include shortcuts-menu
         .ui.dropdown.icon.item.history
           i.icon.time
           .menu
@@ -49,8 +23,6 @@ block body
               i.icon.exchange
             a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
               i.icon.github
-        //-a.link.item.view.source
-          i.icon.github
         a.right.item.expand.button.collapsed.mode.hidden
           i.icon.arrow.right
         a.right.item.collapse.button.expanded.mode
@@ -73,12 +45,13 @@ block body
           i.icon.add
       .ui.form.segment.no.margin.hidden.expanded.mode
         .field
-          .ui.input
-            input(placeholder="(doc title)",type="text")
-        .field
-          .ui.input
-            input(placeholder="(doc url)",type="text")
-        .ui.submit.button.green.small add to this foldr
+          input.new.title(placeholder="想在 foldr 中顯示的名稱",type="text",name="new-pad-name",value="文件標題")
+        //-.field
+          input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
+        .inline.field
+          input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
+          | .hackpad.com
+        .ui.submit.button.green.small create and add to foldr
     nav#toc
       .ui.vertical.menu
 
@@ -121,6 +94,8 @@ block script
           var link_url = row[0].trim();
           if(link_url.match(/^.*.hackpad.com\//)){
             link_icon = "text file outline";
+          } else if(link_url.match(/^.*.etherpad.mozilla.org\//)) {
+            link_icon = "file outline";
           } else if(link_url.match(/^.*.groups.google.com\//)) {
             link_icon = "users";
           } else if(link_url.match(/^.*.plus.google.com\//)) {
@@ -189,7 +164,7 @@ block script
             $('#toc .ui.vertical').append($link_element)
           }
 
-          // enable default iframe
+          // enable default iframe?
           if(current_iframe_url == "edit"){
             iframe_src = 'https://ethercalc.org/'+ethercalc_name;
             $("#topbar .edit.table").hide();
@@ -201,7 +176,6 @@ block script
               iframe_src = context.url;
             }
           }
-
           if(!iframe_src) {
             iframe_src = context.url;
           }
@@ -365,15 +339,29 @@ block script
       compile_ethercalc();
       });
 
-    // add current link to foldr
+    // create new hackpad and add to foldr
     $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
     });
 
+    $("#topbar .form .submit").on("click tap", function(){
+      var new_title = $("#topbar .form .new.title").attr("value");
+      //'https://*.hackpad.com/' + encodeURIComponent(new_title)
+      console.log(encodeURIComponent(new_title));
+      });
+
+    //$.ajax({
+    //    url: "https://ethercalc.org/_/test-74",
+    //    type: 'POST',
+    //    contentType: 'text/csv',
+    //    processData: false,
+    //    data: 'one,two,three'
+    //});
+
     // link item events
     $("#sidebar").on("click tap", "a.link.item", function(event){
       // dynamic url
-      iframe_path = event.target.href;
+      var iframe_path = event.target.href;
       if(iframe_path.match(/^https:\/\/.*.hackpad.com\//)){
         iframe_path = iframe_path.split(/\//).pop();
       }
@@ -397,7 +385,7 @@ block script
     });
 
     // add href attr to foldr title
-    $("#topbar .item.title").attr("href",'/'+ethercalc_name);
+    $("#topbar a.item.title").attr("href",'/'+ethercalc_name);
 
     // make current link item active
 

@@ -5,7 +5,8 @@ Using:
 * Compass
 * Semantic UI
 * Jade
-* Angular JS
+* jQuery
+* Handlebars
 
 Windows
 ------------
@@ -14,7 +15,7 @@ Windows
 
 Mockup / Prototype
 ============
-https://hackfoldr.github.io/maker.moztw.org/public/
+https://hack.etblue.tw/
 
 License
 ============
