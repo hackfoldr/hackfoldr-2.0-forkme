@@ -58,6 +58,8 @@ var compile_ethercalc = function(){
         link_icon = "map marker";
       } else if(link_url.match(/^.*.www.google.com\/maps\//)) {
         link_icon = "map marker";
+      } else if(link_url.match(/^.*.umap.fluv.io\//)) {
+        link_icon = "map marker";
       } else if(link_url.match(/^.*.github.com\//)) {
         link_icon = "github";
       } else if(link_url.match(/^.*.moqups.com\//)) {
@@ -238,6 +240,16 @@ var compile_ethercalc = function(){
     $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
     $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
     
+    // auto expand active items
+    var link_is_current_url_or_not = function(){
+      link_url = $(this).attr("href");
+      if(link_url == current_iframe_url){
+        return true;
+      } else {
+        return false;
+      }
+    };
+    $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
   });
 };
 
@@ -338,6 +350,12 @@ $("#sidebar").on("click tap", "a.link.item", function(event){
     $("#topbar .edit.table").show();
     $("#topbar .refresh.table").hide();
   }
+});
+
+// activate link on click
+$("#sidebar").on("click tap", "#toc a.link.item", function(){
+  $("#toc a.link.item").removeClass("active");
+  $(this).addClass("active");
 });
 
 // edit table
