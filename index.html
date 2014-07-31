@@ -5,6 +5,7 @@ var iframe_src;
 var history_state={};
 var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
 var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
+var new_pad_row_index = 3;
 
 var compile_ethercalc = function(){
   $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
@@ -156,6 +157,12 @@ var compile_ethercalc = function(){
             $('#topbar .foldr.title').html(col);
             got_title = true;
             
+            // detect title row index
+            //console.log(new_pad_row_index);
+            new_pad_row_index = row_index+2;
+            //console.log(row_index+2);
+            //console.log(new_pad_row_index.toString());
+            
             // add to history menu
             
             var current_foldr_history = {
@@ -287,9 +294,13 @@ $("#topbar .form .submit").on("click tap", function(){
   var new_hackpad_id = Math.random().toString(36);
   var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
   var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
-  $('#toc .ui.vertical.menu').append(new_menu_item);
+  // add new hackpad info to foldr
+  $('#toc .ui.vertical.menu').prepend(new_menu_item);
+  // post new hackpad info to ethercalc
   $.ajax({
-    url: "https://ethercalc.org/_/"+ethercalc_name,
+    //url: "https://ethercalc.org/_/"+ethercalc_name,
+    url: "https://ethercalc.org/_/"+ethercalc_name+"?row="+new_pad_row_index.toString(),
+    //url: "https://ethercalc.org/_/"+ethercalc_name+"?row=3",
     type: 'POST',
     contentType: 'text/csv',
     processData: false,
