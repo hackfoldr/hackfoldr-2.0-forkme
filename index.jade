@@ -400,12 +400,12 @@ block script
       $("#sidebar").css("left","-17rem");
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
-      $(".collapsed.mode").show();
+      $(".collapsed.mode").not(".mobile.only").show();
       });
     $("#nav .expand.button").on("click tap", function(){
       $("#sidebar").css("left","0");
       $("#wrapper").css("padding-left","20rem");
-      $(".expanded.mode").css("display","");
+      $(".expanded.mode").not(".mobile.only").css("display","");
       $(".collapsed.mode").hide();
       });
 

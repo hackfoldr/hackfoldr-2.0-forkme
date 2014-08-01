@@ -203,22 +203,22 @@ a, a:link {
   margin-right: 0;
 }
 @media screen and (max-width: 960px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003136}}
-  #sidebar #nav a.button.item.desktop.only {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003137}}
+  #sidebar #nav .zoom .menu {
+    right: 0;
+    left: auto;
+  }
+}
+@media screen and (max-width: 960px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003140}}
+  #sidebar a.button.item.desktop.only {
     display: none;
   }
 }
 @media screen and (min-width: 960px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003139}}
-  #sidebar #nav a.button.item.mobile.only {
-    display: none;
-  }
-}
-@media screen and (max-width: 960px) {
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003143}}
-  #sidebar #nav .zoom .menu {
-    right: 0;
-    left: auto;
+  #sidebar a.button.item.mobile.only {
+    display: none;
   }
 }
 
