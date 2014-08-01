@@ -18,7 +18,7 @@
   </head>
   <body>
     <nav id="sidebar">
-      <nav id="nav">
+      <nav id="nav" class="desktop only">
         <div class="ui borderless menu">
           <div class="ui dropdown icon item shortcuts"><i class="icon home"></i>
             <div class="menu"><a href="http://g0v.tw" target="iframe" class="link item">g0v 官網<i class="icon globe"></i></a>
@@ -29,7 +29,9 @@
             </div>
           </div>
           <div class="ui dropdown icon item history"><i class="icon time"></i>
-            <div class="menu"></div>
+            <div class="menu">
+              <div class="item no data hidden">您還沒有瀏覽 foldr 的紀錄</div>
+            </div>
           </div>
           <div class="ui dropdown icon item about"><i class="icon help"></i>
             <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a></div>
@@ -44,7 +46,51 @@
         </div>
       </nav>
       <nav id="topbar">
-        <div class="ui borderless menu"><a class="item foldr title"></a><a target="iframe" class="right icon item edit table"><i class="icon pencil"></i></a><a class="right icon item refresh table hidden"><i class="icon repeat"></i></a><a class="right icon item add to list hidden"><i class="icon add"></i></a><a class="right item show nav button collapsed mode mobile only"><i class="icon arrow down"></i></a><a class="right item hide nav button expanded mode hidden mobile only"><i class="icon arrow up"></i></a></div>
+        <div class="ui borderless menu">
+          <div class="ui dropdown icon item shortcuts tablet only"><i class="icon home"></i>
+            <div class="menu"><a href="http://g0v.tw" target="iframe" class="link item">g0v 官網<i class="icon globe"></i></a>
+              <div class="ui accordion">
+                <div class="title item">各期黑客松<i class="icon dropdown"></i></div>
+                <div class="content"><a href="/g0v-hackath9n" class="foldr item">還我土地 2014-06-21<i class="icon exchange"></i></a><a href="/g0v-hackath8n" class="foldr item">解除戒嚴 2014-04-19<i class="icon exchange"></i></a><a href="/g0v-hackath7n" class="foldr item">自由時代 2014-02-22<i class="icon exchange"></i></a><a href="/g0v-hackath6n" class="foldr item">勞動基準 2013-12-21<i class="icon exchange"></i></a><a href="/g0v-hackath5n" class="foldr item">美麗島 2013-10-20<i class="icon exchange"></i></a><a href="/g0v-hackath4n" class="foldr item">國民大會 2013-08-10<i class="icon exchange"></i></a><a href="/g0v-hackath3n" class="foldr item">客廳工廠 2013-06-06<i class="icon exchange"></i></a><a href="/g0v-hackath2n" class="foldr item">九大建設 2013-03-23<i class="icon exchange"></i></a><a href="https://hackpad.com/lIoCjaeMWzC" target="iframe" class="link item">公地放領 2013-01-27<i class="icon text file outline"></i></a><a href="https://hackpad.com/ul6fMthof2S" target="iframe" class="link item">動員戡亂 2012-12-01<i class="icon text file outline"></i></a></div>
+              </div>
+            </div>
+          </div>
+          <div class="ui dropdown icon item history tablet only"><i class="icon time"></i>
+            <div class="menu">
+              <div class="item no data hidden">您還沒有瀏覽 foldr 的紀錄</div>
+            </div>
+          </div>
+          <div class="ui dropdown icon item about tablet only"><i class="icon help"></i>
+            <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a></div>
+          </div><a class="item foldr title"></a>
+          <div class="right ui dropdown icon item meta phone only"><i class="icon ellipsis vertical"></i>
+            <div class="menu">
+              <div class="item shortcuts">捷徑<i class="icon home"></i>
+                <div class="menu"><a href="http://g0v.tw" target="iframe" class="link item">g0v 官網<i class="icon globe"></i></a>
+                  <div class="ui accordion">
+                    <div class="title item">各期黑客松<i class="icon dropdown"></i></div>
+                    <div class="content"><a href="/g0v-hackath9n" class="foldr item">還我土地 2014-06-21<i class="icon exchange"></i></a><a href="/g0v-hackath8n" class="foldr item">解除戒嚴 2014-04-19<i class="icon exchange"></i></a><a href="/g0v-hackath7n" class="foldr item">自由時代 2014-02-22<i class="icon exchange"></i></a><a href="/g0v-hackath6n" class="foldr item">勞動基準 2013-12-21<i class="icon exchange"></i></a><a href="/g0v-hackath5n" class="foldr item">美麗島 2013-10-20<i class="icon exchange"></i></a><a href="/g0v-hackath4n" class="foldr item">國民大會 2013-08-10<i class="icon exchange"></i></a><a href="/g0v-hackath3n" class="foldr item">客廳工廠 2013-06-06<i class="icon exchange"></i></a><a href="/g0v-hackath2n" class="foldr item">九大建設 2013-03-23<i class="icon exchange"></i></a><a href="https://hackpad.com/lIoCjaeMWzC" target="iframe" class="link item">公地放領 2013-01-27<i class="icon text file outline"></i></a><a href="https://hackpad.com/ul6fMthof2S" target="iframe" class="link item">動員戡亂 2012-12-01<i class="icon text file outline"></i></a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item history">紀錄<i class="icon time"></i>
+                <div class="menu">
+                  <div class="item no data hidden">您還沒有瀏覽 foldr 的紀錄</div>
+                </div>
+              </div>
+              <div class="item about">說明<i class="icon help"></i>
+                <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a></div>
+              </div>
+            </div>
+          </div>
+          <div class="right icon item zoom ui dropdown mobile only"><i class="icon zoom in"></i>
+            <div class="menu">
+              <div class="item normal">100%</div>
+              <div class="item large">130%</div>
+              <div class="item larger">150%</div>
+            </div>
+          </div><a target="iframe" class="right icon item edit table"><i class="icon pencil"></i></a><a class="right icon item refresh table hidden"><i class="icon repeat"></i></a><a class="right icon item add to list hidden"><i class="icon add"></i></a><a class="right item show nav button collapsed mode mobile only"><i class="icon arrow down"></i></a><a class="right item hide nav button expanded mode hidden mobile only"><i class="icon arrow up"></i></a>
+        </div>
         <form class="ui form segment no margin hidden expanded mode">
           <div class="field">
             <input placeholder="想顯示在 foldr 中的文件名稱" type="text" name="new-pad-name" value="我是可愛的新文件" class="new title">
@@ -52,7 +98,7 @@
           <div class="ui submit button green small">create and add to foldr</div>
         </form>
       </nav>
-      <nav id="toc" class="desktop only">
+      <nav id="toc">
         <div class="ui vertical menu sortable"></div>
       </nav>
     </nav>
@@ -384,7 +430,7 @@
         // setup history menu
         $.each(foldr_histories, function(index, foldr_history){
           var item = JSON.parse(foldr_history);
-          $("#nav .history .menu").append(
+          $("#sidebar .history .menu").append(
             $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
               .text(item.foldr_name)
               .append($('<i class="icon exchange"></i>'))
@@ -394,17 +440,20 @@
         // for semantic ui css specificity
         $(".hidden").hide();
         
+        // firefox fix for iframe initial size
+        $("#wrapper .frame").addClass("normal size");
+        
         // sidebar expansion buttons
         $("#nav .collapse.button").on("click tap", function(){
           $("#sidebar").css("left","-17rem");
           $("#wrapper").css("padding-left","3rem");
           $(".expanded.mode").hide();
-          $(".collapsed.mode").not(".mobile.only").show();
+          $(".collapsed.mode").not(".tablet.only").show();
           });
         $("#nav .expand.button").on("click tap", function(){
           $("#sidebar").css("left","0");
           $("#wrapper").css("padding-left","20rem");
-          $(".expanded.mode").not(".mobile.only").css("display","");
+          $(".expanded.mode").not(".tablet.only").css("display","");
           $(".collapsed.mode").hide();
           });
           
@@ -420,8 +469,14 @@
           $("#toc").slideToggle();
           });
           
-        // firefox fix for iframe initial size
-        $("#wrapper .frame").addClass("normal size");
+        // history button
+        $("#sidebar .history").on("click tap", function(){
+          if($("#sidebar .history .menu").has("a.foldr.item").length==0){
+            $("#sidebar .history .menu .no.data").show();
+          }else{
+            $("#sidebar .history .menu .no.data").hide();
+          }
+        });
         
         // zoom in buttons
         $(".frame, #iframe").addClass(foldr_scale + " size");
@@ -430,13 +485,13 @@
           $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
           localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
         };
-        $("#nav .zoom.dropdown .normal").on("click tap", function(){
+        $("#sidebar .zoom.dropdown .normal").on("click tap", function(){
           set_scale("normal");
         });
-        $("#nav .zoom.dropdown .large").on("click tap", function(){
+        $("#sidebar .zoom.dropdown .large").on("click tap", function(){
           set_scale("large");
         });
-        $("#nav .zoom.dropdown .larger").on("click tap", function(){
+        $("#sidebar .zoom.dropdown .larger").on("click tap", function(){
           set_scale("larger");
         });
         

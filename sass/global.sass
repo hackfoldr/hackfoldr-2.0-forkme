@@ -55,15 +55,29 @@ a, a:link
 
 .desktop.only
   @media screen and (max-width: 1024px)
-    display: none
-  @media screen and (min-width: 1025px)
-    display: ""
+    display: none!important
 
 .mobile.only
+  @media screen and (min-width: 1025px)
+    display: none!important
   @media screen and (max-width: 1024px)
     display: ""
+
+.tablet.only
   @media screen and (min-width: 1025px)
-    display: none
+    display: none!important
+  @media screen and (max-width: 1024px)
+    display: ""
+  @media screen and (min-width: 641px)
+    display: ""
+  @media screen and (max-width: 640px)
+    display: none!important
+
+.phone.only
+  @media screen and (min-width: 641px)
+    display: none!important
+  @media screen and (max-width: 640px)
+    display: ""
 
 // layout
 
@@ -82,17 +96,15 @@ a, a:link
 
   @media screen and (max-width: 1024px)
     width: 100%
-    height: 5.5rem
+    height: 3rem
     overflow: visible
 
   #toc
-    .placeholder
-      height: 2rem
-      line-height: 2rem
     &>.ui.menu
       width: 100%
       border-top: 2px rgba(#000,0.5) solid
     @media screen and (max-width: 1024px)
+      display: none
       .accordion
         width: 100%
 
@@ -101,7 +113,6 @@ a, a:link
       +box-shadow(0 0 0.25rem rgba(#000,0.25))
 
   #topbar>.ui.menu
-    position: relative
     z-index: 2
 
   .collapsed.icon
@@ -122,27 +133,36 @@ a, a:link
   #nav>.ui.menu
     background-color: rgba(#fff,0)
 
-  #nav
-    .dropdown.about .menu
-      width: 10rem
-    .dropdown.shortcuts, .dropdown.history
-      .menu
+  #nav, #topbar
+    &>.menu
+      &>.dropdown.about .menu
         width: 14rem
+      &>.dropdown.shortcuts, &>.dropdown.history
+        .menu
+          width: 14rem
     .dropdown .menu
       .item
         i.icon
           float: right
           margin-right: 0
-    @media screen and (max-width: 1024px)
-      .zoom .menu
+    .zoom
+      @media screen and (max-width: 640px)
+        display: none
+      .menu
+        @media screen and (max-width: 1024px)
+          right: 0
+          left: auto
+    .meta
+      &>.menu
         right: 0
         left: auto
-  a.button.item.desktop.only
-    @media screen and (max-width: 1024px)
-      display: none
-  a.button.item.mobile.only
-    @media screen and (min-width: 1024px)
-      display: none
+        width: 6rem
+        &>.item>.menu
+          right: 100%
+          left: auto!important
+          width: 14rem
+      @media screen and (max-width: 480px)
+        display: none
 
 #wrapper
   position: absolute
@@ -157,7 +177,7 @@ a, a:link
   +transition-timing-function(ease)
 
   @media screen and (max-width: 1024px)
-    padding-top: 5.5rem
+    padding-top: 3rem
     padding-left: 0
     height: auto
 
@@ -221,6 +241,6 @@ a, a:link
     -o-transform-origin: 0 0
     -webkit-transform-origin: 0 0
 
-#toc, #nav
+#sidebar
   .ui.accordion>.content
     padding: 0
