@@ -446,6 +446,7 @@ block script
     // load ethercalc data only instead of loading the whole page
     $("#topbar .refresh.table").on("click tap", function(){
       $("#toc .menu").html("");
+      $("#topbar .form").hide();
       compile_ethercalc();
       });
 
