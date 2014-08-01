@@ -132,6 +132,7 @@ block script
     }else{
       csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+ethercalc_name+'&exportFormat=csv&gid=0';
       csv_api_source_type = "google";
+      $("#topbar .add.to.list, #topbar .form").remove();
     };
 
     var compile_json = function(rows){
