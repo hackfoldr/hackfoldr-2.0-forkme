@@ -33,7 +33,7 @@
           </div>
           <div class="ui dropdown icon item about"><i class="icon help"></i>
             <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a></div>
-          </div><a class="right item expand button collapsed mode hidden"><i class="icon arrow right"></i></a><a class="right item collapse button expanded mode"><i class="icon arrow left"></i></a>
+          </div><a class="right item expand button collapsed mode hidden desktop only"><i class="icon arrow right"></i></a><a class="right item collapse button expanded mode desktop only"><i class="icon arrow left"></i></a>
           <div class="right icon item zoom ui dropdown"><i class="icon zoom in"></i>
             <div class="menu">
               <div class="item normal">100%</div>
@@ -44,7 +44,7 @@
         </div>
       </nav>
       <nav id="topbar">
-        <div class="ui borderless menu"><a class="item foldr title"></a><a target="iframe" class="right icon item edit table"><i class="icon pencil"></i></a><a class="right icon item refresh table hidden"><i class="icon repeat"></i></a><a class="right icon item add to list"><i class="icon add"></i></a></div>
+        <div class="ui borderless menu"><a class="item foldr title"></a><a target="iframe" class="right icon item edit table"><i class="icon pencil"></i></a><a class="right icon item refresh table hidden"><i class="icon repeat"></i></a><a class="right icon item add to list"><i class="icon add"></i></a><a class="right item show nav button collapsed mode mobile only"><i class="icon arrow down"></i></a><a class="right item hide nav button expanded mode hidden mobile only"><i class="icon arrow up"></i></a></div>
         <form class="ui form segment no margin hidden expanded mode">
           <div class="field">
             <input placeholder="想顯示在 foldr 中的文件名稱" type="text" name="new-pad-name" value="我是可愛的新文件" class="new title">
@@ -52,7 +52,7 @@
           <div class="ui submit button green small">create and add to foldr</div>
         </form>
       </nav>
-      <nav id="toc">
+      <nav id="toc" class="desktop only">
         <div class="ui vertical menu sortable"></div>
       </nav>
     </nav>
@@ -407,6 +407,18 @@
           $(".collapsed.mode").hide();
           });
           
+        // sidebar show nav buttons
+        $("#topbar .hide.nav.button").on("click tap", function(){
+          $(".expanded.mode").hide();
+          $(".collapsed.mode").not(".desktop.only").show();
+          $("#toc").slideToggle();
+          });
+        $("#topbar .show.nav.button").on("click tap", function(){
+          $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
+          $(".collapsed.mode").hide();
+          $("#toc").slideToggle();
+          });
+          
         // firefox fix for iframe initial size
         $("#wrapper .frame").addClass("normal size");
         
@@ -478,6 +490,13 @@
           // reset page title
           $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
           }
+          
+          // for mobile: set toc default display (hidden)
+          $("#toc").css("display","");
+          $("#topbar .form").hide();
+          $("#topbar .hide.nav.button").hide();
+          $("#topbar .show.nav.button").show();
+          
         });
         
         // activate link on click

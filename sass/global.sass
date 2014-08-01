@@ -50,8 +50,19 @@ a, a:link
 .hidden
   display: none
 
-.mobile.hide
+.inline.block
+  display: inline-block
+
+.desktop.only
   @media screen and (max-width: 960px)
+    display: none
+  @media screen and (min-width: 961px)
+    display: ""
+
+.mobile.only
+  @media screen and (max-width: 960px)
+    display: ""
+  @media screen and (min-width: 961px)
     display: none
 
 // layout
@@ -69,6 +80,11 @@ a, a:link
   +transition-duration(0.5s)
   +transition-timing-function(ease)
 
+  @media screen and (max-width: 960px)
+    width: 100%
+    height: 5.5rem
+    overflow: visible
+
   #toc
     .placeholder
       height: 2rem
@@ -76,6 +92,9 @@ a, a:link
     &>.ui.menu
       width: 100%
       border-top: 2px rgba(#000,0.5) solid
+    @media screen and (max-width: 960px)
+      .accordion
+        width: 100%
 
   #toc, #topbar
     &>.ui.menu
@@ -93,8 +112,12 @@ a, a:link
     .title.item
       font-weight: 700
       width: 12rem
+      @media screen and (max-width: 960px)
+        width: auto
     .form.segment
       background: none
+      @media screen and (max-width: 960px)
+        background: #fff
 
   #nav>.ui.menu
     background-color: rgba(#fff,0)
@@ -110,6 +133,16 @@ a, a:link
         i.icon
           float: right
           margin-right: 0
+    a.button.item.desktop.only
+      @media screen and (max-width: 960px)
+        display: none
+    a.button.item.mobile.only
+      @media screen and (min-width: 960px)
+        display: none
+    @media screen and (max-width: 960px)
+      .zoom .menu
+        right: 0
+        left: auto
 
 #wrapper
   position: absolute
@@ -122,6 +155,11 @@ a, a:link
   height: 100%
   +transition-duration(0.5s)
   +transition-timing-function(ease)
+
+  @media screen and (max-width: 960px)
+    padding-top: 5.5rem
+    padding-left: 0
+    height: auto
 
   .frame
     position: relative
@@ -139,6 +177,8 @@ a, a:link
     position: relative
     z-index: 3
     background-color: #e9e9e9
+    @media screen and (max-width: 960px)
+      z-index: 0
 
 // zoom iframe content
 

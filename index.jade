@@ -23,9 +23,9 @@ block body
               i.icon.exchange
             a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
               i.icon.github
-        a.right.item.expand.button.collapsed.mode.hidden
+        a.right.item.expand.button.collapsed.mode.hidden.desktop.only
           i.icon.arrow.right
-        a.right.item.collapse.button.expanded.mode
+        a.right.item.collapse.button.expanded.mode.desktop.only
           i.icon.arrow.left
         .right.icon.item.zoom.ui.dropdown
           i.icon.zoom.in
@@ -43,6 +43,10 @@ block body
           i.icon.repeat
         a.right.icon.item.add.to.list
           i.icon.add
+        a.right.item.show.nav.button.collapsed.mode.mobile.only
+          i.icon.arrow.down
+        a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
+          i.icon.arrow.up
       form.ui.form.segment.no.margin.hidden.expanded.mode
         .field
           input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")
@@ -52,7 +56,7 @@ block body
           input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
           | .hackpad.com
         .ui.submit.button.green.small create and add to foldr
-    nav#toc
+    nav#toc.desktop.only
       .ui.vertical.menu.sortable
 
   #wrapper
@@ -405,6 +409,18 @@ block script
       $(".collapsed.mode").hide();
       });
 
+    // sidebar show nav buttons
+    $("#topbar .hide.nav.button").on("click tap", function(){
+      $(".expanded.mode").hide();
+      $(".collapsed.mode").not(".desktop.only").show();
+      $("#toc").slideToggle();
+      });
+    $("#topbar .show.nav.button").on("click tap", function(){
+      $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
+      $(".collapsed.mode").hide();
+      $("#toc").slideToggle();
+      });
+
     // firefox fix for iframe initial size
     $("#wrapper .frame").addClass("normal size");
 
@@ -476,6 +492,13 @@ block script
       // reset page title
       $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
       }
+
+      // for mobile: set toc default display (hidden)
+      $("#toc").css("display","");
+      $("#topbar .form").hide();
+      $("#topbar .hide.nav.button").hide();
+      $("#topbar .show.nav.button").show();
+
     });
 
     // activate link on click
