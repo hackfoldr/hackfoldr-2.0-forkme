@@ -8,7 +8,7 @@ block body
 
     nav#nav.desktop.only
       .ui.borderless.menu
-        .ui.dropdown.icon.item.shortcuts
+        //-.ui.dropdown.icon.item.shortcuts
           i.icon.home
           include shortcuts-menu
         .ui.dropdown.icon.item.history
@@ -37,7 +37,8 @@ block body
 
     nav#topbar
       .ui.borderless.menu
-        .ui.dropdown.icon.item.shortcuts.tablet.only
+        a.item.foldr.title
+        //-.ui.dropdown.icon.item.shortcuts.tablet.only
           i.icon.home
           include shortcuts-menu
         .ui.dropdown.icon.item.history.tablet.only
@@ -53,7 +54,6 @@ block body
               i.icon.exchange
             a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
               i.icon.github
-        a.item.foldr.title
         a.right.item.show.nav.button.collapsed.mode.mobile.only
           i.icon.arrow.down
         a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
@@ -65,7 +65,7 @@ block body
               i.icon.pencil
             a.item.refresh.table.tiny.only.hidden 更新
               i.icon.repeat
-            .item.shortcuts 捷徑
+            //-.item.shortcuts 捷徑
               i.icon.home
               include shortcuts-menu
             .item.history 紀錄
