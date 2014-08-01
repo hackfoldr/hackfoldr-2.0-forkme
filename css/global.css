@@ -167,7 +167,7 @@ a, a:link {
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
   #sidebar {
     width: 100%;
-    height: 3rem;
+    height: 2.75rem;
     overflow: visible;
   }
 }
@@ -286,7 +286,7 @@ a, a:link {
 @media screen and (max-width: 1024px) {
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003168}}
   #wrapper {
-    padding-top: 3rem;
+    padding-top: 2.75rem;
     padding-left: 0;
     height: auto;
   }
