@@ -1,0 +1,587 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- libraries-->
+    <script type="text/javascript" src="/assets/tabletop/tabletop.js"></script>
+    <script type="text/javascript" src="/assets/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/assets/jquery-ui/1.11.0.custom/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/semantic-ui/0.19.0/css/semantic.min.css">
+    <script type="text/javascript" src="/assets/semantic-ui/0.19.0/javascript/semantic.min.js"></script>
+    <!-- custom files-->
+    <script type="text/javascript" src="/js/global.js"></script>
+    <script type="text/javascript" src="/js/csv.js"></script>
+    <script type="text/javascript" src="/js/handlebars-v1.3.0.js"></script>
+    <link rel="stylesheet" href="/css/global.css">
+    <title>高雄氣爆時序圖 TimeMapper | 0801高雄氣爆資訊 | hackfoldr</title>
+  <link type="text/css" rel="stylesheet" href="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/js/page_context.js"></script><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -90px !important;
+    width: 180px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style><script>window["_GOOG_TRANS_EXT_VER"] = "1";</script><script>window["_GOOG_TRANS_EXT_VER"] = "1";</script><script>window["_GOOG_TRANS_EXT_VER"] = "1";</script></head>
+  <body screen_capture_injected="true">
+    <nav id="sidebar">
+      <nav id="nav" class="desktop only">
+        <div class="ui borderless menu">
+          <div class="ui dropdown icon item history"><i class="icon time"></i>
+            <div class="menu">
+              <div class="item no data hidden" style="display: none;">您還沒有瀏覽 foldr 的紀錄</div>
+            <a href="/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath8n" class="foldr item">解除戒嚴黑客松共筆區<i class="icon exchange"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">歡迎光臨 hackfoldr<i class="icon exchange"></i></a><a href="/ks0801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath9n" class="foldr item">6/21還我土地黑客松共筆區<i class="icon exchange"></i></a><a href="/g0v-summit2014" class="foldr item">g0v summit 2014工作區<i class="icon exchange"></i></a><a href="/moztw" class="foldr item">Mozilla 台灣社群<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">https://mapsengine.google.com/map/embed?mid=z1Pm7zQY-cpo.kYCosnL20JN0<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">高雄氣爆訊息統整<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">Hints:<i class="icon exchange"></i></a><a href="/meta" class="foldr item">零時基礎建設<i class="icon exchange"></i></a><a href="/3du" class="foldr item">3du.tw<i class="icon exchange"></i></a><a href="/coscup2014" class="foldr item">COSCUP 2014 開源人年會<i class="icon exchange"></i></a><a href="/g0v-hackath6n" class="foldr item">勞動基準黑客松<i class="icon exchange"></i></a><a href="/g0v-hackath2n" class="foldr item">xxxxx<i class="icon exchange"></i></a></div>
+          </div>
+          <div class="ui dropdown icon item about"><i class="icon help"></i>
+            <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i><i class="icon forward mail"></i></a></div>
+          </div><a class="right item expand button collapsed mode hidden desktop only" style="display: none;"><i class="icon arrow right"></i></a><a class="right item collapse button expanded mode desktop only"><i class="icon arrow left"></i></a>
+          <div class="right icon item zoom ui dropdown"><i class="icon zoom in"></i>
+            <div class="menu">
+              <div class="item normal">100%</div>
+              <div class="item large">130%</div>
+              <div class="item larger">150%</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <nav id="topbar">
+        <div class="ui borderless menu"><a class="item foldr title" href="/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4">0801高雄氣爆資訊</a>
+          <div class="ui dropdown icon item history tablet only"><i class="icon time"></i>
+            <div class="menu">
+              <div class="item no data hidden" style="display: none;">您還沒有瀏覽 foldr 的紀錄</div>
+            <a href="/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath8n" class="foldr item">解除戒嚴黑客松共筆區<i class="icon exchange"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">歡迎光臨 hackfoldr<i class="icon exchange"></i></a><a href="/ks0801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath9n" class="foldr item">6/21還我土地黑客松共筆區<i class="icon exchange"></i></a><a href="/g0v-summit2014" class="foldr item">g0v summit 2014工作區<i class="icon exchange"></i></a><a href="/moztw" class="foldr item">Mozilla 台灣社群<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">https://mapsengine.google.com/map/embed?mid=z1Pm7zQY-cpo.kYCosnL20JN0<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">高雄氣爆訊息統整<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">Hints:<i class="icon exchange"></i></a><a href="/meta" class="foldr item">零時基礎建設<i class="icon exchange"></i></a><a href="/3du" class="foldr item">3du.tw<i class="icon exchange"></i></a><a href="/coscup2014" class="foldr item">COSCUP 2014 開源人年會<i class="icon exchange"></i></a><a href="/g0v-hackath6n" class="foldr item">勞動基準黑客松<i class="icon exchange"></i></a><a href="/g0v-hackath2n" class="foldr item">xxxxx<i class="icon exchange"></i></a></div>
+          </div>
+          <div class="ui dropdown icon item about tablet only"><i class="icon help"></i>
+            <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i><i class="icon forward mail"></i></a></div>
+          </div><a class="right item show nav button collapsed mode mobile only"><i class="icon arrow down"></i></a><a class="right item hide nav button expanded mode hidden mobile only" style="display: none;"><i class="icon arrow up"></i></a>
+          <div class="right ui dropdown icon item meta phone only"><i class="icon ellipsis vertical"></i>
+            <div class="menu"><a target="iframe" class="item edit table tiny only" href="https://docs.google.com/spreadsheets/d/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4/edit" style="display: inline;">編輯<i class="icon pencil"></i></a><a class="item refresh table tiny only hidden" style="display: none;">更新<i class="icon repeat"></i></a>
+              <div class="item history">紀錄<i class="icon time"></i>
+                <div class="menu">
+                  <div class="item no data hidden" style="display: none;">您還沒有瀏覽 foldr 的紀錄</div>
+                <a href="/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath8n" class="foldr item">解除戒嚴黑客松共筆區<i class="icon exchange"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">歡迎光臨 hackfoldr<i class="icon exchange"></i></a><a href="/ks0801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">0801高雄氣爆資訊<i class="icon exchange"></i></a><a href="/g0v-hackath9n" class="foldr item">6/21還我土地黑客松共筆區<i class="icon exchange"></i></a><a href="/g0v-summit2014" class="foldr item">g0v summit 2014工作區<i class="icon exchange"></i></a><a href="/moztw" class="foldr item">Mozilla 台灣社群<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">https://mapsengine.google.com/map/embed?mid=z1Pm7zQY-cpo.kYCosnL20JN0<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">高雄氣爆訊息統整<i class="icon exchange"></i></a><a href="/Kaohsiung-explode-20140801" class="foldr item">Hints:<i class="icon exchange"></i></a><a href="/meta" class="foldr item">零時基礎建設<i class="icon exchange"></i></a><a href="/3du" class="foldr item">3du.tw<i class="icon exchange"></i></a><a href="/coscup2014" class="foldr item">COSCUP 2014 開源人年會<i class="icon exchange"></i></a><a href="/g0v-hackath6n" class="foldr item">勞動基準黑客松<i class="icon exchange"></i></a><a href="/g0v-hackath2n" class="foldr item">xxxxx<i class="icon exchange"></i></a></div>
+              </div>
+              <div class="item about">說明<i class="icon help"></i>
+                <div class="menu"><a href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr" target="iframe" class="link item">使用說明<i class="icon text file outline"></i></a><a href="/welcome-to-hackfoldr" class="foldr item">開發與回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i><i class="icon forward mail"></i></a></div>
+              </div>
+            </div>
+          </div>
+          <div class="right icon item zoom ui dropdown tablet only"><i class="icon zoom in"></i>
+            <div class="menu">
+              <div class="item normal">100%</div>
+              <div class="item large">130%</div>
+              <div class="item larger">150%</div>
+            </div>
+          </div><a target="iframe" class="right icon item edit table" href="https://docs.google.com/spreadsheets/d/1WVWrKC-Tbry3ltgouQPpZH2Cd2HkKeZ8DjLs4PWa1z4/edit"><i class="icon pencil"></i></a><a class="right icon item refresh table hidden" style="display: none;"><i class="icon repeat"></i></a>
+        </div>
+        
+      </nav>
+      <nav id="toc">
+        <div class="ui vertical menu sortable"><a href="https://mapsengine.google.com/map/embed?mid=z1Pm7zQY-cpo.kYCosnL20JN0" target="iframe" class="link item">救災地圖<i class="icon map marker"></i></a><a href="http://umap.fluv.io/zh/map/kaohsiung-explode-mapping-2_1988" target="iframe" class="link item">Umap版救災地圖<i class="icon map marker"></i></a><a href="http://apkh.tw/fire/fire.php" target="iframe" class="link item">高市氣爆火警回報系統<i class="icon globe"></i></a><a href="http://timemap.kuansim.com/hychen/kaohsiung-gas-explosion#27" target="iframe" class="link item active">高雄氣爆時序圖 TimeMapper<i class="icon globe"></i></a><a href="https://www.facebook.com/permalink.php?story_fbid=832159123475306&amp;id=592006300823924" target="_blank" class="link item">Embed<i class="icon facebook"></i><i class="icon forward mail"></i></a><div class="ui accordion"><div class="title header item ">現場最新狀況<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="https://docs.google.com/document/d/1yx8iv1gyaBBz2jD6WJm0u8iLQ3A2MAwVpkNGDIaFGyY/edit" target="iframe" class="link item">最新公告<i class="icon text file"></i></a><a href="https://docs.google.com/document/d/1SJFqGgPQb_GbBjGuozEstpkACsbyAoh15WStlRapNYI/preview" target="iframe" class="link item">網友回報區<i class="icon text file"></i></a><a href="https://docs.google.com/document/d/1SJFqGgPQb_GbBjGuozEstpkACsbyAoh15WStlRapNYI/edit" target="iframe" class="link item">網友回報區<i class="icon text file"></i></a><a href="https://www.ptt.cc/bbs/Kaohsiung/M.1406902939.A.BB8.html" target="iframe" class="link item">物資及收容所現況<i class="icon chat outline"></i></a><a href="https://g0v.hackpad.com/ep/pad/static/S0z70k3PaP4" target="iframe" class="link item">救災資訊<i class="icon text file outline"></i></a><a href="https://docs.google.com/spreadsheets/d/1OshWUVZ0X0a0Uw7gOsk_OhLkdlvNfeABlqtgRr39kmM/preview" target="iframe" class="link item">醫院病患資訊公告<i class="icon table"></i></a><a href="https://docs.google.com/spreadsheets/d/1cfifzxSOoRDddGr0_j3V8TofXjRqfJfkZD3yaFAar2o/preview" target="iframe" class="link item">傷病死亡名單<i class="icon table"></i></a></div></div><div class="ui accordion"><div class="title header item ">救護區、消防電話統整<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="http://www.1991.tw/1991_MsgBoard/login.jsp" target="iframe" class="link item">1991報平安留言平台<i class="icon globe"></i></a><a href="http://paste.plurk.com/show/1953230/" target="iframe" class="link item">前鎮各區消防連絡電話及醫護區<i class="icon globe"></i></a><a href="https://docs.google.com/spreadsheets/d/1NyHl5TYOswkddAHBMbP8SiS-LJY3Jc7oNqqV74yTvi4/preview" target="iframe" class="link item">救難物資整理表<i class="icon table"></i></a><a href="https://www.ptt.cc/bbs/Gossiping/M.1406862039.A.192.html" target="iframe" class="link item">免費住宿地點<i class="icon chat outline"></i></a></div></div><div class="ui accordion"><div class="title header item ">志工資訊<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="https://docs.google.com/forms/d/1XDOPT8KmF_7s7VAXR_ArqxLX-NzRjHUV_2cCtQVkwuY/viewform" target="iframe" class="link item">【助人者募集】7/31高雄市瓦斯氣爆<i class="icon unordered list"></i></a><a href="https://docs.google.com/forms/d/1RgRq8DH2kt8YT5yB36ulwp-saQF1vNanXPpaDeFz4WU/viewform" target="iframe" class="link item">各類專長志工募集<i class="icon unordered list"></i></a><a href="https://docs.google.com/forms/d/1TJriYExcZbeFsVWgBXsb0-aQFpsMvFjBCZCf6Ive2KI/viewform?usp=send_form" target="iframe" class="link item">需要志工請填此<i class="icon unordered list"></i></a><a href="https://docs.google.com/spreadsheets/d/1tuy2sIJKFeW_-4iSQ6pwYzvEwVqWIdBhncrdPi9nlEw/edit?usp=sharing" target="iframe" class="link item">志工需求一覽表<i class="icon table"></i></a><a href="https://www.ptt.cc/bbs/Kaohsiung/M.1406850881.A.28E.html" target="iframe" class="link item">志工參考地圖<i class="icon chat outline"></i></a><a href="https://docs.google.com/spreadsheets/d/1o1Ej3ZZZz5fQ2WBibo85YsU0UGwe2Oj2dQXZ7AUY_64/edit?usp=sharing" target="iframe" class="link item">物資需求清單<i class="icon table"></i></a><a href="https://docs.google.com/forms/d/11T151UisnTAeugd8jUTKS8NQKa1sTIeEBmuApWUAG6c/viewform?usp=send_form" target="iframe" class="link item">物資需求填表<i class="icon unordered list"></i></a></div></div><div class="ui accordion"><div class="title header item ">官方機構公佈資訊<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="http://ensky.tw/hwama/" target="iframe" class="link item">陳菊&amp;高市資訊<i class="icon globe"></i></a><a href="https://www.facebook.com/kikuChen" target="_blank" class="link item">陳菊 (花媽) 市長<i class="icon facebook"></i><i class="icon forward mail"></i></a><a href="https://www.facebook.com/GaoXiongShiZhengFu" target="_blank" class="link item">高雄市政府<i class="icon facebook"></i><i class="icon forward mail"></i></a><a href="http://www.fdkc.gov.tw/fdkc_danger/index.php?page=news&amp;NType=MQ==&amp;danger_history=MTk=" target="iframe" class="link item">高雄市消防局<i class="icon globe"></i></a></div></div><div class="ui accordion"><div class="title header item ">新聞台訊息總表<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="http://j.mp/1n9IBx0" target="iframe" class="link item">電視新聞選台器（G8V電視牆）<i class="icon globe"></i></a><a href="http://news520.web.fc2.com/ustream.html" target="iframe" class="link item">LiveTV 台灣新聞頻道綜合<i class="icon globe"></i></a><a href="https://www.youtube.com/playlist?list=PLPh89N96p446cjAf_6J0PpbXBzzTHglQc" target="_blank" class="link item">新聞直播（YouTube列表）<i class="icon youtube"></i><i class="icon forward mail"></i></a><a href="https://www.youtube.com/embed/e8QiWCHFn3I" target="iframe" class="link item">華視新聞（Youtube）<i class="icon youtube play"></i></a><a href="https://www.youtube.com/embed/ukWk-Gy0NT8" target="iframe" class="link item">大愛新聞（Youtube）<i class="icon youtube play"></i></a><a href="http://www.ustream.tv/embed/18294766" target="iframe" class="link item">年代新聞（UStream）<i class="icon facetime video"></i></a><a href="http://www.ustream.tv/embed/18590658" target="iframe" class="link item">東森新聞（UStream）<i class="icon facetime video"></i></a><a href="https://www.youtube.com/embed/LZdixA6uTA8" target="iframe" class="link item">中天新聞（Youtube）<i class="icon youtube play"></i></a><a href="https://www.youtube.com/embed/q4-PAqm3W9A" target="iframe" class="link item">中天新聞（Youtube）<i class="icon youtube play"></i></a><a href="http://www.ustream.tv/embed/18590674" target="iframe" class="link item">中天新聞（UStream）<i class="icon facetime video"></i></a><a href="https://www.youtube.com/embed/s5Vj3VKOZGc" target="iframe" class="link item">民視新聞（Youtube）<i class="icon youtube play"></i></a><a href="http://www.ustream.tv/embed/18590692" target="iframe" class="link item">三立新聞（UStream）<i class="icon facetime video"></i></a><a href="https://www.youtube.com/embed/18_nIeiyQ2A" target="iframe" class="link item">三立新聞（Youtube）<i class="icon youtube play"></i></a><a href="http://www.ustream.tv/embed/18590697" target="iframe" class="link item">TVBS新聞（UStream）<i class="icon facetime video"></i></a><a href="https://www.youtube.com/embed/SwrKzkRUlaw" target="iframe" class="link item">udn新聞（Youtube）<i class="icon youtube play"></i></a></div></div><div class="ui accordion"><div class="title header item ">PTT資訊(read only)<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="https://www.ptt.cc/bbs/Kaohsiung/M.1406827942.A.BFB.html" target="iframe" class="link item">高雄板-災害回報區<i class="icon chat outline"></i></a><a href="https://www.ptt.cc/bbs/Kaohsiung/M.1406827990.A.5F7.html" target="iframe" class="link item">高雄板-尋人狀況區<i class="icon chat outline"></i></a><a href="https://www.ptt.cc/bbs/Kaohsiung/M.1406828069.A.5A9.html" target="iframe" class="link item">高雄板-回報交流區<i class="icon chat outline"></i></a><a href="http://disp.cc/b/163-7YlM" target="iframe" class="link item">災區照片(DISP)<i class="icon chat outline"></i></a></div></div><div class="ui accordion"><div class="title header item ">社群網站比較有總整理的<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="http://bit.ly/Kaohsiung-explode" target="iframe" class="link item">FB）標題：高雄氣爆事件訊息統整<i class="icon globe"></i></a><a href="https://www.facebook.com/ShotForDemocracy?fref=ts" target="_blank" class="link item">公民攝影守護民主陣線<i class="icon facebook"></i><i class="icon forward mail"></i></a></div></div><div class="ui accordion"><div class="title header item ">影片紀錄<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="https://www.youtube.com/embed/KmEZNKAfh1Y" target="iframe" class="link item">14.07.31 高雄瓦斯氣爆監視錄影帶<i class="icon youtube play"></i></a><a href="https://www.facebook.com/photo.php?v=10203749537633896&amp;fref=nf" target="_blank" class="link item">高雄前鎮區瓦斯爆炸<i class="icon facebook"></i><i class="icon forward mail"></i></a><a href="https://www.youtube.com/embed/5Oqk3KEtMHw" target="iframe" class="link item">1030731高雄氣爆事(行車記錄器)<i class="icon youtube play"></i></a><a href="https://www.facebook.com/photo.php?v=1444247869184193" target="_blank" class="link item">瓦斯氣爆<i class="icon facebook"></i><i class="icon forward mail"></i></a><a href="https://www.youtube.com/embed/2ecyfmNekYs" target="iframe" class="link item">高雄三多路.氣爆滿目瘡痍<i class="icon youtube play"></i></a><a href="https://www.youtube.com/embed/BY85434x4CE" target="iframe" class="link item">瓦斯氣爆瞬間的監視器畫面 #1<i class="icon youtube play"></i></a><a href="https://www.youtube.com/embed/YhElyXb_QB0" target="iframe" class="link item">瓦斯氣爆瞬間的監視器畫面 #2<i class="icon youtube play"></i></a><a href="https://www.facebook.com/photo.php?v=789737851048591" target="_blank" class="link item">三多路氣爆現場<i class="icon facebook"></i><i class="icon forward mail"></i></a></div></div><div class="ui accordion"><div class="title header item ">其他<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"><a href="https://www.facebook.com/photo.php?fbid=10201786734825150&amp;set=a.1209518613178.26471.1685122073" target="_blank" class="link item">爆炸點與地下管線套疊<i class="icon facebook"></i><i class="icon forward mail"></i></a></div></div></div>
+      </nav>
+    </nav>
+    <div id="wrapper">
+      <div class="frame normal size">
+        <iframe id="iframe" name="iframe" class="normal size" src="https://mapsengine.google.com/map/embed?mid=z1Pm7zQY-cpo.kYCosnL20JN0"></iframe>
+      </div>
+    </div>
+    <div id="script">
+      <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+      <script type="text/javascript" src="/js/global.js"></script>
+      <script>
+        var paths = location.pathname.split('/') || [];
+        var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
+        var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
+        var current_foldr_name = "";
+        var iframe_src;
+        var history_state={};
+        var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
+        var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
+        var new_pad_row_index = 3;
+        var csv_api_source = "";
+        var csv_api_source_type = "";
+        
+        // check where the csv will come from
+        if(ethercalc_name.length <= 40){
+          csv_api_source = 'https://ethercalc.org/_/'+ethercalc_name+'/csv';
+          csv_api_source_type = "ethercalc";
+        }else{
+          csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+ethercalc_name+'&exportFormat=csv&gid=0';
+          csv_api_source_type = "google";
+          $("#topbar .add.to.list, #topbar .form").remove();
+        };
+        
+        var compile_json = function(rows){
+        
+          var got_title = false
+          var depth = 0 // if depth == 1, link should in accordion
+          
+          var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item">{{subject}}<i class="icon {{icon}}"></i></a>';
+          var link_template = Handlebars.compile(link_template_source);
+          
+          var add_link = function(row){
+            try{
+              var link_options = JSON.parse(row[2]);
+            }catch(e){
+              var link_options = {};
+            }
+            
+            // auto link icon
+            var link_icon = "";
+            var link_type = "link";
+            var link_target = "iframe";
+            var link_url = row[0].trim();
+            if(link_url.match(/^.*.hackpad.com\//)){
+              link_icon = "text file outline";
+            } else if(link_url.match(/^.*.etherpad.mozilla.org\//)) {
+              link_icon = "file outline";
+            } else if(link_url.match(/^.*.groups.google.com\//)) {
+              link_icon = "users";
+            } else if(link_url.match(/^.*.plus.google.com\//)) {
+              link_icon = "google plus";
+            } else if(link_url.match(/^.*.kktix.cc\//)) {
+              link_icon = "bullhorn";
+            } else if(link_url.match(/^.*.kktix.com\//)) {
+              link_icon = "bullhorn";
+            } else if(link_url.match(/^.*.registrano.com\//)) {
+              link_icon = "bullhorn";
+            } else if(link_url.match(/^.*.docs.google.com\/spreadsheet.*/)) {
+              link_icon = "table";
+            } else if(link_url.match(/^.*.docs.google.com\/drawings.*/)) {
+              link_icon = "photo";
+            } else if(link_url.match(/^.*.docs.google.com\/document.*/)) {
+              link_icon = "text file";
+            } else if(link_url.match(/^.*.docs.google.com\/presentation.*/)) {
+              link_icon = "laptop";
+            } else if(link_url.match(/^.*.docs.google.com\/form.*/)) {
+              link_icon = "unordered list";
+            } else if(link_url.match(/^.*.drive.google.com\//)) {
+              link_icon = "cloud";
+            } else if(link_url.match(/^.*.mapsengine.google.com\//)) {
+              link_icon = "map marker";
+            } else if(link_url.match(/^.*.www.google.com\/maps\//)) {
+              link_icon = "map marker";
+            } else if(link_url.match(/^.*.umap.fluv.io\//)) {
+              link_icon = "map marker";
+            } else if(link_url.match(/^.*.github.com\//)) {
+              link_icon = "github";
+            } else if(link_url.match(/^.*.moqups.com\//)) {
+              link_icon = "photo";
+            } else if(link_url.match(/^.*.facebook.com\//)) {
+              link_icon = "facebook";
+            } else if(link_url.match(/^.*.twitter.com\//)) {
+              link_icon = "twitter";
+            } else if(link_url.match(/^.*.tumblr.com\//)) {
+              link_icon = "tumblr";
+            } else if(link_url.match(/^.*.trello.com\//)) {
+              link_icon = "trello";
+            } else if(link_url.match(/^.*.youtube.com\/embed\//)) {
+              link_icon = "youtube play";
+            } else if(link_url.match(/^.*.youtube.com\//)) {
+              link_icon = "youtube";
+            } else if(link_url.match(/^.*.ustream.tv\//)) {
+              link_icon = "facetime video";
+            } else if(link_url.match(/^.*.www.justin.tv\//)) {
+              link_icon = "facetime video";
+            } else if(link_url.match(/^.*.www.ptt.cc\/bbs\//)) {
+              link_icon = "chat outline";
+            } else if(link_url.match(/^.*.disp.cc\//)) {
+              link_icon = "chat outline";
+            } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
+              link_icon = "exchange";
+              //link_url = link_url.split("/")[1].toString();
+              //link_type = "foldr";
+              //link_target = "";
+            } else if(link_url.match(/^.*.hack.etblue.tw\//)) {
+              link_icon = "exchange";
+              //link_url = link_url.split("/")[1].toString();
+              //link_type = "foldr";
+              //link_target = "";
+            } else if(link_url.match(/^.*.hackfoldr.org\//)) {
+              link_icon = "exchange";
+              //link_url = link_url.split("/")[1].toString();
+              //link_type = "foldr";
+              //link_target = "";
+            } else {
+              link_icon = "globe";
+            }
+            
+            var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
+            var $link_element = $(link_template(context));
+            
+            for(key in link_options){
+              $link_element.attr(key, link_options[key]);
+            }
+            
+            if(depth == 1){
+              $('#toc .ui.accordion:last').find('.menu').append($link_element)
+            }else{
+              $('#toc .ui.vertical.menu').append($link_element)
+            }
+            
+            // enable default iframe?
+            if(current_iframe_url == "edit"){
+              if(csv_api_source_type=="ethercalc"){
+                iframe_src = 'https://ethercalc.org/'+ethercalc_name;
+              }else{
+                iframe_src = 'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit';
+              };
+              $("#topbar .edit.table").hide();
+              $("#topbar .refresh.table").show();
+              $("#topbar .add.to.list").show();
+            }else if((new RegExp(context.url+"/?")).test(current_iframe_url)){
+              iframe_src = current_iframe_url;
+            }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
+              if( current_iframe_url === context.url.split(/\//).pop()){
+                iframe_src = context.url;
+              }
+            }
+            if(!iframe_src) {
+              iframe_src = context.url;
+            }
+          }
+          
+          var accordion_template_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+          var accordion_template = Handlebars.compile(accordion_template_source);
+          
+          var add_accordion = function(row){
+            try{
+              var options = JSON.parse(row[2]);
+            }catch(e){
+              var options = {};
+            }
+            var context = {title: row[1] };
+            var $accordion_el = $(accordion_template(context));
+            
+            $accordion_el.appendTo('#toc .ui.vertical.menu').accordion({onChange: function(){
+              $accordion_el.find('.folder').toggle()
+            }})
+            
+            if(options.expand){
+              $accordion_el.accordion('open',0)
+            }
+          }
+          
+          $.each(rows, function(row_index, row){
+            //console.log(row);
+            
+            // for gsheet
+            if(!row[0]){
+              row[0] = "";
+            }
+            if(!row[1]){
+              row[1] = "";
+            }
+            
+            var this_row_url = row[0].trim();
+            
+            // if 1st and 2nd is empty then this a empty row 
+            if(this_row_url.length === 0 && row[1].trim().length === 0){
+              return
+            }
+            
+            // now we have soming thing, should get title first
+            if(!got_title){
+            
+              // TODO: need opt....
+              $.each(row, function(col_index, col){
+                col = col.trim()
+                
+                // get the MAGIC title 
+                if(!got_title && !col.match(/^#/) && col.length > 0) {
+                  $('#topbar .foldr.title').html(col);
+                  current_foldr_name = col;
+                  got_title = true;
+                  
+                  // detect title row index
+                  //console.log(new_pad_row_index);
+                  new_pad_row_index = row_index+2;
+                  //console.log(row_index+2);
+                  //console.log(new_pad_row_index.toString());
+                  
+                  // add to history menu
+                  
+                  var current_foldr_history = {
+                    foldr_name: col,
+                    foldr_id: ethercalc_name
+                  };
+                  
+                  // Remove all items in foldr_histories that share the same foldr_id before unshift
+                  foldr_histories = $.grep(foldr_histories, function(value){
+                    return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
+                  });
+                  foldr_histories.unshift(JSON.stringify(current_foldr_history));
+                  localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+                }
+                
+              })
+              
+            } else {
+              if(this_row_url.length == 0){ // folder 
+                depth = 1
+                add_accordion(row);
+              }else{ // link
+                add_link(row);
+                // set initial page title
+                if(this_row_url == iframe_src){
+                  $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+                }
+              }
+            }
+          });
+          
+          // set initial iframe src attribute
+          if(!$("#iframe").attr("src")){
+            $("#iframe").attr("src",iframe_src);
+          }
+          
+          // auto new window, and auto new window icon
+          var new_window_icon = "<i class='icon forward mail'></i>";
+          var open_link_in_new_window_or_not = function(){
+            link_url = $(this).attr("href");
+            if(link_url.match(/^.*.plus.google.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.kktix.cc\//)) {
+              return true;
+            } else if(link_url.match(/^.*.kktix.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.registrano.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.github.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.drive.google.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.facebook.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.trello.com\//)) {
+              return true;
+            } else if(link_url.match(/^.*.youtube.com\/playlist.*/)) {
+              return true;
+            } else {
+              return false;
+            }
+          };
+          $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
+          $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
+          
+          // auto expand active items
+          var link_is_current_url_or_not = function(){
+            link_url = $(this).attr("href");
+            if(link_url == iframe_src){
+              return true;
+            } else {
+              return false;
+            }
+          };
+          $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
+          
+        }
+        
+        var compile_ethercalc = function(){
+          if(csv_api_source_type=="ethercalc"){
+            // compile ethercalc csv
+            $.get(csv_api_source).pipe(CSV.parse).done(compile_json);
+            //console.log($.get(csv_api_source).pipe(CSV.parse));
+          }else{
+            //console.log($.get(csv_api_source).pipe(CSV.parse).done);
+            // compile gsheet-tabletop json
+            Tabletop.init({
+              key: ethercalc_name,
+              callback: function(data, tabletop){
+                data = data.map(function (o) {
+                  result = [];
+                  result[0] = o.url || "";
+                  result[1] = o.title || "";
+                  result[2] = o.foldrexpend || "";
+                  result[3] = o["編輯註解"] || "";
+                  result[4] = o.hints || "";
+                  return result;
+                });
+                compile_json(data);
+              },
+              simpleSheet: true
+            });
+          }
+        };
+        
+        compile_ethercalc();
+        
+        // setup history menu
+        $.each(foldr_histories, function(index, foldr_history){
+          var item = JSON.parse(foldr_history);
+          $("#sidebar .history .menu").append(
+            $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
+              .text(item.foldr_name)
+              .append($('<i class="icon exchange"></i>'))
+          );
+        });
+        
+        // for semantic ui css specificity
+        $(".hidden").hide();
+        
+        // firefox fix for iframe initial size
+        $("#wrapper .frame").addClass("normal size");
+        
+        // sidebar expansion buttons
+        $("#nav .collapse.button").on("click tap", function(){
+          $("#sidebar").css("left","-17rem");
+          $("#wrapper").css("padding-left","3rem");
+          $(".expanded.mode").hide();
+          $(".collapsed.mode").not(".tablet.only").show();
+          });
+        $("#nav .expand.button").on("click tap", function(){
+          $("#sidebar").css("left","0");
+          $("#wrapper").css("padding-left","20rem");
+          $(".expanded.mode").not(".tablet.only").css("display","");
+          $(".collapsed.mode").hide();
+          });
+          
+        // sidebar show nav buttons
+        $("#topbar .hide.nav.button").on("click tap", function(){
+          $(".expanded.mode").hide();
+          $(".collapsed.mode").not(".desktop.only").show();
+          $("#toc").slideToggle();
+          });
+        $("#topbar .show.nav.button").on("click tap", function(){
+          $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
+          $(".collapsed.mode").hide();
+          $("#toc").slideToggle();
+          });
+          
+        // history button
+        $("#sidebar .history").on("click tap", function(){
+          if($("#sidebar .history .menu").has("a.foldr.item").length==0){
+            $("#sidebar .history .menu .no.data").show();
+          }else{
+            $("#sidebar .history .menu .no.data").hide();
+          }
+        });
+        
+        // zoom in buttons
+        $(".frame, #iframe").addClass(foldr_scale + " size");
+        
+        var set_scale = function(scale){
+          $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
+          localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
+        };
+        $("#sidebar .zoom.dropdown .normal").on("click tap", function(){
+          set_scale("normal");
+        });
+        $("#sidebar .zoom.dropdown .large").on("click tap", function(){
+          set_scale("large");
+        });
+        $("#sidebar .zoom.dropdown .larger").on("click tap", function(){
+          set_scale("larger");
+        });
+        
+        // refresh table
+        // load ethercalc data only instead of loading the whole page
+        $("#topbar .refresh.table").on("click tap", function(){
+          $("#toc .menu").html("");
+          $("#topbar .form").hide();
+          compile_ethercalc();
+          });
+          
+        // create new hackpad and add to foldr
+        $("#topbar .add.to.list").on("click tap", function(){
+          $("#topbar .form").slideToggle();
+          // add moretext to defalt input value
+          //$.getJSONP('')
+        });
+        
+        $("#topbar .form .submit").on("click tap", function(){
+          var new_hackpad_title = $("#topbar .form .new.title").val();
+          //var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
+          var new_hackpad_id = Math.random().toString(36);
+          var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
+          var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
+          // add new hackpad info to foldr
+          $('#toc .ui.vertical.menu').prepend(new_menu_item);
+          // post new hackpad info to ethercalc
+          $.ajax({
+            //url: "https://ethercalc.org/_/"+ethercalc_name,
+            url: "https://ethercalc.org/_/"+ethercalc_name+"?row="+new_pad_row_index.toString(),
+            //url: "https://ethercalc.org/_/"+ethercalc_name+"?row=3",
+            type: 'POST',
+            contentType: 'text/csv',
+            processData: false,
+            data: new_hackpad_url + ',' + new_hackpad_title
+          });
+          $("#topbar .form").hide();
+          $("#topbar .add.to.list").hide();
+        });
+        
+        // link item events
+        $("#sidebar").on("click tap", "a.link.item", function(event){
+          // dynamic url
+          var iframe_path = event.target.href;
+          if(iframe_path.match(/^https:\/\/.*.hackpad.com\//)){
+            iframe_path = iframe_path.split(/\//).pop();
+          }
+          history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
+          
+          // when leaving ethercalc, show edit icon again
+          if(event.target.target !== "_blank"){
+            $("#topbar .edit.table").show();
+            $("#topbar .refresh.table").hide();
+            $("#topbar .add.to.list").hide();
+            $("#topbar .form").hide();
+            
+          // reset page title
+          $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
+          }
+          
+          // for mobile: set toc default display (hidden)
+          $("#toc").css("display","");
+          $("#topbar .form").hide();
+          $("#topbar .hide.nav.button").hide();
+          $("#topbar .show.nav.button").css("display","");
+          
+        });
+        
+        // activate link on click
+        $("#sidebar").on("click tap", "#toc a.link.item", function(){
+          $("#toc a.link.item").removeClass("active");
+          $(this).addClass("active");
+        });
+        
+        // edit table
+        if(csv_api_source_type=="ethercalc"){
+          $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
+        }else{
+          $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit');
+        }
+        $("#sidebar").on("click tap", "#topbar .edit.table", function(){
+          // switch icon
+          $("#topbar .edit.table").hide();
+          $("#topbar .refresh.table").show();
+          $("#topbar .add.to.list").show();
+          // change url
+          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+          // make foldr items sortable
+        });
+        
+        // sort table
+        //$("#toc .sortable").sortable();
+        //$("#toc .sortable").on("sortchange", function( event, ui ) {
+          //$.ajax({
+          //  contentType: 'text/plain',
+          //  data: 'moveinsert '+'A2:F2'+' A5',
+          //  type: 'POST',
+          //  processData: false 
+          //});
+        //});
+        
+        // add href attr to foldr title
+        $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
+        
+        // make current link item active
+        
+      </script>
+    </div>
+  
+</body></html>
