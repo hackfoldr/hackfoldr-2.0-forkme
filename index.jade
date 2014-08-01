@@ -360,8 +360,16 @@ block script
         Tabletop.init({
           key: ethercalc_name,
           callback: function(data, tabletop){
-            console.log(data);
-            compile_json;
+            data = data.map(function (o) {
+              result = [];
+              result[0] = o.url || "";
+              result[1] = o.title || "";
+              result[2] = o.foldrexpend || "";
+              result[3] = o["編輯註解"] || "";
+              result[4] = o.hints || "";
+              return result;
+            });
+            compile_json(data);
           },
           simpleSheet: true
         });
