@@ -11,7 +11,7 @@ Using:
 Windows
 ------------
 * now using Fire.app build views/ to public/
-* if build doesn't work: jade -w views -o public --pretty
+* if build doesn't work: jade -w . -o . --pretty
 
 Mockup / Prototype
 ============
