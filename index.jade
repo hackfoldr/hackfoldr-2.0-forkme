@@ -54,9 +54,17 @@ block body
             a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
               i.icon.github
         a.item.foldr.title
+        a.right.item.show.nav.button.collapsed.mode.mobile.only
+          i.icon.arrow.down
+        a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
+          i.icon.arrow.up
         .right.ui.dropdown.icon.item.meta.phone.only
           i.icon.ellipsis.vertical
           .menu
+            a.item.edit.table.tiny.only(target="iframe") 編輯
+              i.icon.pencil
+            a.item.refresh.table.tiny.only.hidden 更新
+              i.icon.repeat
             .item.shortcuts 捷徑
               i.icon.home
               include shortcuts-menu
@@ -73,7 +81,7 @@ block body
                   i.icon.exchange
                 a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
                   i.icon.github
-        .right.icon.item.zoom.ui.dropdown.mobile.only
+        .right.icon.item.zoom.ui.dropdown.tablet.only
           i.icon.zoom.in
           .menu
             .item.normal 100%
@@ -85,10 +93,6 @@ block body
           i.icon.repeat
         a.right.icon.item.add.to.list.hidden
           i.icon.add
-        a.right.item.show.nav.button.collapsed.mode.mobile.only
-          i.icon.arrow.down
-        a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
-          i.icon.arrow.up
       form.ui.form.segment.no.margin.hidden.expanded.mode
         .field
           input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")

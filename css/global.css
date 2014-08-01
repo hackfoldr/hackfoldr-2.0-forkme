@@ -136,7 +136,14 @@ a, a:link {
   }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000384}}
+@media screen and (min-width: 481px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000382}}
+  .tiny.only {
+    display: none !important;
+  }
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
 #sidebar {
   width: 20rem;
   position: absolute;
@@ -157,42 +164,37 @@ a, a:link {
   transition-timing-function: ease;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
   #sidebar {
     width: 100%;
     height: 3rem;
     overflow: visible;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003107}}
 #sidebar #toc > .ui.menu {
   width: 100%;
   border-top: 2px rgba(0, 0, 0, 0.5) solid;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003102}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003106}}
   #sidebar #toc {
     display: none;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003112}}
   #sidebar #toc .accordion {
     width: 100%;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003116}}
 #sidebar #toc > .ui.menu, #sidebar #topbar > .ui.menu {
   -moz-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003119}}
 #sidebar #topbar > .ui.menu {
   z-index: 2;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003118}}
-#sidebar .collapsed.icon {
-  float: none;
-  margin: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003123}}
 #sidebar #topbar .title.item {
@@ -227,44 +229,44 @@ a, a:link {
 #sidebar #nav > .menu > .dropdown.shortcuts .menu, #sidebar #nav > .menu > .dropdown.history .menu, #sidebar #topbar > .menu > .dropdown.shortcuts .menu, #sidebar #topbar > .menu > .dropdown.history .menu {
   width: 14rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003145}}
+@media screen and (max-width: 480px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003143}}
+  #sidebar #nav > .menu > .edit.table, #sidebar #nav > .menu > .refresh.table, #sidebar #topbar > .menu > .edit.table, #sidebar #topbar > .menu > .refresh.table {
+    display: none !important;
+  }
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003148}}
 #sidebar #nav .dropdown .menu .item i.icon, #sidebar #topbar .dropdown .menu .item i.icon {
   float: right;
   margin-right: 0;
 }
 @media screen and (max-width: 640px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003151}}
   #sidebar #nav .zoom, #sidebar #topbar .zoom {
     display: none;
   }
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003154}}
   #sidebar #nav .zoom .menu, #sidebar #topbar .zoom .menu {
     right: 0;
     left: auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003159}}
 #sidebar #nav .meta > .menu, #sidebar #topbar .meta > .menu {
   right: 0;
   left: auto;
   width: 6rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003163}}
 #sidebar #nav .meta > .menu > .item > .menu, #sidebar #topbar .meta > .menu > .item > .menu {
   right: 100%;
   left: auto !important;
   width: 14rem;
 }
-@media screen and (max-width: 480px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003155}}
-  #sidebar #nav .meta, #sidebar #topbar .meta {
-    display: none;
-  }
-}
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003168}}
 #wrapper {
   position: absolute;
   padding-left: 20rem;
@@ -282,14 +284,14 @@ a, a:link {
   transition-timing-function: ease;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003168}}
   #wrapper {
     padding-top: 3rem;
     padding-left: 0;
     height: auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003184}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003185}}
 #wrapper .frame {
   position: relative;
   left: 0;
@@ -297,7 +299,7 @@ a, a:link {
   bottom: 0;
   right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003191}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003192}}
 #wrapper #iframe {
   -moz-box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
@@ -311,18 +313,18 @@ a, a:link {
   background-color: #e9e9e9;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003191}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003192}}
   #wrapper #iframe {
     z-index: 0;
   }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003206}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003207}}
 .normal.size.frame {
   width: 100%;
   height: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003210}}
 .normal.size#iframe {
   -ms-zoom: 1;
   -moz-transform: scale(1);
@@ -333,12 +335,12 @@ a, a:link {
   -webkit-transform-origin: 0 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003219}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003220}}
 .large.size.frame {
   width: 76%;
   height: 76%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003223}}
 .large.size#iframe {
   -ms-zoom: 1.3;
   -moz-transform: scale(1.3);
@@ -349,12 +351,12 @@ a, a:link {
   -webkit-transform-origin: 0 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003232}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003233}}
 .larger.size.frame {
   width: 66%;
   height: 66%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003235}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003236}}
 .larger.size#iframe {
   -ms-zoom: 1.5;
   -moz-transform: scale(1.5);
@@ -365,7 +367,7 @@ a, a:link {
   -webkit-transform-origin: 0 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003245}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003246}}
 #sidebar .ui.accordion > .content {
   padding: 0;
 }

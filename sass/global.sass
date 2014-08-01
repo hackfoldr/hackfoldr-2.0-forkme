@@ -79,6 +79,10 @@ a, a:link
   @media screen and (max-width: 640px)
     display: ""
 
+.tiny.only
+  @media screen and (min-width: 481px)
+    display: none!important
+
 // layout
 
 #sidebar
@@ -115,10 +119,6 @@ a, a:link
   #topbar>.ui.menu
     z-index: 2
 
-  .collapsed.icon
-    float: none
-    margin: 0
-
   #topbar
     .title.item
       font-weight: 700
@@ -140,6 +140,9 @@ a, a:link
       &>.dropdown.shortcuts, &>.dropdown.history
         .menu
           width: 14rem
+      &>.edit.table, &>.refresh.table
+        @media screen and (max-width: 480px)
+          display: none!important
     .dropdown .menu
       .item
         i.icon
@@ -161,8 +164,6 @@ a, a:link
           right: 100%
           left: auto!important
           width: 14rem
-      @media screen and (max-width: 480px)
-        display: none
 
 #wrapper
   position: absolute
