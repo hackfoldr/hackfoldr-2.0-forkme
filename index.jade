@@ -41,7 +41,7 @@ block body
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
           i.icon.repeat
-        a.right.icon.item.add.to.list
+        a.right.icon.item.add.to.list.hidden
           i.icon.add
         a.right.item.show.nav.button.collapsed.mode.mobile.only
           i.icon.arrow.down
@@ -205,6 +205,7 @@ block script
           };
           $("#topbar .edit.table").hide();
           $("#topbar .refresh.table").show();
+          $("#topbar .add.to.list").show();
         }else if((new RegExp(context.url+"/?")).test(current_iframe_url)){
           iframe_src = current_iframe_url;
         }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
@@ -473,6 +474,8 @@ block script
         processData: false,
         data: new_hackpad_url + ',' + new_hackpad_title
       });
+      $("#topbar .form").hide();
+      $("#topbar .add.to.list").hide();
     });
 
     // link item events
@@ -488,6 +491,8 @@ block script
       if(event.target.target !== "_blank"){
         $("#topbar .edit.table").show();
         $("#topbar .refresh.table").hide();
+        $("#topbar .add.to.list").hide();
+        $("#topbar .form").hide();
 
       // reset page title
       $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
@@ -517,6 +522,7 @@ block script
       // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
+      $("#topbar .add.to.list").show();
       // change url
       history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
       // make foldr items sortable
