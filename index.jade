@@ -72,259 +72,300 @@ block script
     var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
     var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
     var new_pad_row_index = 3;
+    var csv_api_source = "";
+    var csv_api_source_type = "";
 
-    var compile_ethercalc = function(){
-      $.get('https://ethercalc.org/_/'+ethercalc_name+'/csv').pipe(CSV.parse).done(function(rows){
+    // check where the csv will come from
+    if(ethercalc_name.length <= 40){
+      csv_api_source = 'https://ethercalc.org/_/'+ethercalc_name+'/csv';
+      csv_api_source_type = "ethercalc";
+    }else{
+      csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+ethercalc_name+'&exportFormat=csv&gid=0';
+      csv_api_source_type = "google";
+    };
 
-        var got_title = false
-        var depth = 0 // if depth == 1, link should in accordion
+    var compile_json = function(rows){
 
-        var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item">{{subject}}<i class="icon {{icon}}"></i></a>';
-        var link_template = Handlebars.compile(link_template_source);
+      var got_title = false
+      var depth = 0 // if depth == 1, link should in accordion
 
-        var add_link = function(row){
-          try{
-            var link_options = JSON.parse(row[2]);
-          }catch(e){
-            var link_options = {};
-          }
+      var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item">{{subject}}<i class="icon {{icon}}"></i></a>';
+      var link_template = Handlebars.compile(link_template_source);
 
-          // auto link icon
-          var link_icon = "";
-          var link_type = "link";
-          var link_target = "iframe";
-          var link_url = row[0].trim();
-          if(link_url.match(/^.*.hackpad.com\//)){
-            link_icon = "text file outline";
-          } else if(link_url.match(/^.*.etherpad.mozilla.org\//)) {
-            link_icon = "file outline";
-          } else if(link_url.match(/^.*.groups.google.com\//)) {
-            link_icon = "users";
-          } else if(link_url.match(/^.*.plus.google.com\//)) {
-            link_icon = "google plus";
-          } else if(link_url.match(/^.*.kktix.cc\//)) {
-            link_icon = "bullhorn";
-          } else if(link_url.match(/^.*.kktix.com\//)) {
-            link_icon = "bullhorn";
-          } else if(link_url.match(/^.*.registrano.com\//)) {
-            link_icon = "bullhorn";
-          } else if(link_url.match(/^.*.docs.google.com\/spreadsheet.*/)) {
-            link_icon = "table";
-          } else if(link_url.match(/^.*.docs.google.com\/drawings.*/)) {
-            link_icon = "photo";
-          } else if(link_url.match(/^.*.docs.google.com\/document.*/)) {
-            link_icon = "text file";
-          } else if(link_url.match(/^.*.docs.google.com\/presentation.*/)) {
-            link_icon = "laptop";
-          } else if(link_url.match(/^.*.docs.google.com\/form.*/)) {
-            link_icon = "unordered list";
-          } else if(link_url.match(/^.*.drive.google.com\//)) {
-            link_icon = "cloud";
-          } else if(link_url.match(/^.*.mapsengine.google.com\//)) {
-            link_icon = "map marker";
-          } else if(link_url.match(/^.*.www.google.com\/maps\//)) {
-            link_icon = "map marker";
-          } else if(link_url.match(/^.*.umap.fluv.io\//)) {
-            link_icon = "map marker";
-          } else if(link_url.match(/^.*.github.com\//)) {
-            link_icon = "github";
-          } else if(link_url.match(/^.*.moqups.com\//)) {
-            link_icon = "photo";
-          } else if(link_url.match(/^.*.facebook.com\//)) {
-            link_icon = "facebook";
-          } else if(link_url.match(/^.*.twitter.com\//)) {
-            link_icon = "twitter";
-          } else if(link_url.match(/^.*.tumblr.com\//)) {
-            link_icon = "tumblr";
-          } else if(link_url.match(/^.*.trello.com\//)) {
-            link_icon = "trello";
-          } else if(link_url.match(/^.*.youtube.com\/embed\//)) {
-            link_icon = "youtube play";
-          } else if(link_url.match(/^.*.youtube.com\//)) {
-            link_icon = "youtube";
-          } else if(link_url.match(/^.*.ustream.tv\//)) {
-            link_icon = "facetime video";
-          } else if(link_url.match(/^.*.www.justin.tv\//)) {
-            link_icon = "facetime video";
-          } else if(link_url.match(/^.*.www.ptt.cc\/bbs\//)) {
-            link_icon = "chat outline";
-          } else if(link_url.match(/^.*.disp.cc\//)) {
-            link_icon = "chat outline";
-          } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
-            link_icon = "exchange";
-            //link_url = link_url.split("/")[1].toString();
-            //link_type = "foldr";
-            //link_target = "";
-          } else if(link_url.match(/^.*.hack.etblue.tw\//)) {
-            link_icon = "exchange";
-            //link_url = link_url.split("/")[1].toString();
-            //link_type = "foldr";
-            //link_target = "";
-          } else if(link_url.match(/^.*.hackfoldr.org\//)) {
-            link_icon = "exchange";
-            //link_url = link_url.split("/")[1].toString();
-            //link_type = "foldr";
-            //link_target = "";
-          } else {
-            link_icon = "globe";
-          }
+      var add_link = function(row){
+        try{
+          var link_options = JSON.parse(row[2]);
+        }catch(e){
+          var link_options = {};
+        }
 
-          var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
-          var $link_element = $(link_template(context));
+        // auto link icon
+        var link_icon = "";
+        var link_type = "link";
+        var link_target = "iframe";
+        var link_url = row[0].trim();
+        if(link_url.match(/^.*.hackpad.com\//)){
+          link_icon = "text file outline";
+        } else if(link_url.match(/^.*.etherpad.mozilla.org\//)) {
+          link_icon = "file outline";
+        } else if(link_url.match(/^.*.groups.google.com\//)) {
+          link_icon = "users";
+        } else if(link_url.match(/^.*.plus.google.com\//)) {
+          link_icon = "google plus";
+        } else if(link_url.match(/^.*.kktix.cc\//)) {
+          link_icon = "bullhorn";
+        } else if(link_url.match(/^.*.kktix.com\//)) {
+          link_icon = "bullhorn";
+        } else if(link_url.match(/^.*.registrano.com\//)) {
+          link_icon = "bullhorn";
+        } else if(link_url.match(/^.*.docs.google.com\/spreadsheet.*/)) {
+          link_icon = "table";
+        } else if(link_url.match(/^.*.docs.google.com\/drawings.*/)) {
+          link_icon = "photo";
+        } else if(link_url.match(/^.*.docs.google.com\/document.*/)) {
+          link_icon = "text file";
+        } else if(link_url.match(/^.*.docs.google.com\/presentation.*/)) {
+          link_icon = "laptop";
+        } else if(link_url.match(/^.*.docs.google.com\/form.*/)) {
+          link_icon = "unordered list";
+        } else if(link_url.match(/^.*.drive.google.com\//)) {
+          link_icon = "cloud";
+        } else if(link_url.match(/^.*.mapsengine.google.com\//)) {
+          link_icon = "map marker";
+        } else if(link_url.match(/^.*.www.google.com\/maps\//)) {
+          link_icon = "map marker";
+        } else if(link_url.match(/^.*.umap.fluv.io\//)) {
+          link_icon = "map marker";
+        } else if(link_url.match(/^.*.github.com\//)) {
+          link_icon = "github";
+        } else if(link_url.match(/^.*.moqups.com\//)) {
+          link_icon = "photo";
+        } else if(link_url.match(/^.*.facebook.com\//)) {
+          link_icon = "facebook";
+        } else if(link_url.match(/^.*.twitter.com\//)) {
+          link_icon = "twitter";
+        } else if(link_url.match(/^.*.tumblr.com\//)) {
+          link_icon = "tumblr";
+        } else if(link_url.match(/^.*.trello.com\//)) {
+          link_icon = "trello";
+        } else if(link_url.match(/^.*.youtube.com\/embed\//)) {
+          link_icon = "youtube play";
+        } else if(link_url.match(/^.*.youtube.com\//)) {
+          link_icon = "youtube";
+        } else if(link_url.match(/^.*.ustream.tv\//)) {
+          link_icon = "facetime video";
+        } else if(link_url.match(/^.*.www.justin.tv\//)) {
+          link_icon = "facetime video";
+        } else if(link_url.match(/^.*.www.ptt.cc\/bbs\//)) {
+          link_icon = "chat outline";
+        } else if(link_url.match(/^.*.disp.cc\//)) {
+          link_icon = "chat outline";
+        } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
+          link_icon = "exchange";
+          //link_url = link_url.split("/")[1].toString();
+          //link_type = "foldr";
+          //link_target = "";
+        } else if(link_url.match(/^.*.hack.etblue.tw\//)) {
+          link_icon = "exchange";
+          //link_url = link_url.split("/")[1].toString();
+          //link_type = "foldr";
+          //link_target = "";
+        } else if(link_url.match(/^.*.hackfoldr.org\//)) {
+          link_icon = "exchange";
+          //link_url = link_url.split("/")[1].toString();
+          //link_type = "foldr";
+          //link_target = "";
+        } else {
+          link_icon = "globe";
+        }
 
-          for(key in link_options){
-            $link_element.attr(key, link_options[key]);
-          }
+        var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
+        var $link_element = $(link_template(context));
 
-          if(depth == 1){
-            $('#toc .ui.accordion:last').find('.menu').append($link_element)
-          }else{
-            $('#toc .ui.vertical.menu').append($link_element)
-          }
+        for(key in link_options){
+          $link_element.attr(key, link_options[key]);
+        }
 
-          // enable default iframe?
-          if(current_iframe_url == "edit"){
+        if(depth == 1){
+          $('#toc .ui.accordion:last').find('.menu').append($link_element)
+        }else{
+          $('#toc .ui.vertical.menu').append($link_element)
+        }
+
+        // enable default iframe?
+        if(current_iframe_url == "edit"){
+          if(csv_api_source_type=="ethercalc"){
             iframe_src = 'https://ethercalc.org/'+ethercalc_name;
-            $("#topbar .edit.table").hide();
-            $("#topbar .refresh.table").show();
-          }else if((new RegExp(context.url+"/?")).test(current_iframe_url)){
-            iframe_src = current_iframe_url;
-          }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
-            if( current_iframe_url === context.url.split(/\//).pop()){
-              iframe_src = context.url;
-            }
-          }
-          if(!iframe_src) {
+          }else{
+            iframe_src = 'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit';
+          };
+          $("#topbar .edit.table").hide();
+          $("#topbar .refresh.table").show();
+        }else if((new RegExp(context.url+"/?")).test(current_iframe_url)){
+          iframe_src = current_iframe_url;
+        }else if(/^https:\/\/.*.hackpad.com\//.test(context.url)){
+          if( current_iframe_url === context.url.split(/\//).pop()){
             iframe_src = context.url;
           }
         }
-        
-        var accordion_template_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
-        var accordion_template = Handlebars.compile(accordion_template_source);
+        if(!iframe_src) {
+          iframe_src = context.url;
+        }
+      }
+      
+      var accordion_template_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+      var accordion_template = Handlebars.compile(accordion_template_source);
 
-        var add_accordion = function(row){
-          try{
-            var options = JSON.parse(row[2]);
-          }catch(e){
-            var options = {};
-          }
-          var context = {title: row[1] };
-          var $accordion_el = $(accordion_template(context));
-          
-          $accordion_el.appendTo('#toc .ui.vertical.menu').accordion({onChange: function(){
-            $accordion_el.find('.folder').toggle()
-          }})
-          
-          if(options.expand){
-            $accordion_el.accordion('open',0)
-          }
+      var add_accordion = function(row){
+        try{
+          var options = JSON.parse(row[2]);
+        }catch(e){
+          var options = {};
+        }
+        var context = {title: row[1] };
+        var $accordion_el = $(accordion_template(context));
+        
+        $accordion_el.appendTo('#toc .ui.vertical.menu').accordion({onChange: function(){
+          $accordion_el.find('.folder').toggle()
+        }})
+        
+        if(options.expand){
+          $accordion_el.accordion('open',0)
+        }
+      }
+
+      $.each(rows, function(row_index, row){
+        //console.log(row);
+
+        // for gsheet
+        if(!row[0]){
+          row[0] = "";
+        }
+        if(!row[1]){
+          row[1] = "";
         }
 
-        $.each(rows, function(row_index, row){
+        var this_row_url = row[0].trim();
 
-          var this_row_url = row[0].trim();
+        // if 1st and 2nd is empty then this a empty row 
+        if(this_row_url.length === 0 && row[1].trim().length === 0){
+          return
+        }
 
-          // if 1st and 2nd is empty then this a empty row 
-          if(this_row_url.length === 0 && row[1].trim().length === 0){
-            return
-          }
+        // now we have soming thing, should get title first
+        if(!got_title){
 
-          // now we have soming thing, should get title first
-          if(!got_title){
+          // TODO: need opt....
+          $.each(row, function(col_index, col){
+            col = col.trim()
 
-            // TODO: need opt....
-            $.each(row, function(col_index, col){
-              col = col.trim()
+            // get the MAGIC title 
+            if(!got_title && !col.match(/^#/) && col.length > 0) {
+              $('#topbar .foldr.title').html(col);
+              current_foldr_name = col;
+              got_title = true;
 
-              // get the MAGIC title 
-              if(!got_title && !col.match(/^#/) && col.length > 0) {
-                $('#topbar .foldr.title').html(col);
-                current_foldr_name = col;
-                got_title = true;
+              // detect title row index
+              //console.log(new_pad_row_index);
+              new_pad_row_index = row_index+2;
+              //console.log(row_index+2);
+              //console.log(new_pad_row_index.toString());
 
-                // detect title row index
-                //console.log(new_pad_row_index);
-                new_pad_row_index = row_index+2;
-                //console.log(row_index+2);
-                //console.log(new_pad_row_index.toString());
+              // add to history menu
 
-                // add to history menu
+              var current_foldr_history = {
+                foldr_name: col,
+                foldr_id: ethercalc_name
+              };
 
-                var current_foldr_history = {
-                  foldr_name: col,
-                  foldr_id: ethercalc_name
-                };
+              // Remove all items in foldr_histories that share the same foldr_id before unshift
+              foldr_histories = $.grep(foldr_histories, function(value){
+                return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
+              });
+              foldr_histories.unshift(JSON.stringify(current_foldr_history));
+              localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+            }
 
-                // Remove all items in foldr_histories that share the same foldr_id before unshift
-                foldr_histories = $.grep(foldr_histories, function(value){
-                  return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
-                });
-                foldr_histories.unshift(JSON.stringify(current_foldr_history));
-                localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
-              }
+          })
 
-            })
-
-          } else {
-            if(this_row_url.length == 0){ // folder 
-              depth = 1
-              add_accordion(row);
-            }else{ // link
-              add_link(row);
-              // set initial page title
-              if(this_row_url == iframe_src){
-                $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
-              }
+        } else {
+          if(this_row_url.length == 0){ // folder 
+            depth = 1
+            add_accordion(row);
+          }else{ // link
+            add_link(row);
+            // set initial page title
+            if(this_row_url == iframe_src){
+              $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
             }
           }
-        });
-
-        // set initial iframe src attribute
-        if(!$("#iframe").attr("src")){
-          $("#iframe").attr("src",iframe_src);
         }
-
-        // auto new window, and auto new window icon
-        var new_window_icon = "<i class='icon forward mail'></i>";
-        var open_link_in_new_window_or_not = function(){
-          link_url = $(this).attr("href");
-          if(link_url.match(/^.*.plus.google.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.kktix.cc\//)) {
-            return true;
-          } else if(link_url.match(/^.*.kktix.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.registrano.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.github.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.drive.google.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.facebook.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.trello.com\//)) {
-            return true;
-          } else if(link_url.match(/^.*.youtube.com\/playlist.*/)) {
-            return true;
-          } else {
-            return false;
-          }
-        };
-        $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
-        $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
-
-        // auto expand active items
-        var link_is_current_url_or_not = function(){
-          link_url = $(this).attr("href");
-          if(link_url == iframe_src){
-            return true;
-          } else {
-            return false;
-          }
-        };
-        $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
-
       });
+
+      // set initial iframe src attribute
+      if(!$("#iframe").attr("src")){
+        $("#iframe").attr("src",iframe_src);
+      }
+
+      // auto new window, and auto new window icon
+      var new_window_icon = "<i class='icon forward mail'></i>";
+      var open_link_in_new_window_or_not = function(){
+        link_url = $(this).attr("href");
+        if(link_url.match(/^.*.plus.google.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.kktix.cc\//)) {
+          return true;
+        } else if(link_url.match(/^.*.kktix.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.registrano.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.github.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.drive.google.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.facebook.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.trello.com\//)) {
+          return true;
+        } else if(link_url.match(/^.*.youtube.com\/playlist.*/)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
+      $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
+
+      // auto expand active items
+      var link_is_current_url_or_not = function(){
+        link_url = $(this).attr("href");
+        if(link_url == iframe_src){
+          return true;
+        } else {
+          return false;
+        }
+      };
+      $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
+
+    }
+
+    var compile_ethercalc = function(){
+      if(csv_api_source_type=="ethercalc"){
+        // compile ethercalc csv
+        $.get(csv_api_source).pipe(CSV.parse).done(compile_json);
+        //console.log($.get(csv_api_source).pipe(CSV.parse));
+      }else{
+        //console.log($.get(csv_api_source).pipe(CSV.parse).done);
+        // compile gsheet-tabletop json
+        Tabletop.init({
+          key: ethercalc_name,
+          callback: function(data, tabletop){
+            console.log(data);
+            compile_json;
+          },
+          simpleSheet: true
+        });
+      }
     };
 
     compile_ethercalc();
@@ -436,7 +477,11 @@ block script
     });
 
     // edit table
-    $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
+    if(csv_api_source_type=="ethercalc"){
+      $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
+    }else{
+      $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit');
+    }
     $("#sidebar").on("click tap", "#topbar .edit.table", function(){
       // switch icon
       $("#topbar .edit.table").hide();

@@ -6,6 +6,7 @@ if useog
     meta(property="og:image:height",content="200")
 if usecdn
   //- from cdn
+  if lib.tabletop
   if lib.jquery
     script(type="text/javascript",src="//codeorigin.jquery.com/jquery-1.10.2.min.js")
   if lib.jquery_ui
@@ -22,6 +23,8 @@ if usecdn
     script(type="Text/javascript",src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.0/javascript/semantic.min.js")
 else
   //- from local
+  if lib.tabletop
+    script(type="text/javascript",src="#{assets}/tabletop/tabletop.js")
   if lib.jquery
     script(type="text/javascript",src="#{assets}/jquery/1.10.2/jquery.min.js")
   if lib.jquery_ui
