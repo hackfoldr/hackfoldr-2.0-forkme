@@ -8,52 +8,31 @@ block body
 
     nav#nav.desktop.only
       .ui.borderless.menu
-        //-.ui.dropdown.icon.item.shortcuts
-          i.icon.home
-          include shortcuts-menu
+        include white_label-shortcuts-nav
         .ui.dropdown.icon.item.history
           i.icon.time
-          .menu
-            .item.no.data.hidden 您還沒有瀏覽 foldr 的紀錄
+          include foldr_history-menu
         .ui.dropdown.icon.item.about
           i.icon.help
-          .menu
-            a.link.item(href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr",target="iframe") 使用說明
-              i.icon.text.file.outline
-            a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
-              i.icon.exchange
-            a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
-              i.icon.github
+          include help-menu
         a.right.item.expand.button.collapsed.mode.hidden.desktop.only
           i.icon.arrow.right
         a.right.item.collapse.button.expanded.mode.desktop.only
           i.icon.arrow.left
         .right.icon.item.zoom.ui.dropdown
           i.icon.zoom.in
-          .menu
-            .item.normal 100%
-            .item.large 130%
-            .item.larger 150%
+          include zoom-menu
 
     nav#topbar
       .ui.borderless.menu
         a.item.foldr.title
-        //-.ui.dropdown.icon.item.shortcuts.tablet.only
-          i.icon.home
-          include shortcuts-menu
+        include white_label-shortcuts-topbar
         .ui.dropdown.icon.item.history.tablet.only
           i.icon.time
-          .menu
-            .item.no.data.hidden 您還沒有瀏覽 foldr 的紀錄
+          include foldr_history-menu
         .ui.dropdown.icon.item.about.tablet.only
           i.icon.help
-          .menu
-            a.link.item(href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr",target="iframe") 使用說明
-              i.icon.text.file.outline
-            a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
-              i.icon.exchange
-            a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
-              i.icon.github
+          include help-menu
         a.right.item.show.nav.button.collapsed.mode.mobile.only
           i.icon.arrow.down
         a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
@@ -65,28 +44,16 @@ block body
               i.icon.pencil
             a.item.refresh.table.tiny.only.hidden 更新
               i.icon.repeat
-            //-.item.shortcuts 捷徑
-              i.icon.home
-              include shortcuts-menu
+            include white_label-shortcuts-dropdown
             .item.history 紀錄
               i.icon.time
-              .menu
-                .item.no.data.hidden 您還沒有瀏覽 foldr 的紀錄
+              include foldr_history-menu
             .item.about 說明
               i.icon.help
-              .menu
-                a.link.item(href="https://g0v.hackpad.com/welcome_to_hackfoldr#Welcome-to-Hackfoldr",target="iframe") 使用說明
-                  i.icon.text.file.outline
-                a.foldr.item(href="/welcome-to-hackfoldr") 開發與回報
-                  i.icon.exchange
-                a.link.item(href="https://github.com/hackfoldr/maker.moztw.org",target="_blank") 程式碼
-                  i.icon.github
+              include help-menu
         .right.icon.item.zoom.ui.dropdown.tablet.only
           i.icon.zoom.in
-          .menu
-            .item.normal 100%
-            .item.large 130%
-            .item.larger 150%
+          include zoom-menu
         a.right.icon.item.edit.table(target="iframe")
           i.icon.pencil
         a.right.icon.item.refresh.table.hidden
