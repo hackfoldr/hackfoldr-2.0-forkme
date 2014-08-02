@@ -254,7 +254,6 @@ block script
       }
 
       $.each(rows, function(row_index, row){
-        //console.log(row);
 
         // for gsheet
         if(!row[0]){
@@ -271,9 +270,8 @@ block script
           return
         }
 
-        // now we have soming thing, should get title first
+        // now we have soming thing, should get title first            
         if(!got_title){
-
           // TODO: need opt....
           $.each(row, function(col_index, col){
             col = col.trim()
@@ -308,10 +306,12 @@ block script
           })
 
         } else {
-          if(this_row_url.length == 0){ // folder 
+          if(this_row_url.length == 0 || row[0] === ">"){ // folder 
             depth = 1
             add_accordion(row);
-          }else{ // link
+          }else if(row[0] === "<"){ // end folder
+            depth = 0
+          }else { // link
             add_link(row);
             // set initial page title
             if(this_row_url == iframe_src){
