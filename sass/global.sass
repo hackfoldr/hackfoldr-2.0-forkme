@@ -5,6 +5,10 @@ html
   font-family: '微軟正黑體', sans-serif
   color: #333
   background-color: #d0d0d0
+  @media screen and (max-width: 1024px)
+    font-size: 16px
+  @media screen and (max-width: 480px)
+    font-size: 14px
 
 html, body, div, nav, section, article, header, footer, h1, h2, h3, h4
   margin: 0
@@ -102,10 +106,11 @@ a, a:link
     height: 2.75rem
     overflow: visible
 
-  &.desktop-expanded-layout
-    left: 0
-  &.desktop-collapsed-layout
-    left: -17rem
+  @media screen and (min-width: 1025px)
+    &.desktop-expanded-layout
+      left: 0
+    &.desktop-collapsed-layout
+      left: -17rem
 
   #toc
     &>.ui.menu
@@ -185,10 +190,11 @@ a, a:link
     padding-left: 0
     height: auto
 
-  &.desktop-expanded-layout
-    padding-left: 20rem
-  &.desktop-collapsed-layout
-    padding-left: 3rem
+  @media screen and (min-width: 1025px)
+    &.desktop-expanded-layout
+      padding-left: 20rem
+    &.desktop-collapsed-layout
+      padding-left: 3rem
 
   .frame
     position: relative
