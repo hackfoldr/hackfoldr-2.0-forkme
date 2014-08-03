@@ -40,7 +40,7 @@
         </div>
       </nav>
       <nav id="topbar">
-        <div class="ui borderless menu"><a class="item foldr title"></a>
+        <div class="ui borderless menu"><a class="item foldr title"><i class="icon home"></i><span class="text"></span></a>
           <div class="ui dropdown icon item history tablet only"><i class="icon time"></i>
             <div class="menu">
               <div class="item no data hidden">您還沒有瀏覽 foldr 的紀錄</div>
@@ -318,7 +318,7 @@
                 
                 // get the MAGIC title 
                 if(!got_title && !col.match(/^#/) && col.length > 0) {
-                  $('#topbar .foldr.title').html(col);
+                  $('#topbar .foldr.title .text').text(col);
                   current_foldr_name = col;
                   got_title = true;
                   
@@ -395,7 +395,7 @@
           $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
           $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
           
-          // auto expand active items
+          // auto highlight active items and expand parent accordion
           var link_is_current_url_or_not = function(){
             link_url = $(this).attr("href");
             if(link_url == iframe_src){
@@ -405,7 +405,6 @@
             }
           };
           $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
-          
         }
         
         var compile_ethercalc = function(){
@@ -616,7 +615,7 @@
         }else{
           $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit');
         }
-        $("#sidebar").on("click tap", "#topbar .edit.table", function(){
+        $("#topbar .edit.table").on("click tap", function(){
           // switch icon
           $("#topbar .edit.table").hide();
           $("#topbar .refresh.table").show();
@@ -639,8 +638,6 @@
         
         // add href attr to foldr title
         $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
-        
-        // make current link item active
         
       </script>
     </div>
