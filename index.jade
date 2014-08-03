@@ -60,7 +60,7 @@ block body
           i.icon.repeat
         a.right.icon.item.add.to.list.hidden
           i.icon.add
-      form.ui.form.segment.no.margin.hidden.expanded.mode
+      form.ui.warning.form.segment.no.margin.hidden.expanded.mode
         .inline.field
           .ui.radio.checkbox.add.only
             input.content.type(id="add-only",type="radio",name="submit",checked)
@@ -68,19 +68,33 @@ block body
           .ui.radio.checkbox.add.create
             input.content.type(id="create-add",type="radio",name="submit")
             label(for="create-add") 開 hackpad 並投稿
+        .ui.warning.message.shy
+          p 連結網址需要是 url 格式
         .field.adding.only.mode
-          input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="我是可愛的新網頁")
+          .ui.left.labeled.icon.input
+            input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="",required)
+            i.icon.font
+            .ui.corner.label
+              i.icon.asterisk
         .field.adding.only.mode
-          input.new.link.url(placeholder="連結網址",type="text",name="new-link-url",value="我是可愛的新網址")
+          .ui.left.labeled.icon.input
+            input.new.link.url(placeholder="連結網址",type="url",name="new-link-url",value="",required)
+            i.icon.url
+            .ui.corner.label
+              i.icon.asterisk
         .field.creating.adding.mode.hidden
-          input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")
+          .ui.left.labeled.icon.input
+            input.new.pad.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="",required)
+            i.icon.font
+            .ui.corner.label
+              i.icon.asterisk
         //-.field
           input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
         //-.inline.field
           input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
           | .hackpad.com
-        .ui.submit.button.green.small.add.link.adding.only.mode add to foldr
-        .ui.submit.button.green.small.create.add.pad.creating.adding.mode.hidden create and add to foldr
+        .ui.submit.button.green.small.add.only.adding.only.mode add to foldr
+        .ui.submit.button.green.small.add.create.creating.adding.mode.hidden create and add to foldr
     nav#toc
       .ui.vertical.menu.sortable
 
@@ -420,16 +434,16 @@ block script
     });
 
     // for semantic ui css specificity
-    $(".hidden").hide();
+    $(".hidden, .shy").hide();
 
     // sidebar expansion buttons
-    $("#nav").on("click tap", ".collapse.button", function(){
+    $("#nav .collapse.button").on("click tap", function(){
       $("#sidebar").css("left","-17rem");
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").not(".tablet.only").show();
       });
-    $("#nav").on("click tap", ".expand.button", function(){
+    $("#nav .expand.button").on("click tap", function(){
       $("#sidebar").css("left","0");
       $("#wrapper").css("padding-left","20rem");
       $(".expanded.mode").not(".tablet.only").css("display","");
@@ -437,19 +451,38 @@ block script
       });
 
     // sidebar show nav buttons
-    $("#topbar").on("click tap", ".hide.nav.button", function(){
+    $("#topbar .hide.nav.button").on("click tap", function(){
       $(".expanded.mode").hide();
       $(".collapsed.mode").not(".desktop.only").show();
       $("#toc").slideToggle();
       });
-    $("#topbar").on("click tap", ".show.nav.button", function(){
+    $("#topbar .show.nav.button").on("click tap", function(){
       $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
       $(".collapsed.mode").hide();
       $("#toc").slideToggle();
       });
 
+    // firefox fix for iframe initial size
+    $("#wrapper .frame").addClass("normal size");
+
+    // zoom in button
+    $(".frame, #iframe").addClass(foldr_scale + " size");
+    var set_scale = function(scale){
+      $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
+      localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
+    };
+    $("#nav, #topbar").on("click tap", ".zoom.dropdown .normal", function(){
+      set_scale("normal");
+    });
+    $("#nav, #topbar").on("click tap", ".zoom.dropdown .large", function(){
+      set_scale("large");
+    });
+    $("#nav, #topbar").on("click tap", ".zoom.dropdown .larger", function(){
+      set_scale("larger");
+    });
+
     // history button
-    $("#nav, #topbar").on("click tap", ".history", function(){
+    $("#nav, #topbar").on("click tap", " .history", function(){
       if($("#sidebar .history .menu").has("a.foldr.item").length==0){
         $("#sidebar .history .menu .no.data").show();
       }else{
@@ -457,54 +490,48 @@ block script
       }
     });
 
-    // firefox fix for iframe initial size
-    $("#wrapper .frame").addClass("normal size");
-
-    // zoom in buttons
-
-    $(".frame, #iframe").addClass(foldr_scale + " size");
-
-    var set_scale = function(scale){
-      $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
-      localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
-    };
-    $("#sidebar").on("click tap", ".zoom.dropdown .normal", function(){
-      set_scale("normal");
-    });
-    $("#sidebar").on("click tap", ".zoom.dropdown .large", function(){
-      set_scale("large");
-    });
-    $("#sidebar").on("click tap", ".zoom.dropdown .larger", function(){
-      set_scale("larger");
-    });
-
     // refresh table
     // load ethercalc data only instead of loading the whole page
-    $("#topbar").on("click tap", ".refresh.table", function(){
+    $("#topbar .refresh.table").on("click tap", function(){
       $("#toc .menu").html("");
       $("#topbar .form").hide();
       compile_ethercalc();
-      });
+    });
 
-    // create new hackpad and add to foldr
-    $("#topbar").on("click tap", ".add.to.list", function(){
+    // open submit form
+    $("#topbar .add.to.list").on("click tap", function(){
       $("#topbar .form").slideToggle();
       // add moretext to defalt input value
       //$.getJSONP('')
     });
 
-    $("#topbar").on("click tap", ".form .checkbox.add.only", function(){
+    // choose submit type, add link only (sunflower monster) by default
+    $("#topbar .form .checkbox.add.only").on("click tap", function(){
       $("#topbar .form .adding.only.mode").show();
       $("#topbar .form .creating.adding.mode").hide();
     });
 
-    $("#topbar").on("click tap", ".form .checkbox.add.create", function(){
+    $("#topbar .form .checkbox.add.create").on("click tap", function(){
       $("#topbar .form .adding.only.mode").hide();
       $("#topbar .form .creating.adding.mode").show();
+      $("#topbar .form .ui.warning.message").hide();
     });
 
-    $("#topbar").on("click tap", ".form .submit", function(){
-      var new_hackpad_title = $("#topbar .form .new.title").val();
+    // post to ethercalc
+    var post_ethercalc = function(post_title, post_url){
+      $.ajax({
+        url: "https://ethercalc.org/_/"+ethercalc_name,
+        //url: "https://ethercalc.org/_/"+ethercalc_name+"?row="+new_pad_row_index.toString(),
+        type: 'POST',
+        contentType: 'text/csv',
+        processData: false,
+        data: post_url + ',' + post_title
+      });
+    };
+
+    // create new hackpad and add to foldr
+    $("#topbar .form .submit.add.create").on("click tap", function(){
+      var new_hackpad_title = $("#topbar .form .new.pad.title").val();
       //var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
       var new_hackpad_id = Math.random().toString(36);
       var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
@@ -512,16 +539,27 @@ block script
       // add new hackpad info to foldr
       $('#toc .ui.vertical.menu').prepend(new_menu_item);
       // post new hackpad info to ethercalc
-      $.ajax({
-        //url: "https://ethercalc.org/_/"+ethercalc_name,
-        url: "https://ethercalc.org/_/"+ethercalc_name+"?row="+new_pad_row_index.toString(),
-        //url: "https://ethercalc.org/_/"+ethercalc_name+"?row=3",
-        type: 'POST',
-        contentType: 'text/csv',
-        processData: false,
-        data: new_hackpad_url + ',' + new_hackpad_title
-      });
+      post_ethercalc(new_hackpad_title, new_hackpad_url);
       $("#topbar .form").hide();
+    });
+
+    // add a existing url to foldr
+    $("#topbar .form .submit.add.only").on("click tap", function(){
+      var new_link_title = $("#topbar .form .new.link.title").val();
+      var new_link_url = $("#topbar .form .new.link.url").val();
+      // validate url
+      if(/^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(new_link_url)){
+        $('#toc .ui.vertical.menu').prepend(
+          $('<a />', { href: new_link_url, 'target': 'iframe', 'class': 'link item' })
+            .text(new_link_title)
+            .append($('<i class="icon url"></i>'))
+        );
+        post_ethercalc(new_link_title, new_link_url);
+        $("#topbar .form .new.link").val("");
+        $("#topbar .form .ui.warning.message").hide();
+      }else{
+        $("#topbar .form .ui.warning.message").show();
+      }
     });
 
     // link item events

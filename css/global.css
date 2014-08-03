@@ -69,7 +69,7 @@ a, a:link {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000350}}
-.hidden {
+.hidden, .shy {
   display: none;
 }
 
