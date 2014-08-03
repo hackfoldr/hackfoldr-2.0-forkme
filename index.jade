@@ -62,25 +62,25 @@ block body
           i.icon.add
       form.ui.form.segment.no.margin.hidden.expanded.mode
         .inline.field
-          .ui.radio.checkbox
-            input.content.type(id="add",type="radio",name="add",checked)
-            label(for="add") 投稿
-          .ui.radio.checkbox
-            input.content.type(id="create-add",type="radio",name="add")
-            label(for="create-add") 新增文件並投稿
-        .field
+          .ui.radio.checkbox.add.only
+            input.content.type(id="add-only",type="radio",name="submit",checked)
+            label(for="add-only") 投稿
+          .ui.radio.checkbox.add.create
+            input.content.type(id="create-add",type="radio",name="submit")
+            label(for="create-add") 開 hackpad 並投稿
+        .field.adding.only.mode
           input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="我是可愛的新網頁")
-        .field
+        .field.adding.only.mode
           input.new.link.url(placeholder="連結網址",type="text",name="new-link-url",value="我是可愛的新網址")
-        .field
+        .field.creating.adding.mode.hidden
           input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")
         //-.field
           input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
         //-.inline.field
           input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
           | .hackpad.com
-        .ui.submit.button.green.small.add.link add to foldr
-        .ui.submit.button.green.small.create.add.pad create and add to foldr
+        .ui.submit.button.green.small.add.link.adding.only.mode add to foldr
+        .ui.submit.button.green.small.create.add.pad.creating.adding.mode.hidden create and add to foldr
     nav#toc
       .ui.vertical.menu.sortable
 
@@ -422,17 +422,14 @@ block script
     // for semantic ui css specificity
     $(".hidden").hide();
 
-    // firefox fix for iframe initial size
-    $("#wrapper .frame").addClass("normal size");
-
     // sidebar expansion buttons
-    $("#nav .collapse.button").on("click tap", function(){
+    $("#nav").on("click tap", ".collapse.button", function(){
       $("#sidebar").css("left","-17rem");
       $("#wrapper").css("padding-left","3rem");
       $(".expanded.mode").hide();
       $(".collapsed.mode").not(".tablet.only").show();
       });
-    $("#nav .expand.button").on("click tap", function(){
+    $("#nav").on("click tap", ".expand.button", function(){
       $("#sidebar").css("left","0");
       $("#wrapper").css("padding-left","20rem");
       $(".expanded.mode").not(".tablet.only").css("display","");
@@ -440,19 +437,19 @@ block script
       });
 
     // sidebar show nav buttons
-    $("#topbar .hide.nav.button").on("click tap", function(){
+    $("#topbar").on("click tap", ".hide.nav.button", function(){
       $(".expanded.mode").hide();
       $(".collapsed.mode").not(".desktop.only").show();
       $("#toc").slideToggle();
       });
-    $("#topbar .show.nav.button").on("click tap", function(){
+    $("#topbar").on("click tap", ".show.nav.button", function(){
       $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
       $(".collapsed.mode").hide();
       $("#toc").slideToggle();
       });
 
     // history button
-    $("#sidebar .history").on("click tap", function(){
+    $("#nav, #topbar").on("click tap", ".history", function(){
       if($("#sidebar .history .menu").has("a.foldr.item").length==0){
         $("#sidebar .history .menu .no.data").show();
       }else{
@@ -460,39 +457,53 @@ block script
       }
     });
 
+    // firefox fix for iframe initial size
+    $("#wrapper .frame").addClass("normal size");
+
     // zoom in buttons
+
     $(".frame, #iframe").addClass(foldr_scale + " size");
 
     var set_scale = function(scale){
       $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
       localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));    
     };
-    $("#sidebar .zoom.dropdown .normal").on("click tap", function(){
+    $("#sidebar").on("click tap", ".zoom.dropdown .normal", function(){
       set_scale("normal");
     });
-    $("#sidebar .zoom.dropdown .large").on("click tap", function(){
+    $("#sidebar").on("click tap", ".zoom.dropdown .large", function(){
       set_scale("large");
     });
-    $("#sidebar .zoom.dropdown .larger").on("click tap", function(){
+    $("#sidebar").on("click tap", ".zoom.dropdown .larger", function(){
       set_scale("larger");
     });
 
     // refresh table
     // load ethercalc data only instead of loading the whole page
-    $("#topbar .refresh.table").on("click tap", function(){
+    $("#topbar").on("click tap", ".refresh.table", function(){
       $("#toc .menu").html("");
       $("#topbar .form").hide();
       compile_ethercalc();
       });
 
     // create new hackpad and add to foldr
-    $("#topbar .add.to.list").on("click tap", function(){
+    $("#topbar").on("click tap", ".add.to.list", function(){
       $("#topbar .form").slideToggle();
       // add moretext to defalt input value
       //$.getJSONP('')
     });
 
-    $("#topbar .form .submit").on("click tap", function(){
+    $("#topbar").on("click tap", ".form .checkbox.add.only", function(){
+      $("#topbar .form .adding.only.mode").show();
+      $("#topbar .form .creating.adding.mode").hide();
+    });
+
+    $("#topbar").on("click tap", ".form .checkbox.add.create", function(){
+      $("#topbar .form .adding.only.mode").hide();
+      $("#topbar .form .creating.adding.mode").show();
+    });
+
+    $("#topbar").on("click tap", ".form .submit", function(){
       var new_hackpad_title = $("#topbar .form .new.title").val();
       //var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
       var new_hackpad_id = Math.random().toString(36);
