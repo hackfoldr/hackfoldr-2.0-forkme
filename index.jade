@@ -61,6 +61,17 @@ block body
         a.right.icon.item.add.to.list.hidden
           i.icon.add
       form.ui.form.segment.no.margin.hidden.expanded.mode
+        .inline.field
+          .ui.radio.checkbox
+            input.content.type(id="add",type="radio",name="add",checked)
+            label(for="add") 投稿
+          .ui.radio.checkbox
+            input.content.type(id="create-add",type="radio",name="add")
+            label(for="create-add") 新增文件並投稿
+        .field
+          input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="我是可愛的新網頁")
+        .field
+          input.new.link.url(placeholder="連結網址",type="text",name="new-link-url",value="我是可愛的新網址")
         .field
           input.new.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="我是可愛的新文件")
         //-.field
@@ -68,7 +79,8 @@ block body
         //-.inline.field
           input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
           | .hackpad.com
-        .ui.submit.button.green.small create and add to foldr
+        .ui.submit.button.green.small.add.link add to foldr
+        .ui.submit.button.green.small.create.add.pad create and add to foldr
     nav#toc
       .ui.vertical.menu.sortable
 
@@ -499,7 +511,6 @@ block script
         data: new_hackpad_url + ',' + new_hackpad_title
       });
       $("#topbar .form").hide();
-      $("#topbar .add.to.list").hide();
     });
 
     // link item events
