@@ -18,7 +18,7 @@
     </title>
   </head>
   <body>
-    <nav id="sidebar">
+    <nav id="sidebar" class="desktop-expanded-layout">
       <nav id="nav" class="desktop only">
         <div class="ui borderless menu">
           <div class="ui dropdown icon item history"><i class="icon time"></i>
@@ -111,7 +111,7 @@
         <div class="ui vertical menu sortable"></div>
       </nav>
     </nav>
-    <div id="wrapper">
+    <div id="wrapper" class="desktop-expanded-layout">
       <div class="frame">
         <iframe id="iframe" name="iframe"></iframe>
       </div>
@@ -451,14 +451,12 @@
         
         // sidebar expansion buttons
         $("#nav .collapse.button").on("click tap", function(){
-          $("#sidebar").css("left","-17rem");
-          $("#wrapper").css("padding-left","3rem");
+          $("#sidebar, #wrapper").addClass("desktop-collapsed-layout").removeClass("desktop-expanded-layout");
           $(".expanded.mode").hide();
           $(".collapsed.mode").not(".tablet.only").show();
           });
         $("#nav .expand.button").on("click tap", function(){
-          $("#sidebar").css("left","0");
-          $("#wrapper").css("padding-left","20rem");
+          $("#sidebar, #wrapper").addClass("desktop-expanded-layout").removeClass("desktop-collapsed-layout");
           $(".expanded.mode").not(".tablet.only").css("display","");
           $(".collapsed.mode").hide();
           });

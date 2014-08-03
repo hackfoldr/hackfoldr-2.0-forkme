@@ -4,7 +4,7 @@ block title
 
 block body
 
-  nav#sidebar
+  nav#sidebar.desktop-expanded-layout
 
     nav#nav.desktop.only
       .ui.borderless.menu
@@ -100,7 +100,7 @@ block body
     nav#toc
       .ui.vertical.menu.sortable
 
-  #wrapper
+  #wrapper.desktop-expanded-layout
 
     .frame
       iframe#iframe(name="iframe")
@@ -439,14 +439,12 @@ block script
 
     // sidebar expansion buttons
     $("#nav .collapse.button").on("click tap", function(){
-      $("#sidebar").css("left","-17rem");
-      $("#wrapper").css("padding-left","3rem");
+      $("#sidebar, #wrapper").addClass("desktop-collapsed-layout").removeClass("desktop-expanded-layout");
       $(".expanded.mode").hide();
       $(".collapsed.mode").not(".tablet.only").show();
       });
     $("#nav .expand.button").on("click tap", function(){
-      $("#sidebar").css("left","0");
-      $("#wrapper").css("padding-left","20rem");
+      $("#sidebar, #wrapper").addClass("desktop-expanded-layout").removeClass("desktop-collapsed-layout");
       $(".expanded.mode").not(".tablet.only").css("display","");
       $(".collapsed.mode").hide();
       });

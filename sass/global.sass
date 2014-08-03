@@ -89,7 +89,6 @@ a, a:link
   width: 20rem
   position: absolute
   z-index: 1
-  left: 0
   top: 0
   bottom: 0
   overflow-y: auto
@@ -102,6 +101,11 @@ a, a:link
     width: 100%
     height: 2.75rem
     overflow: visible
+
+  &.desktop-expanded-layout
+    left: 0
+  &.desktop-collapsed-layout
+    left: -17rem
 
   #toc
     &>.ui.menu
@@ -167,7 +171,6 @@ a, a:link
 
 #wrapper
   position: absolute
-  padding-left: 20rem
   left: 0
   top: 0
   bottom: 0
@@ -181,6 +184,11 @@ a, a:link
     padding-top: 2.75rem
     padding-left: 0
     height: auto
+
+  &.desktop-expanded-layout
+    padding-left: 20rem
+  &.desktop-collapsed-layout
+    padding-left: 3rem
 
   .frame
     position: relative
