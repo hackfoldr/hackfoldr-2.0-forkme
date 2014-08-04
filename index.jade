@@ -401,7 +401,6 @@ block script
       $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
       // auto expand #toc accordion when number < 4
       var children_are_less_or_not = function(){
-        console.log($(this).children().length);
         if($(this).children().length<4){
           return true;
         }else{
@@ -453,6 +452,11 @@ block script
           .append($('<i class="icon exchange"></i>'))
       );
     });
+
+    // activate semantic ui components
+    $('.ui.dropdown').dropdown();
+    //$('.ui.checkbox').checkbox();
+    $('.ui.accordion').accordion();
 
     // for semantic ui css specificity
     $(".hidden, .shy").hide();
