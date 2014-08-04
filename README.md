@@ -1,5 +1,6 @@
 The New Hackfoldr for MozTW
 ============
+
 Using:
 * Sass
 * Compass
@@ -8,18 +9,32 @@ Using:
 * jQuery
 * Handlebars
 * Tabletop
+* Fire.app
 
-Windows
+Development
 ------------
-* using Fire.app to watch .jade and .sass
+
 * development on master branch
-* deploy: use deploy.bat to deploy to gh-pages (half working... lol)
+* deploy on gh-pages branch
+
+###Windows
+
+* development:
+    * using Fire.app to watch .jade and .sass
+    * using Github for Windows to sync and commit
+* deploy: .\deploy.bat
+
+###Mac / Linux
+
+* development: using Fire.app to watch .jade and .sass
+* deploy: .\deploy.sh (probably, not tested)
 
 Mockup / Prototype
-============
+------------
+
 https://hack.etblue.tw/
 
 License
-============
-Same as hackfoldr
+------------
 
+Same as hackfoldr
