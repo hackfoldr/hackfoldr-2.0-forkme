@@ -956,3 +956,5 @@
 2014-08-04 15:37:47     error livescripts/controllers.ls: Error: Parse error on line 5: Unexpected 'CREMENT'
 2014-08-04 15:37:47     error livescripts/app.ls: Error: Parse error on line 6: Unexpected 'PARAM('
 2014-08-04 15:37:47     error livescripts/controllers.ls: Error: Parse error on line 5: Unexpected 'CREMENT'
+2014-08-04 15:56:47 identical css/global.css 
+2014-08-04 15:56:48 identical css/global.css.map 

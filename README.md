@@ -7,11 +7,13 @@ Using:
 * Jade
 * jQuery
 * Handlebars
+* Tabletop
 
 Windows
 ------------
-* now using Fire.app build views/ to public/
-* if build doesn't work: jade . -o . --pretty
+* using Fire.app to watch .jade and .sass
+* development on master branch
+* deploy: use deploy.bat to deploy to gh-pages (half working... lol)
 
 Mockup / Prototype
 ============
