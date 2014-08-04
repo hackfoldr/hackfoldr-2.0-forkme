@@ -219,7 +219,7 @@ pip-log.txt
 #############
 
 .sass-cache
-.livescript-cache/
+.livescript-cache
 fire_app_log.txt
 .editorconfig
 public/library.html
