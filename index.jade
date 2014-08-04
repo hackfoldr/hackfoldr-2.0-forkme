@@ -62,41 +62,44 @@ block body
           i.icon.repeat
         a.right.icon.item.add.to.list.hidden
           i.icon.add
-      form.ui.warning.form.segment.no.margin.hidden.expanded.mode
-        .inline.field
-          .ui.radio.checkbox.add.only
-            input.content.type(id="add-only",type="radio",name="submit",checked)
-            label(for="add-only") 投稿
-          .ui.radio.checkbox.add.create
-            input.content.type(id="create-add",type="radio",name="submit")
-            label(for="create-add") 開 hackpad 並投稿
-        .ui.warning.message.shy
-          p 連結網址需要是 url 格式
-        .field.adding.only.mode
-          .ui.left.labeled.icon.input
-            input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="",required)
-            i.icon.font
-            .ui.corner.label
-              i.icon.asterisk
-        .field.adding.only.mode
-          .ui.left.labeled.icon.input
-            input.new.link.url(placeholder="連結網址",type="url",name="new-link-url",value="",required)
-            i.icon.url
-            .ui.corner.label
-              i.icon.asterisk
-        .field.creating.adding.mode.hidden
-          .ui.left.labeled.icon.input
-            input.new.pad.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="",required)
-            i.icon.font
-            .ui.corner.label
-              i.icon.asterisk
-        //-.field
-          input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
-        //-.inline.field
-          input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
-          | .hackpad.com
-        .ui.submit.button.green.small.add.only.adding.only.mode add to foldr
-        .ui.submit.button.green.small.add.create.creating.adding.mode.hidden create and add to foldr
+      .ui.segment.submit.no.margin.hidden.expanded.mode
+        .ui.form
+          .inline.field
+            .ui.radio.checkbox.add.only
+              input.content.type(id="add-only",type="radio",name="submit",checked)
+              label(for="add-only") 投稿
+            .ui.radio.checkbox.add.create
+              input.content.type(id="create-add",type="radio",name="submit")
+              label(for="create-add") 開 hackpad 並投稿
+        form.ui.warning.form.adding.only.mode
+          .ui.error.message
+          .field
+            .ui.left.labeled.icon.input
+              input.new.link.title(placeholder="想顯示在 foldr 中的連結名稱",type="text",name="new-link-title",value="",required)
+              i.icon.font
+              .ui.corner.label
+                i.icon.asterisk
+          .field
+            .ui.left.labeled.icon.input
+              input.new.link.url(placeholder="連結網址",type="url",name="new-link-url",value="",required)
+              i.icon.url
+              .ui.corner.label
+                i.icon.asterisk
+          .ui.submit.button.green.small.add.only add to foldr
+        form.ui.warning.form.creating.adding.mode.hidden
+          .ui.error.message
+          .field
+            .ui.left.labeled.icon.input
+              input.new.pad.title(placeholder="想顯示在 foldr 中的文件名稱",type="text",name="new-pad-name",value="",required)
+              i.icon.font
+              .ui.corner.label
+                i.icon.asterisk
+          .ui.submit.button.green.small.add.create create and add to foldr
+          //-.field
+            input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
+          //-.inline.field
+            input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
+            | .hackpad.com
     nav#toc
       .ui.fluid.vertical.menu.sortable
 
@@ -127,7 +130,7 @@ block script
     }else{
       csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+ethercalc_name+'&exportFormat=csv&gid=0';
       csv_api_source_type = "google";
-      $("#topbar .add.to.list, #topbar .form").remove();
+      $("#topbar .add.to.list, #topbar .submit.segment").remove();
     };
 
     var compile_json = function(rows){
@@ -480,7 +483,7 @@ block script
       $("#toc").slideToggle();
       });
     $("#topbar .show.nav.button").on("click tap", function(){
-      $(".expanded.mode").not(".desktop.only").not(".ui.form").css("display","block");
+      $(".expanded.mode").not(".desktop.only").not(".ui.segment.submit").css("display","block");
       $(".collapsed.mode").hide();
       $("#toc").slideToggle();
       });
@@ -517,28 +520,29 @@ block script
     // load ethercalc data only instead of loading the whole page
     $("#topbar .refresh.table").on("click tap", function(){
       $("#toc .menu").html("");
-      $("#topbar .form").hide();
-      $("#topbar .form .warning.message").hide();
+      $("#topbar .submit.segment").hide();
+      //$("#topbar .submit.segment .error.message").hide();
       compile_ethercalc();
     });
 
     // open submit form
     $("#topbar .add.to.list").on("click tap", function(){
-      $("#topbar .form").slideToggle();
+      $("#topbar .submit.segment").slideToggle();
       // add moretext to defalt input value
       //$.getJSONP('')
     });
 
     // choose submit type, add link only (sunflower monster) by default
-    $("#topbar .form .checkbox.add.only").on("click tap", function(){
-      $("#topbar .form .adding.only.mode").show();
-      $("#topbar .form .creating.adding.mode").hide();
+    $("#topbar .submit.segment .checkbox.add.only").on("click tap", function(){
+      $("#topbar .form.adding.only.mode").show();
+      $("#topbar .form.creating.adding.mode").hide();
+      //$("#topbar .form .error.message").hide();
     });
 
-    $("#topbar .form .checkbox.add.create").on("click tap", function(){
-      $("#topbar .form .adding.only.mode").hide();
-      $("#topbar .form .creating.adding.mode").show();
-      $("#topbar .form .ui.warning.message").hide();
+    $("#topbar .submit.segment .checkbox.add.create").on("click tap", function(){
+      $("#topbar .form.adding.only.mode").hide();
+      $("#topbar .form.creating.adding.mode").show();
+      //$("#topbar .form .error.message").hide();
     });
 
     // post to ethercalc
@@ -561,10 +565,15 @@ block script
       var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
       var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item">'+new_hackpad_title+'<i class="icon text file outline"></i></a>';
       // add new hackpad info to foldr
-      $('#toc .ui.vertical.menu').append(new_menu_item);
-      // post new hackpad info to ethercalc
-      post_ethercalc(new_hackpad_title, new_hackpad_url);
-      $("#topbar .form").hide();
+      if(new_hackpad_title.length > 0){
+        $('#toc .ui.vertical.menu').append(new_menu_item);
+        // post new hackpad info to ethercalc
+        post_ethercalc(new_hackpad_title, new_hackpad_url);
+        //$("#topbar .submit.segment").hide();
+        //$("#topbar .form .ui.error.message").hide();
+      }else{
+        //$("#topbar .form .ui.error.message").show();
+      }
     });
 
     // add a existing url to foldr
@@ -572,20 +581,52 @@ block script
       var new_link_title = $("#topbar .form .new.link.title").val();
       var new_link_url = $("#topbar .form .new.link.url").val();
       // validate url
-      if(/^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(new_link_url)){
+      if(/^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(new_link_url) && new_link_title.length > 0){
         $('#toc .ui.vertical.menu').append(
           $('<a />', { href: new_link_url, 'target': 'iframe', 'class': 'link item' })
             .text(new_link_title)
             .append($('<i class="icon url"></i>'))
         );
         post_ethercalc(new_link_title, new_link_url);
-        $("#topbar .form .new.link").val("");
-        $("#topbar .form .ui.warning.message").hide();
+        //$("#topbar .form .new.link").val("");
+        //$("#topbar .form .ui.error.message").hide();
       }else{
-        $("#topbar .form .ui.warning.message").show();
+        //$("#topbar .form .ui.error.message").show();
       }
     });
 
+    // semantic ui validation
+    $('.ui.form')
+      .form({
+        new_pad_title: {
+          identifier: 'new-pad-name',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '新文件叫什麼名字？'
+            }
+          ]
+        },
+        new_link_title: {
+          identifier: 'new-link-title',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '這個網頁叫什麼名字？'
+            }
+          ]
+        },
+        new_link_url: {
+          identifier: 'new-link-url',
+          rules: [
+            {
+              type: 'url',
+              prompt: '網址的格式有問題喔'
+            }
+          ]
+        }
+      })
+    ;
     // link item events
     $("#sidebar").on("click tap", "a.link.item", function(event){
       // dynamic url
@@ -600,7 +641,7 @@ block script
         $("#topbar .edit.table").show();
         $("#topbar .refresh.table").hide();
         $("#topbar .add.to.list").hide();
-        $("#topbar .form").hide();
+        $("#topbar .submit.segment").hide();
 
       // reset page title
       $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
@@ -608,9 +649,9 @@ block script
 
       // for mobile: set toc default display (hidden)
       $("#toc").css("display","");
-      $("#topbar .form").hide();
       $("#topbar .hide.nav.button").hide();
       $("#topbar .show.nav.button").css("display","");
+      $("#topbar .submit.segment").hide();
 
     });
 
