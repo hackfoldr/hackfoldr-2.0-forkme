@@ -206,6 +206,10 @@ block script
           link_icon = "chat outline";
         } else if(link_url.match(/^.*.disp.cc\//)) {
           link_icon = "chat outline";
+        } else if(link_url.match(/^.*.www.google.com\/moderator\//)) {
+          link_icon = "chat outline";
+        } else if(link_url.match(/^.*.www.loomio.org\//)) {
+          link_icon = "chat outline";
         } else if(link_url.match(/^.*.hack.g0v.tw\//)) {
           link_icon = "exchange";
           //link_url = link_url.split("/")[1].toString();
@@ -376,6 +380,8 @@ block script
           return true;
         } else if(link_url.match(/^.*.youtube.com\/playlist.*/)) {
           return true;
+        } else if(link_url.match(/^.*.gov.tw\//)) {
+          return true;
         } else {
           return false;
         }
@@ -393,6 +399,20 @@ block script
         }
       };
       $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
+      // auto expand #toc accordion when number < 4
+      var children_are_less_or_not = function(){
+        console.log($(this).children().length);
+        if($(this).children().length<4){
+          return true;
+        }else{
+          return false;
+        }
+      };
+      $("#toc .ui.accordion .content").filter(children_are_less_or_not).addClass("active").prev(".header").addClass("active");
+
+      // change foldr icons for auto activated subfoldrs
+      $("#toc .ui.accordion .header.active .icon.folder.closed").hide();
+      $("#toc .ui.accordion .header.active .icon.folder.open").show();
     }
 
     var compile_ethercalc = function(){
@@ -625,4 +645,3 @@ block script
 
     // add href attr to foldr title
     $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
-
