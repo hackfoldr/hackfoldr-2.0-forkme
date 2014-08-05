@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="ui dropdown icon item about"><i class="icon help"></i>
-            <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item">使用說明、問題回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a>
+            <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item"><i class="icon exchange"></i>使用說明、問題回報</a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item"><i class="icon github"></i><i class="icon forward mail"></i>程式碼</a>
             </div>
           </div><a class="right item expand button collapsed mode hidden desktop only"><i class="icon arrow right"></i></a><a class="right item collapse button expanded mode desktop only"><i class="icon arrow left"></i></a>
           <div class="right icon item zoom ui dropdown"><i class="icon zoom in"></i>
@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="ui dropdown icon item about tablet only"><i class="icon help"></i>
-            <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item">使用說明、問題回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a>
+            <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item"><i class="icon exchange"></i>使用說明、問題回報</a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item"><i class="icon github"></i><i class="icon forward mail"></i>程式碼</a>
             </div>
           </div><a class="right item show nav button collapsed mode mobile only"><i class="icon arrow down"></i></a><a class="right item hide nav button expanded mode hidden mobile only"><i class="icon arrow up"></i></a>
           <div class="right ui dropdown icon item meta phone only"><i class="icon ellipsis vertical"></i>
@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="item about">說明<i class="icon help"></i>
-                <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item">使用說明、問題回報<i class="icon exchange"></i></a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item">程式碼<i class="icon github"></i></a>
+                <div class="menu"><a href="/welcome-to-hackfoldr" class="foldr item"><i class="icon exchange"></i>使用說明、問題回報</a><a href="https://github.com/hackfoldr/maker.moztw.org" target="_blank" class="link item"><i class="icon github"></i><i class="icon forward mail"></i>程式碼</a>
                 </div>
               </div>
             </div>
@@ -409,8 +409,8 @@
               return false;
             }
           };
-          $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").find("i.icon").after(new_window_icon);
-          $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").find("i.icon").after(new_window_icon);
+          $("#toc a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").find("i.icon").after(new_window_icon);
+          $("#toc a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").find("i.icon").after(new_window_icon);
           
           // auto highlight active items and expand parent accordion
           var link_is_current_url_or_not = function(){
@@ -472,7 +472,7 @@
           $("#sidebar .history .menu").append(
             $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
               .text(item.foldr_name)
-              .append($('<i class="icon exchange"></i>'))
+              .prepend($('<i class="icon exchange"></i>'))
           );
         });
         
