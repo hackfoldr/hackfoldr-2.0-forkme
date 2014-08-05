@@ -32,7 +32,7 @@ Development
 Mockup / Prototype
 ------------
 
-https://hack.etblue.tw/
+http://hack.etblue.tw/
 
 License
 ------------
