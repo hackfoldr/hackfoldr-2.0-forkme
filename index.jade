@@ -86,7 +86,7 @@ block body
               i.icon.url
               .ui.corner.label
                 i.icon.asterisk
-          .ui.submit.button.green.small.add.only add to foldr
+          button.ui.submit.button.green.small.add.only(type="button") add to foldr
         form.ui.warning.form.creating.adding.mode.hidden
           .ui.error.message
           .field
@@ -639,6 +639,10 @@ block script
             }
           ]
         }
+      }).submit(function(e){
+        // Prevent real form submissions,
+        // which is triggered by sementic-ui internally (?)
+        e.preventDefault();
       })
     ;
     // link item events
