@@ -299,9 +299,7 @@
             var context = {title: row[1] };
             var $accordion_el = $(accordion_template(context));
             
-            $accordion_el.appendTo('#toc .ui.vertical.menu').accordion({onChange: function(){
-              $accordion_el.find('.folder').toggle()
-            }})
+            $accordion_el.appendTo('#toc .ui.vertical.menu').accordion();
             
             if(options.expand){
               $accordion_el.accordion('open',0)
@@ -678,9 +676,14 @@
         });
         
         // activate link on click
-        $("#sidebar").on("click tap", "#toc a.link.item", function(){
+        $("#toc").on("click tap", "a.link.item", function(){
           $("#toc a.link.item").removeClass("active");
           $(this).addClass("active");
+        });
+        
+        // toggle folder icons on click
+        $("#toc").on("click tap", ".header.item", function(){
+          $(this).find('.icon.folder').toggle();
         });
         
         // edit table
