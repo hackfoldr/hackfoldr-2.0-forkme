@@ -105,7 +105,7 @@
                 <div class="ui corner label"><i class="icon asterisk"></i></div>
               </div>
             </div>
-            <div class="ui submit button green small add only">add to foldr</div>
+            <button type="button" class="ui submit button green small add only">add to foldr</button>
           </form>
           <form class="ui warning form creating adding mode hidden">
             <div class="ui error message"></div>
@@ -658,6 +658,10 @@
                 }
               ]
             }
+          }).submit(function(e){
+            // Prevent real form submissions,
+            // which is triggered by sementic-ui internally (?)
+            e.preventDefault();
           })
         ;
         // link item events
