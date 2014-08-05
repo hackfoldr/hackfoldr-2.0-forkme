@@ -268,7 +268,7 @@ block script
         }
       }
       
-      var accordion_template_source = '<div class="ui accordion"><div class="title header item ">{{title}}<i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i></div><div class="content menu"></div></div>';
+      var accordion_template_source = '<div class="ui accordion"><div class="title header item "><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu"></div></div>';
       var accordion_template = Handlebars.compile(accordion_template_source);
 
       var add_accordion = function(row){
