@@ -124,6 +124,7 @@ block script
     var csv_api_source = "";
     var csv_api_source_type = "";
     var csv_api_source_id = ethercalc_name;
+    var hide_sheet = false;
 
     // check where the csv will come from
     if(ethercalc_name.length < 40){
@@ -329,17 +330,18 @@ block script
               got_title = true;
 
               // detect title row index
-              //console.log(new_pad_row_index);
-              new_pad_row_index = row_index+2;
-              //console.log(row_index+2);
-              //console.log(new_pad_row_index.toString());
+              //new_pad_row_index = row_index+2;
 
               // add to history menu
-
               var current_foldr_history = {
                 foldr_name: col,
                 foldr_id: ethercalc_name
               };
+
+              // detect sheet option
+              if(row[2].match(/^hide/)) {
+                hide_sheet = true;
+              }
 
               // Remove all items in foldr_histories that share the same foldr_id before unshift
               foldr_histories = $.grep(foldr_histories, function(value){
@@ -686,17 +688,18 @@ block script
 
     // edit table
     $("#topbar .edit.table").on("click tap", function(){
-      if(csv_api_source_type=="ethercalc"){
+      if(csv_api_source_type=="ethercalc" && hide_sheet==false){
         $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
-      }else{
+        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+      }else if(hide_sheet==false){
         $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
+        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
       }
       // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
       $("#topbar .add.to.list").show();
       // change url
-      history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
       // make foldr items sortable
     });
 
