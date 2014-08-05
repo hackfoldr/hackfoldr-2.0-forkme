@@ -126,7 +126,7 @@ block script
     var csv_api_source_id = ethercalc_name;
 
     // check where the csv will come from
-    if(ethercalc_name.length <= 40){
+    if(ethercalc_name.length < 40){
       csv_api_source = 'https://ethercalc.org/_/'+ethercalc_name+'/csv';
       csv_api_source_type = "ethercalc";
     }else{
@@ -138,7 +138,7 @@ block script
     var compile_json = function(rows){
 
       // jump from ethercalc to google spreadsheet
-      if(csv_api_source_type == "ethercalc" && rows[0][0].length > 40){
+      if(csv_api_source_type == "ethercalc" && rows[0][0].length >= 40){
         //console.log(rows[0][0]);
         csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+rows[0][0]+'&exportFormat=csv&gid=0';
         csv_api_source_type = "google";
