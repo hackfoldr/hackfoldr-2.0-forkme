@@ -22,12 +22,12 @@ Development
 * development:
     * using Fire.app to watch .jade and .sass
     * using Github for Windows to sync and commit
-* deploy: .\deploy.bat
+* deploy: .\deploy.bat (on master)
 
 ###Mac / Linux
 
 * development: using Fire.app to watch .jade and .sass
-* deploy: .\deploy.sh (probably, not tested)
+* deploy: .\deploy.sh (on master) (probably, not tested)
 
 Mockup / Prototype
 ------------

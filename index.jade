@@ -139,7 +139,7 @@ block script
       var got_title = false
       var depth = 0 // if depth == 1, link should in accordion
 
-      var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item">{{subject}}<i class="icon {{icon}}"></i></a>';
+      var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
 
       var add_link = function(row){
@@ -386,12 +386,14 @@ block script
           return true;
         } else if(link_url.match(/^.*.gov.tw\//)) {
           return true;
+        } else if(link_url.match(/^.*.www.loomio.org\//)) {
+          return true;
         } else {
           return false;
         }
       };
-      $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").append(new_window_icon);
-      $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").append(new_window_icon);
+      $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").find("i.icon").after(new_window_icon);
+      $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").find("i.icon").after(new_window_icon);
 
       // auto highlight active items and expand parent accordion
       var link_is_current_url_or_not = function(){
