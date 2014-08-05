@@ -700,12 +700,12 @@
         });
         
         // edit table
-        if(csv_api_source_type=="ethercalc"){
-          $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
-        }else{
-          $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
-        }
         $("#topbar .edit.table").on("click tap", function(){
+          if(csv_api_source_type=="ethercalc"){
+            $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
+          }else{
+            $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
+          }
           // switch icon
           $("#topbar .edit.table").hide();
           $("#topbar .refresh.table").show();
