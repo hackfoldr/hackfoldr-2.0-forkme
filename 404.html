@@ -142,6 +142,7 @@
         var new_pad_row_index = 3;
         var csv_api_source = "";
         var csv_api_source_type = "";
+        var csv_api_source_id = ethercalc_name;
         
         // check where the csv will come from
         if(ethercalc_name.length <= 40){
@@ -155,6 +156,17 @@
         
         var compile_json = function(rows){
         
+          // jump from ethercalc to google spreadsheet
+          if(csv_api_source_type == "ethercalc" && rows[0][0].length > 40){
+            //console.log(rows[0][0]);
+            csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+rows[0][0]+'&exportFormat=csv&gid=0';
+            csv_api_source_type = "google";
+            csv_api_source_id = rows[0][0].trim();
+            $("#topbar .add.to.list, #topbar .submit.segment").remove();
+            compile_ethercalc();
+            return
+          }
+          
           var got_title = false
           var depth = 0 // if depth == 1, link should in accordion
           
@@ -268,9 +280,9 @@
             // enable default iframe?
             if(current_iframe_url == "edit"){
               if(csv_api_source_type=="ethercalc"){
-                iframe_src = 'https://ethercalc.org/'+ethercalc_name;
+                iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
               }else{
-                iframe_src = 'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit';
+                iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
               };
               $("#topbar .edit.table").hide();
               $("#topbar .refresh.table").show();
@@ -422,6 +434,7 @@
             }
           };
           $("#toc a.link.item").filter(link_is_current_url_or_not).addClass("active").parent(".content").addClass("active").prev(".header").addClass("active");
+          
           // auto expand #toc accordion when number < 4
           var children_are_less_or_not = function(){
             if($(this).children().length<4){
@@ -446,7 +459,7 @@
             //console.log($.get(csv_api_source).pipe(CSV.parse).done);
             // compile gsheet-tabletop json
             Tabletop.init({
-              key: ethercalc_name,
+              key: csv_api_source_id,
               callback: function(data, tabletop){
                 data = data.map(function (o) {
                   result = [];
@@ -688,9 +701,9 @@
         
         // edit table
         if(csv_api_source_type=="ethercalc"){
-          $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+ethercalc_name);
+          $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
         }else{
-          $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+ethercalc_name+'/edit');
+          $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
         }
         $("#topbar .edit.table").on("click tap", function(){
           // switch icon
