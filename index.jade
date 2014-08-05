@@ -522,7 +522,7 @@ block script
     });
 
     // history button
-    $("#nav, #topbar").on("click tap", " .history", function(){
+    $("#nav .history, #topbar .history").on("click tap", function(){
       if($("#sidebar .history .menu").has("a.foldr.item").length==0){
         $("#sidebar .history .menu .no.data").show();
       }else{
