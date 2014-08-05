@@ -390,8 +390,8 @@ block script
           return false;
         }
       };
-      $("#sidebar a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").find("i.icon").after(new_window_icon);
-      $("#sidebar a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").find("i.icon").after(new_window_icon);
+      $("#toc a.link.item").filter(open_link_in_new_window_or_not).attr("target","_blank").find("i.icon").after(new_window_icon);
+      $("#toc a.link.item[target='_blank']").not(":has(i.icon.forward.mail)").find("i.icon").after(new_window_icon);
 
       // auto highlight active items and expand parent accordion
       var link_is_current_url_or_not = function(){
@@ -453,7 +453,7 @@ block script
       $("#sidebar .history .menu").append(
         $('<a />', { href: '/'+item.foldr_id, 'class': 'foldr item' })
           .text(item.foldr_name)
-          .append($('<i class="icon exchange"></i>'))
+          .prepend($('<i class="icon exchange"></i>'))
       );
     });
 
