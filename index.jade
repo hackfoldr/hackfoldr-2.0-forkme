@@ -639,6 +639,10 @@ block script
             }
           ]
         }
+      }).submit(function(e){
+        // Prevent real form submissions,
+        // which is triggered by sementic-ui internally (?)
+        e.preventDefault();
       })
     ;
     // link item events
