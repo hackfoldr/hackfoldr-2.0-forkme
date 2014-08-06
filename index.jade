@@ -102,7 +102,7 @@ block body
             input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
             | .hackpad.com
     nav#toc
-      .ui.fluid.vertical.menu.sortable
+      .ui.fluid.vertical.menu
 
   #wrapper.desktop-expanded-layout
 
@@ -263,6 +263,20 @@ block script
         if(current_iframe_url == "edit"){
           if(csv_api_source_type=="ethercalc"){
             iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
+            $("#toc .vertical.menu").addClass("sortable").sortable({
+              update: function( event, ui ) {
+                //console.log("updated");
+                //var sort_initial_row = ui.originalPosition;
+                //var sort_target_row = ui.position;
+                //$.ajax({
+                //  contentType: 'text/plain',
+                //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+                //  type: 'POST',
+                //  processData: false 
+                //});
+              }
+              //placeholder: "placeholder"
+            });
           }else{
             iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
           };
@@ -702,18 +716,36 @@ block script
       $("#topbar .refresh.table").show();
       $("#topbar .add.to.list").show();
       // change url
+
       // make foldr items sortable
+      $("#toc .vertical.menu").addClass("sortable").sortable({
+        update: function( event, ui ) {
+          //console.log("updated");
+          //var sort_initial_row = ui.originalPosition;
+          //var sort_target_row = ui.position;
+          //$.ajax({
+          //  contentType: 'text/plain',
+          //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+          //  type: 'POST',
+          //  processData: false 
+          //});
+        }
+      //placeholder: "placeholder"
+      });
     });
 
     // sort table
-    //$("#toc .sortable").sortable();
     //$("#toc .sortable").on("sortchange", function( event, ui ) {
-      //$.ajax({
-      //  contentType: 'text/plain',
-      //  data: 'moveinsert '+'A2:F2'+' A5',
-      //  type: 'POST',
-      //  processData: false 
-      //});
+    //  console.log(ui);
+    //  console.log(event);
+    //  var sort_initial_row = ui.originalPosition;
+    //  var sort_target_row = ui.position;
+    //  $.ajax({
+    //    contentType: 'text/plain',
+    //    data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+    //    type: 'POST',
+    //    processData: false 
+    //  });
     //});
 
     // add href attr to foldr title
