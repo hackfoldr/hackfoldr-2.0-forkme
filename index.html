@@ -167,6 +167,26 @@
           compile_ethercalc();
         }
         
+        var sort_action = {
+          update: function( event, ui ) {
+            var sort_initial_row = ui.item.attr("id");
+            var new_order = $(this).sortable("toArray");
+            var sort_target_neighbor = new_order[$.inArray(sort_initial_row, new_order)+1]
+            if($.type(sort_target_neighbor)==="undefined"){
+              new_order = $.map(new_order, function(value, index){
+                return parseInt(value);
+              });
+              var sort_target_neighbor_row = Math.max.apply(Math, new_order);
+              var sort_target_row = sort_target_neighbor_row+1;
+            }else{
+              var sort_target_row = parseInt(sort_target_neighbor);
+            }
+            var sort_initial_row = parseInt(sort_initial_row);
+            //console.log(sort_initial_row+" to "+(sort_target_row-1));
+            sort_ethercalc(sort_initial_row, sort_target_row);
+          }
+        };
+        
         var compile_json = function(rows){
         
           // jump from ethercalc to google spreadsheet
@@ -294,17 +314,7 @@
             if(current_iframe_url == "edit"){
               if(csv_api_source_type=="ethercalc"){
                 iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
-                $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
-                  update: function( event, ui ) {
-                    var sort_initial_row = ui.item.attr("id");
-                    var new_order = $(this).sortable("toArray");
-                    var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
-                    var sort_initial_row = parseInt(sort_initial_row);
-                    console.log(sort_initial_row+" to "+sort_target_row);
-                    sort_ethercalc(sort_initial_row, sort_target_row+1);
-                  }
-                  //placeholder: "placeholder"
-                });
+                $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
               }else{
                 iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
               };
@@ -746,17 +756,7 @@
           // change url
           
           // make foldr items sortable
-          $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
-            update: function( event, ui ) {
-              var sort_initial_row = ui.item.attr("id");
-              var new_order = $(this).sortable("toArray");
-              var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
-              var sort_initial_row = parseInt(sort_initial_row);
-              console.log(sort_initial_row+" to "+sort_target_row);
-              sort_ethercalc(sort_initial_row, sort_target_row+1);
-            }
-          //placeholder: "placeholder"
-          });
+          $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
         });
         
         // sort table
