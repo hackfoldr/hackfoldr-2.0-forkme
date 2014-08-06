@@ -138,11 +138,14 @@ block script
 
     var sort_ethercalc = function(sort_initial_row, sort_target_row){
       $.ajax({
+        url: "https://ethercalc.org/_/"+ethercalc_name,
         contentType: 'text/plain',
         data: 'moveinsert A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
         type: 'POST',
         processData: false
       });
+      $("#toc .menu").html("");
+      compile_ethercalc();
     }
 
     var compile_json = function(rows){
@@ -256,7 +259,7 @@ block script
         }
 
         var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
-        var $link_element = $(link_template(context)).attr("id", row_index);
+        var $link_element = $(link_template(context)).attr("id", row_index+1);
 
         for(key in link_options){
           $link_element.attr(key, link_options[key]);
@@ -279,7 +282,7 @@ block script
                 var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
                 var sort_initial_row = parseInt(sort_initial_row);
                 console.log(sort_initial_row+" to "+sort_target_row);
-                sort_ethercalc(sort_initial_row, sort_target_row);
+                sort_ethercalc(sort_initial_row, sort_target_row+1);
               }
               //placeholder: "placeholder"
             });
@@ -311,7 +314,7 @@ block script
           var options = {};
         }
         var context = {title: row[1] };
-        var $accordion_el = $(accordion_template(context)).attr("id", row_index);
+        var $accordion_el = $(accordion_template(context)).attr("id", row_index+1);
         
         $accordion_el.appendTo('#toc .ui.vertical.menu').accordion();
         
@@ -731,7 +734,7 @@ block script
           var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
           var sort_initial_row = parseInt(sort_initial_row);
           console.log(sort_initial_row+" to "+sort_target_row);
-          sort_ethercalc(sort_initial_row, sort_target_row);
+          sort_ethercalc(sort_initial_row, sort_target_row+1);
         }
       //placeholder: "placeholder"
       });
