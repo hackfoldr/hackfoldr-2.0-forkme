@@ -740,25 +740,25 @@ block script
 
     // edit table
     $("#topbar .edit.table").on("click tap", function(){
+      // show sheet
       if(hide_sheet==false){
         if(csv_api_source_type=="ethercalc"){
           $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
-          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+          // make foldr items sortable
+          if(sort_sheet){
+            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+          }
         }else if(csv_api_source_type=="google"){
           $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
-          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
         }
+        // change url
+        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
       }
       // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
       $("#topbar .add.to.list").show();
-      // change url
 
-      // make foldr items sortable
-      if(sort_sheet){
-        $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
-      }
     });
 
     // add href attr to foldr title
