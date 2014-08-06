@@ -125,7 +125,7 @@ block script
     var csv_api_source_type = "";
     var csv_api_source_id = ethercalc_name;
     var hide_sheet = false;
-    var sort_sheet = false;
+    var sort_sheet = true;
 
     // check where the csv will come from
     if(ethercalc_name.length < 40){
@@ -289,16 +289,15 @@ block script
         }
 
         if(depth == 1){
-          $('#toc .ui.accordion:last').find('.menu').append($link_element)
+          $('#toc .ui.accordion:last').find('.menu').append($link_element);
         }else{
-          $('#toc .ui.vertical.menu').append($link_element)
+          $('#toc .ui.vertical.menu').append($link_element);
         }
 
-        // enable default iframe?
+        // set iframe src?
         if(current_iframe_url == "edit"){
           if(csv_api_source_type=="ethercalc"){
             iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
-            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
           }else{
             iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
           };
@@ -312,6 +311,7 @@ block script
             iframe_src = context.url;
           }
         }
+
         if(!iframe_src) {
           iframe_src = context.url;
         }
@@ -366,9 +366,14 @@ block script
               current_foldr_name = col;
               got_title = true;
 
-              // detect sheet option
+              // detect sheet hide option
               if(row[2].match(/^hide/)) {
                 hide_sheet = true;
+              }
+
+              // detect sheet sort option
+              if(row[2].match(/^unsortable/)) {
+                sort_sheet = false;
               }
 
               // detect title row index
@@ -468,6 +473,15 @@ block script
       // change foldr icons for auto activated subfoldrs
       $("#toc .ui.accordion .header.active .icon.folder.closed").hide();
       $("#toc .ui.accordion .header.active .icon.folder.open").show();
+
+      // make #toc sortable on edit page by default
+      if(current_iframe_url == "edit"){
+        if(csv_api_source_type=="ethercalc"){
+          if(sort_sheet){
+            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+          }
+        }
+      }
     }
 
     var compile_ethercalc = function(){
@@ -684,6 +698,7 @@ block script
         e.preventDefault();
       })
     ;
+
     // link item events
     $("#sidebar").on("click tap", "a.link.item", function(event){
       // dynamic url
@@ -741,22 +756,10 @@ block script
       // change url
 
       // make foldr items sortable
-      $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+      if(sort_sheet){
+        $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+      }
     });
-
-    // sort table
-    //$("#toc .sortable").on("sortchange", function( event, ui ) {
-    //  console.log(ui);
-    //  console.log(event);
-    //  var sort_initial_row = ui.originalPosition;
-    //  var sort_target_row = ui.position;
-    //  $.ajax({
-    //    contentType: 'text/plain',
-    //    data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
-    //    type: 'POST',
-    //    processData: false 
-    //  });
-    //});
 
     // add href attr to foldr title
     $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
