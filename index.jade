@@ -120,11 +120,12 @@ block script
     var history_state={};
     var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
     var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
-    var new_pad_row_index = 3;
+    //var new_pad_row_index = 3;
     var csv_api_source = "";
     var csv_api_source_type = "";
     var csv_api_source_id = ethercalc_name;
     var hide_sheet = false;
+    var sort_sheet = false;
 
     // check where the csv will come from
     if(ethercalc_name.length < 40){
@@ -136,6 +137,7 @@ block script
       $("#topbar .add.to.list, #topbar .submit.segment").remove();
     };
 
+    // action for jquery ui sortable
     var sort_ethercalc = function(sort_initial_row, sort_target_row){
       $.ajax({
         url: "https://ethercalc.org/_/"+ethercalc_name,
@@ -334,6 +336,7 @@ block script
         }
       }
 
+      // start creating #toc menu
       $.each(rows, function(row_index, row){
 
         // for gsheet
