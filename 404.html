@@ -282,7 +282,7 @@
             if(current_iframe_url == "edit"){
               if(csv_api_source_type=="ethercalc"){
                 iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
-                $("#toc .vertical.menu").addClass("sortable").sortable({
+                $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
                   update: function( event, ui ) {
                     //console.log("updated");
                     //var sort_initial_row = ui.originalPosition;
@@ -737,7 +737,7 @@
           // change url
           
           // make foldr items sortable
-          $("#toc .vertical.menu").addClass("sortable").sortable({
+          $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
             update: function( event, ui ) {
               //console.log("updated");
               //var sort_initial_row = ui.originalPosition;
