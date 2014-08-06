@@ -143,9 +143,10 @@ block script
         data: 'moveinsert A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
         type: 'POST',
         processData: false
-      });
-      $("#toc .menu").html("");
-      compile_ethercalc();
+      }).then(function(){ setTimeout(function(){
+        $("#toc .menu").html("");
+        compile_ethercalc();
+      }, 1000) });
     }
 
     var sort_action = {
