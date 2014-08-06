@@ -136,6 +136,15 @@ block script
       $("#topbar .add.to.list, #topbar .submit.segment").remove();
     };
 
+    var sort_ethercalc = function(sort_initial_row, sort_target_row){
+      $.ajax({
+        contentType: 'text/plain',
+        data: 'moveinsert A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+        type: 'POST',
+        processData: false
+      });
+    }
+
     var compile_json = function(rows){
 
       // jump from ethercalc to google spreadsheet
@@ -155,7 +164,7 @@ block script
       var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
 
-      var add_link = function(row){
+      var add_link = function(row_index, row){
         try{
           var link_options = JSON.parse(row[2]);
         }catch(e){
@@ -247,7 +256,7 @@ block script
         }
 
         var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
-        var $link_element = $(link_template(context));
+        var $link_element = $(link_template(context)).attr("id", row_index);
 
         for(key in link_options){
           $link_element.attr(key, link_options[key]);
@@ -265,15 +274,12 @@ block script
             iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
             $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
               update: function( event, ui ) {
-                //console.log("updated");
-                //var sort_initial_row = ui.originalPosition;
-                //var sort_target_row = ui.position;
-                //$.ajax({
-                //  contentType: 'text/plain',
-                //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
-                //  type: 'POST',
-                //  processData: false 
-                //});
+                var sort_initial_row = ui.item.attr("id");
+                var new_order = $(this).sortable("toArray");
+                var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
+                var sort_initial_row = parseInt(sort_initial_row);
+                console.log(sort_initial_row+" to "+sort_target_row);
+                sort_ethercalc(sort_initial_row, sort_target_row);
               }
               //placeholder: "placeholder"
             });
@@ -295,17 +301,17 @@ block script
         }
       }
       
-      var accordion_template_source = '<div class="ui accordion"><div class="title header item "><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu"></div></div>';
+      var accordion_template_source = '<div class="ui accordion"><div class="title header item"><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu"></div></div>';
       var accordion_template = Handlebars.compile(accordion_template_source);
 
-      var add_accordion = function(row){
+      var add_accordion = function(row_index, row){
         try{
           var options = JSON.parse(row[2]);
         }catch(e){
           var options = {};
         }
         var context = {title: row[1] };
-        var $accordion_el = $(accordion_template(context));
+        var $accordion_el = $(accordion_template(context)).attr("id", row_index);
         
         $accordion_el.appendTo('#toc .ui.vertical.menu').accordion();
         
@@ -370,11 +376,11 @@ block script
         } else {
           if(this_row_url.length == 0 || row[0] === ">"){ // folder 
             depth = 1
-            add_accordion(row);
+            add_accordion(row_index, row);
           }else if(row[0] === "<"){ // end folder
             depth = 0
           }else { // link
-            add_link(row);
+            add_link(row_index, row);
             // set initial page title
             if(this_row_url == iframe_src){
               $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
@@ -720,15 +726,12 @@ block script
       // make foldr items sortable
       $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable({
         update: function( event, ui ) {
-          //console.log("updated");
-          //var sort_initial_row = ui.originalPosition;
-          //var sort_target_row = ui.position;
-          //$.ajax({
-          //  contentType: 'text/plain',
-          //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
-          //  type: 'POST',
-          //  processData: false 
-          //});
+          var sort_initial_row = ui.item.attr("id");
+          var new_order = $(this).sortable("toArray");
+          var sort_target_row = parseInt(new_order[$.inArray(sort_initial_row, new_order)+1])-1;
+          var sort_initial_row = parseInt(sort_initial_row);
+          console.log(sort_initial_row+" to "+sort_target_row);
+          sort_ethercalc(sort_initial_row, sort_target_row);
         }
       //placeholder: "placeholder"
       });
