@@ -102,7 +102,7 @@ block body
             input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
             | .hackpad.com
     nav#toc
-      .ui.fluid.vertical.menu.sortable
+      .ui.fluid.vertical.menu
 
   #wrapper.desktop-expanded-layout
 
@@ -263,6 +263,20 @@ block script
         if(current_iframe_url == "edit"){
           if(csv_api_source_type=="ethercalc"){
             iframe_src = 'https://ethercalc.org/'+csv_api_source_id;
+            $("#toc .vertical.menu").addClass("sortable").sortable({
+              update: function( event, ui ) {
+                //console.log("updated");
+                //var sort_initial_row = ui.originalPosition;
+                //var sort_target_row = ui.position;
+                //$.ajax({
+                //  contentType: 'text/plain',
+                //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+                //  type: 'POST',
+                //  processData: false 
+                //});
+              }
+              //placeholder: "placeholder"
+            });
           }else{
             iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
           };
@@ -329,6 +343,11 @@ block script
               current_foldr_name = col;
               got_title = true;
 
+              // detect sheet option
+              if(row[2].match(/^hide/)) {
+                hide_sheet = true;
+              }
+
               // detect title row index
               //new_pad_row_index = row_index+2;
 
@@ -337,11 +356,6 @@ block script
                 foldr_name: col,
                 foldr_id: ethercalc_name
               };
-
-              // detect sheet option
-              if(row[2].match(/^hide/)) {
-                hide_sheet = true;
-              }
 
               // Remove all items in foldr_histories that share the same foldr_id before unshift
               foldr_histories = $.grep(foldr_histories, function(value){
@@ -688,30 +702,50 @@ block script
 
     // edit table
     $("#topbar .edit.table").on("click tap", function(){
-      if(csv_api_source_type=="ethercalc" && hide_sheet==false){
-        $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
-        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
-      }else if(hide_sheet==false){
-        $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
-        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+      if(hide_sheet==false){
+        if(csv_api_source_type=="ethercalc"){
+          $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
+          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+        }else if(csv_api_source_type=="google"){
+          $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
+          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+        }
       }
       // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
       $("#topbar .add.to.list").show();
       // change url
+
       // make foldr items sortable
+      $("#toc .vertical.menu").addClass("sortable").sortable({
+        update: function( event, ui ) {
+          //console.log("updated");
+          //var sort_initial_row = ui.originalPosition;
+          //var sort_target_row = ui.position;
+          //$.ajax({
+          //  contentType: 'text/plain',
+          //  data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+          //  type: 'POST',
+          //  processData: false 
+          //});
+        }
+      //placeholder: "placeholder"
+      });
     });
 
     // sort table
-    //$("#toc .sortable").sortable();
     //$("#toc .sortable").on("sortchange", function( event, ui ) {
-      //$.ajax({
-      //  contentType: 'text/plain',
-      //  data: 'moveinsert '+'A2:F2'+' A5',
-      //  type: 'POST',
-      //  processData: false 
-      //});
+    //  console.log(ui);
+    //  console.log(event);
+    //  var sort_initial_row = ui.originalPosition;
+    //  var sort_target_row = ui.position;
+    //  $.ajax({
+    //    contentType: 'text/plain',
+    //    data: 'moveinsert '+'A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
+    //    type: 'POST',
+    //    processData: false 
+    //  });
     //});
 
     // add href attr to foldr title
