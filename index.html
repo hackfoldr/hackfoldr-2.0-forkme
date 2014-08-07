@@ -341,7 +341,9 @@
             
             if(link_label.length > 0){
               // set up label color
-              if(link_label.match(/black/)){
+              if(link_label.match(/gray/)){
+                link_label_color = "gray";
+              }else if(link_label.match(/black/)){
                 link_label_color = "black";
               }else if(link_label.match(/green/)){
                 link_label_color = "green";
