@@ -196,8 +196,12 @@ block script
       // #toc menu items are at root level by default. if depth == 1, they will be in level 1 submenu, which is wrapped inside an semantic ui accordion
       var depth = 0
 
-      var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
+      var link_template_source ='<a href="{{url}}" target="{{target}}" id="{{id}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
+      //var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
+
+      var link_label_template_source ='<span class="ui label {{color}}">{{label}}</span>';
+      var link_label_template = Handlebars.compile(link_label_template_source);
 
       // for link items
       var add_link = function(row_index, row){
@@ -206,6 +210,7 @@ block script
         var link_icon = "";
         var link_type = "link";
         var link_url = row[0].trim();
+
         // parse link options. version 1
         //try{
         //  var link_options = JSON.parse(row[2]);
@@ -216,6 +221,7 @@ block script
         //for(key in link_options){
         //  $link_element.attr(key, link_options[key]);
         //}
+
         // parse link options. version 2
         if(row[2].match(/blank/)){
           var link_target = "_blank";
@@ -304,9 +310,37 @@ block script
         }
 
         // wrap up link item optinos into a hash
-        var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
-        // and send it into the html template (meanwhile, assign it an id for jquery sortable)
-        var $link_element = $(link_template(context)).attr("id", row_index+1);
+        var context = {id: row_index+1, url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
+        // and send it into the html template (meanwhile, assign it an id for jquery sortable)        
+        var $link_element = $(link_template(context));
+
+        // parse link labels
+        var link_label = row[3].trim();
+        if(link_label.length > 0){
+          // set up label color
+          var link_label_color = "";
+          if(link_label.match(/black/)){
+            link_label_color = "black";
+          }else if(link_label.match(/green/)){
+            link_label_color = "green";
+          }else if(link_label.match(/red/)){
+            link_label_color = "red";
+          }else if(link_label.match(/blue/)){
+            link_label_color = "blue";
+          }else if(link_label.match(/orange/)){
+            link_label_color = "orange";
+          }else if(link_label.match(/purple/)){
+            link_label_color = "purple";
+          }else if(link_label.match(/teal/)){
+            link_label_color = "teal";
+          };
+          // set up label content
+          link_label = link_label.replace(link_label_color,"").trim();
+          // append label to link item
+          var label_context = {label: link_label, color: link_label_color};
+          var $link_label_element = $(link_label_template(label_context));
+          $link_element = $link_element.append($link_label_element);
+        }
 
         // append link item to #toc menu
         if(depth == 1){
