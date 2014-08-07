@@ -316,9 +316,10 @@ block script
 
         // parse link labels
         var link_label = row[3].trim();
+        var link_label_color = "";
+
         if(link_label.length > 0){
           // set up label color
-          var link_label_color = "";
           if(link_label.match(/black/)){
             link_label_color = "black";
           }else if(link_label.match(/green/)){
@@ -341,7 +342,7 @@ block script
           // append label to link item
           var label_context = {label: link_label, color: link_label_color};
           var $link_label_element = $(link_label_template(label_context));
-          $link_element = $link_element.append($link_label_element);
+          $link_element.find("i.icon").after($link_label_element);
         }
 
         // append link item to #toc menu
