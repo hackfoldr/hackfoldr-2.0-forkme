@@ -86,7 +86,7 @@ block body
               i.icon.url
               .ui.corner.label
                 i.icon.asterisk
-          button.ui.submit.button.green.small.add.only(type="button") add to foldr
+          button.ui.submit.button.green.small.add.only add to foldr
         form.ui.warning.form.creating.adding.mode.hidden
           .ui.error.message
           .field
@@ -95,7 +95,7 @@ block body
               i.icon.font
               .ui.corner.label
                 i.icon.asterisk
-          .ui.submit.button.green.small.add.create create and add to foldr
+          button.ui.submit.button.green.small.add.create create and add to foldr
     nav#toc
       .ui.fluid.vertical.menu
 
@@ -323,7 +323,7 @@ block script
             link_label_color = "black";
           }else if(link_label.match(/green/)){
             link_label_color = "green";
-          }else if(link_label.match(/red/)){
+          }else if(link_label.match(/red/) || link_label.match(/important/)){
             link_label_color = "red";
           }else if(link_label.match(/blue/)){
             link_label_color = "blue";
@@ -333,9 +333,11 @@ block script
             link_label_color = "purple";
           }else if(link_label.match(/teal/)){
             link_label_color = "teal";
+          }else if(link_label.match(/yellow/) || link_label.match(/warning/)){
+            link_label_color = "yellow";
           };
           // set up label content
-          link_label = link_label.replace(link_label_color,"").trim();
+          link_label = link_label.replace(link_label_color,"").replace("important","").replace("warning","").replace(":","").trim();
           // append label to link item
           var label_context = {label: link_label, color: link_label_color};
           var $link_label_element = $(link_label_template(label_context));
