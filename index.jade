@@ -5,7 +5,6 @@ block title
 block body
 
   nav#sidebar.desktop-expanded-layout
-    // test deploy.sh
 
     nav#nav.desktop.only
       .ui.borderless.menu
@@ -24,6 +23,7 @@ block body
           i.icon.zoom.in
           include zoom-menu
 
+    //- on mobile / tablet / phone, nav bar content is merged into this bar
     nav#topbar
       .ui.borderless.menu
         a.item.foldr.title
@@ -96,11 +96,6 @@ block body
               .ui.corner.label
                 i.icon.asterisk
           .ui.submit.button.green.small.add.create create and add to foldr
-          //-.field
-            input.new.url(placeholder="想使用的 hackpad ID",type="text",name="new-pad-id",value="new-pad-id_such-as_123g0v")
-          //-.inline.field
-            input.new.instance(placeholder="hackpad 站台名稱",type="text",name="new-pad-instance",value="g0v",size="10")
-            | .hackpad.com
     nav#toc
       .ui.fluid.vertical.menu
 
@@ -111,33 +106,37 @@ block body
 
 block script
   script.
-
+    // prepare to handle url
     var paths = location.pathname.split('/') || [];
     var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
-    var current_foldr_name = "";
-    var iframe_src;
     var history_state={};
-    var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
-    var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
-    //var new_pad_row_index = 3;
+    // prepare to handle backend data (from ethercalc or google spreadsheet)
     var csv_api_source = "";
     var csv_api_source_type = "";
     var csv_api_source_id = ethercalc_name;
+    // prepare to accept foldr options set in ethercalc
     var hide_sheet = false;
     var sort_sheet = true;
+    // prepare to handle iframe content
+    var current_foldr_name = "";
+    var iframe_src;
+    // user preferences saved in local storage
+    var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
+    var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
 
-    // check where the csv will come from
+    // check where the csv will come from, ethercalc or gsheet?
     if(ethercalc_name.length < 40){
       csv_api_source = 'https://ethercalc.org/_/'+ethercalc_name+'/csv';
       csv_api_source_type = "ethercalc";
     }else{
       csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+ethercalc_name+'&exportFormat=csv&gid=0';
       csv_api_source_type = "google";
+      // because posting to gsheet is hard to implement, we don't offer submit feature when using gsheet. since it's easy to moderate editing in gsheet, you can just let users edit or comment on it.
       $("#topbar .add.to.list, #topbar .submit.segment").remove();
     };
 
-    // action for jquery ui sortable
+    // let user sort #toc menu by drag and drop, a very user friendly feature suggest by @ipa. using jquery ui sortable. (also, ethercalc only)
     var sort_ethercalc = function(sort_initial_row, sort_target_row){
       $.ajax({
         url: "https://ethercalc.org/_/"+ethercalc_name,
@@ -145,17 +144,22 @@ block script
         data: 'moveinsert A'+sort_initial_row+':F'+sort_initial_row+' A'+sort_target_row,
         type: 'POST',
         processData: false
+      // to avoid race condition (ethercalc data is re-compiled before post action is finished), use promise mode on $.ajax and prospond compile action for 1 sec. thanks @audreyt :3 :3
       }).then(function(){ setTimeout(function(){
         $("#toc .menu").html("");
         compile_ethercalc();
       }, 1000) });
     }
-
+    // for jquery ui sortable
     var sort_action = {
       update: function( event, ui ) {
+        // previously we have assigned each menu item an id attribute while reading csv data. ha!
         var sort_initial_row = ui.item.attr("id");
+        // get an array with new item order as array index, and old item row number as array value. using a jquery ui built-in function.
         var new_order = $(this).sortable("toArray");
+        // find the old row name of the next sibling of the dragged item.
         var sort_target_neighbor = new_order[$.inArray(sort_initial_row, new_order)+1]
+        // but if item is dragged to bottom, there would be no neighbor. so use the one with largest row number instead.
         if($.type(sort_target_neighbor)==="undefined"){
           new_order = $.map(new_order, function(value, index){
             return parseInt(value);
@@ -165,43 +169,67 @@ block script
         }else{
           var sort_target_row = parseInt(sort_target_neighbor);
         }
+        // convert row numbers from string to number
         var sort_initial_row = parseInt(sort_initial_row);
         //console.log(sort_initial_row+" to "+(sort_target_row-1));
         sort_ethercalc(sort_initial_row, sort_target_row);
       }
     };
 
+    // compile csv data from either ethercalc or google spreadsheet
     var compile_json = function(rows){
 
-      // jump from ethercalc to google spreadsheet
+      // jump from ethercalc to google spreadsheet when A1 is filled with a gsheet id
       if(csv_api_source_type == "ethercalc" && rows[0][0].length >= 40){
-        //console.log(rows[0][0]);
+        // reset all related variables and compile again
         csv_api_source = 'docs.google.com/feeds/download/spreadsheets/Export?key='+rows[0][0]+'&exportFormat=csv&gid=0';
         csv_api_source_type = "google";
         csv_api_source_id = rows[0][0].trim();
+        // remember? we don't support submit forms with gsheet. so need to remove the + button as well as the form segment.
         $("#topbar .add.to.list, #topbar .submit.segment").remove();
         compile_ethercalc();
         return
       }
 
+      // at the first beginning, we don't have a foldr title. so we are going to get the title before any other thing happens.
       var got_title = false
-      var depth = 0 // if depth == 1, link should in accordion
+      // #toc menu items are at root level by default. if depth == 1, they will be in level 1 submenu, which is wrapped inside an semantic ui accordion
+      var depth = 0
 
-      var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
+      var link_template_source ='<a href="{{url}}" target="{{target}}" id="{{id}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
+      //var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
 
-      var add_link = function(row_index, row){
-        try{
-          var link_options = JSON.parse(row[2]);
-        }catch(e){
-          var link_options = {};
-        }
+      var link_label_template_source ='<span class="ui label {{color}}">{{label}}</span>';
+      var link_label_template = Handlebars.compile(link_label_template_source);
 
-        // auto link icon
+      // for link items
+      var add_link = function(row_index, row){
+
+        // prepare to handle link items. these variables will be used with link_template.
         var link_icon = "";
         var link_type = "link";
-        var link_target = "iframe";
         var link_url = row[0].trim();
+
+        // parse link options. version 1
+        //try{
+        //  var link_options = JSON.parse(row[2]);
+        //}catch(e){
+        //  var link_options = {};
+        //}
+        // apply additional link options set in column c... well, since there seems to be only one possible option (target), i would like to make it easier to setup... how about just writing "blank" keyword?
+        //for(key in link_options){
+        //  $link_element.attr(key, link_options[key]);
+        //}
+
+        // parse link options. version 2
+        if(row[2].match(/blank/)){
+          var link_target = "_blank";
+        }else{
+          var link_target = "iframe";
+        }
+
+        // automatically assign various of pretty icons for link items
         if(link_url.match(/^.*.hackpad.com\//)){
           link_icon = "text file outline";
         } else if(link_url.match(/^.*.etherpad.mozilla.org\//)) {
@@ -281,13 +309,40 @@ block script
           link_icon = "globe";
         }
 
-        var context = {url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
-        var $link_element = $(link_template(context)).attr("id", row_index+1);
+        // wrap up link item optinos into a hash
+        var context = {id: row_index+1, url: link_url, subject: row[1], icon: link_icon, type: link_type, target: link_target};
+        // and send it into the html template (meanwhile, assign it an id for jquery sortable)        
+        var $link_element = $(link_template(context));
 
-        for(key in link_options){
-          $link_element.attr(key, link_options[key]);
+        // parse link labels
+        var link_label = row[3].trim();
+        if(link_label.length > 0){
+          // set up label color
+          var link_label_color = "";
+          if(link_label.match(/black/)){
+            link_label_color = "black";
+          }else if(link_label.match(/green/)){
+            link_label_color = "green";
+          }else if(link_label.match(/red/)){
+            link_label_color = "red";
+          }else if(link_label.match(/blue/)){
+            link_label_color = "blue";
+          }else if(link_label.match(/orange/)){
+            link_label_color = "orange";
+          }else if(link_label.match(/purple/)){
+            link_label_color = "purple";
+          }else if(link_label.match(/teal/)){
+            link_label_color = "teal";
+          };
+          // set up label content
+          link_label = link_label.replace(link_label_color,"").trim();
+          // append label to link item
+          var label_context = {label: link_label, color: link_label_color};
+          var $link_label_element = $(link_label_template(label_context));
+          $link_element = $link_element.append($link_label_element);
         }
 
+        // append link item to #toc menu
         if(depth == 1){
           $('#toc .ui.accordion:last').find('.menu').append($link_element);
         }else{
@@ -311,7 +366,7 @@ block script
             iframe_src = context.url;
           }
         }
-
+        // the very first link href would be default iframe_src
         if(!iframe_src) {
           iframe_src = context.url;
         }
@@ -320,18 +375,30 @@ block script
       var accordion_template_source = '<div class="ui accordion"><div class="title header item"><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu"></div></div>';
       var accordion_template = Handlebars.compile(accordion_template_source);
 
+      // for foldr items
       var add_accordion = function(row_index, row){
-        try{
-          var options = JSON.parse(row[2]);
-        }catch(e){
-          var options = {};
+
+        // foldr options, version 1
+        //try{
+        //  var options = JSON.parse(row[2]);
+        //}catch(e){
+        //  var options = {};
+        //}
+        // foldr options, version 2
+        if(row[2].match(/expand/)){
+          var foldr_expand = true;
+        }else{
+          var foldr_expand = false;
         }
-        var context = {title: row[1] };
+
+        var context = {title: row[1]};
         var $accordion_el = $(accordion_template(context)).attr("id", row_index+1);
-        
+
+        // append foldr item to #toc menu
         $accordion_el.appendTo('#toc .ui.vertical.menu').accordion();
-        
-        if(options.expand){
+
+        // expand foldr item if "expand" is set to its option
+        if(foldr_expand){
           $accordion_el.accordion('open',0)
         }
       }
@@ -349,53 +416,57 @@ block script
 
         var this_row_url = row[0].trim();
 
-        // if 1st and 2nd is empty then this a empty row 
+        // if column A and B is empty, then skip this row 
         if(this_row_url.length === 0 && row[1].trim().length === 0){
           return
         }
 
-        // now we have soming thing, should get title first            
+        // of anyone of column A and B is not empty, then parse this row
         if(!got_title){
+          // if foldr title is not set yet, then the content of first non-empty row would be foldr title
           // TODO: need opt....
           $.each(row, function(col_index, col){
             col = col.trim()
 
-            // get the MAGIC title 
+            // get the MAGIC title
+            // first, skip comments
             if(!got_title && !col.match(/^#/) && col.length > 0) {
+              // second, make the first non-comment content foldr title 
               $('#topbar .foldr.title .text').text(col);
               current_foldr_name = col;
               got_title = true;
 
               // detect sheet hide option
-              if(row[2].match(/^hide/)) {
+              if(row[2].match(/hide/)) {
                 hide_sheet = true;
               }
 
               // detect sheet sort option
-              if(row[2].match(/^unsortable/)) {
+              if(row[2].match(/unsortable/)) {
                 sort_sheet = false;
               }
 
-              // detect title row index
+              // detect title row index, not using
               //new_pad_row_index = row_index+2;
 
-              // add to history menu
+              // save current foldr info
               var current_foldr_history = {
                 foldr_name: col,
                 foldr_id: ethercalc_name
               };
 
-              // Remove all items in foldr_histories that share the same foldr_id before unshift
+              // Remove all items in foldr_histories that share the same foldr_id
               foldr_histories = $.grep(foldr_histories, function(value){
                 return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
               });
+              // new history on top
               foldr_histories.unshift(JSON.stringify(current_foldr_history));
+              // add foldr to history
               localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
             }
-
           })
-
         } else {
+          // since foldr title is set, start to get links in #toc
           if(this_row_url.length == 0 || row[0] === ">"){ // folder 
             depth = 1
             add_accordion(row_index, row);
@@ -484,13 +555,12 @@ block script
       }
     }
 
+    // prepare to load or refresh csv data
     var compile_ethercalc = function(){
       if(csv_api_source_type=="ethercalc"){
         // compile ethercalc csv
         $.get(csv_api_source).pipe(CSV.parse).done(compile_json);
-        //console.log($.get(csv_api_source).pipe(CSV.parse));
       }else{
-        //console.log($.get(csv_api_source).pipe(CSV.parse).done);
         // compile gsheet-tabletop json
         Tabletop.init({
           key: csv_api_source_id,
@@ -511,6 +581,7 @@ block script
       }
     };
 
+    // load page~
     compile_ethercalc();
 
     // setup history menu
@@ -612,7 +683,7 @@ block script
       //$("#topbar .form .error.message").hide();
     });
 
-    // post to ethercalc
+    // prepare to post to ethercalc
     var post_ethercalc = function(post_title, post_url){
       $.ajax({
         url: "https://ethercalc.org/_/"+ethercalc_name,
@@ -636,10 +707,7 @@ block script
         $('#toc .ui.vertical.menu').append(new_menu_item);
         // post new hackpad info to ethercalc
         post_ethercalc(new_hackpad_title, new_hackpad_url);
-        //$("#topbar .submit.segment").hide();
-        //$("#topbar .form .ui.error.message").hide();
       }else{
-        //$("#topbar .form .ui.error.message").show();
       }
     });
 
@@ -655,10 +723,7 @@ block script
             .prepend($('<i class="icon url"></i>'))
         );
         post_ethercalc(new_link_title, new_link_url);
-        //$("#topbar .form .new.link").val("");
-        //$("#topbar .form .ui.error.message").hide();
       }else{
-        //$("#topbar .form .ui.error.message").show();
       }
     });
 
@@ -699,7 +764,7 @@ block script
       })
     ;
 
-    // link item events
+    // when click on a #toc link item
     $("#sidebar").on("click tap", "a.link.item", function(event){
       // dynamic url
       var iframe_path = event.target.href;
@@ -724,7 +789,6 @@ block script
       $("#topbar .hide.nav.button").hide();
       $("#topbar .show.nav.button").css("display","");
       $("#topbar .submit.segment").hide();
-
     });
 
     // activate link on click
@@ -738,27 +802,26 @@ block script
       $(this).find('.icon.folder').toggle();
     });
 
-    // edit table
+    // when click on edit table button
     $("#topbar .edit.table").on("click tap", function(){
+      // show sheet
       if(hide_sheet==false){
         if(csv_api_source_type=="ethercalc"){
           $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
-          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+          // make foldr items sortable
+          if(sort_sheet){
+            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+          }
         }else if(csv_api_source_type=="google"){
           $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
-          history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
         }
+        // change url
+        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
       }
       // switch icon
       $("#topbar .edit.table").hide();
       $("#topbar .refresh.table").show();
       $("#topbar .add.to.list").show();
-      // change url
-
-      // make foldr items sortable
-      if(sort_sheet){
-        $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
-      }
     });
 
     // add href attr to foldr title
