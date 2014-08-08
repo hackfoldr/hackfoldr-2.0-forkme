@@ -441,6 +441,11 @@
           // start creating #toc menu
           $.each(rows, function(row_index, row){
           
+            // skip comment rows
+            if(row[0].match(/^#/) || row[1].match(/^#/) || row[2].match(/^#/) || row[3].match(/^#/)){
+              return
+            }
+            
             // for gsheet
             if(!row[0]){
               row[0] = "";
@@ -462,16 +467,15 @@
               return
             }
             
-            // of anyone of column A and B is not empty, then parse this row
+            // if anyone of column A and B is not empty, then parse this row
             if(!got_title){
               // if foldr title is not set yet, then the content of first non-empty row would be foldr title
               // TODO: need opt....
               $.each(row, function(col_index, col){
-                col = col.trim()
+                col = col.trim();
                 
                 // get the MAGIC title
-                // first, skip comments
-                if(!got_title && !col.match(/^#/) && col.length > 0) {
+                if(!got_title && col.length > 0) {
                   // second, make the first non-comment content foldr title 
                   $('#topbar .foldr.title .text').text(col);
                   current_foldr_name = col;
