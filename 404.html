@@ -341,24 +341,32 @@
             
             if(link_label.length > 0){
               // set up label color
-              if(link_label.match(/gray/) || link_label.match(/issue/)){
+              if(link_label.match(/^gray/) || link_label.match(/:issue/)){
                 link_label_color = "gray";
-              }else if(link_label.match(/black/)){
+              }else if(link_label.match(/^deep-blue/)){
+                link_label_color = "deep-blue";
+              }else if(link_label.match(/^deep-green/)){
+                link_label_color = "deep-green";
+              }else if(link_label.match(/^deep-purple/)){
+                link_label_color = "deep-purple";
+              }else if(link_label.match(/^black/)){
                 link_label_color = "black";
-              }else if(link_label.match(/green/)){
+              }else if(link_label.match(/^green/)){
                 link_label_color = "green";
-              }else if(link_label.match(/red/) || link_label.match(/important/)){
+              }else if(link_label.match(/^red/) || link_label.match(/:important/)){
                 link_label_color = "red";
-              }else if(link_label.match(/blue/)){
+              }else if(link_label.match(/^blue/)){
                 link_label_color = "blue";
-              }else if(link_label.match(/orange/)){
+              }else if(link_label.match(/^orange/)){
                 link_label_color = "orange";
-              }else if(link_label.match(/purple/)){
+              }else if(link_label.match(/^purple/)){
                 link_label_color = "purple";
-              }else if(link_label.match(/teal/)){
+              }else if(link_label.match(/^teal/)){
                 link_label_color = "teal";
-              }else if(link_label.match(/yellow/) || link_label.match(/warning/)){
+              }else if(link_label.match(/^yellow/) || link_label.match(/:warning/)){
                 link_label_color = "yellow";
+              }else if(link_label.match(/^pink/)){
+                link_label_color = "pink";
               };
               // set up label content
               link_label = link_label.replace(link_label_color,"").replace("important","").replace("warning","").replace("issue","").replace(":","").trim();
