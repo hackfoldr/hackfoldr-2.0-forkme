@@ -407,7 +407,7 @@
             }
           }
           
-          var accordion_template_source = '<div class="ui accordion"><div class="title header item"><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu"></div></div>';
+          var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu {{mode}}"></div></div>';
           var accordion_template = Handlebars.compile(accordion_template_source);
           
           // for foldr items
@@ -421,21 +421,23 @@
             //}
             // foldr options, version 2
             if(row[2].match(/expand/)){
-              var foldr_expand = true;
+              var foldr_mode = "active";
+            }else if(row[2].match(/collapse/)){
+              var foldr_mode = "collapsed-subfoldr";
             }else{
-              var foldr_expand = false;
+              var foldr_mode = "";
             }
             
-            var context = {title: row[1]};
-            var $accordion_el = $(accordion_template(context)).attr("id", row_index+1);
+            var context = {title: row[1], id: row_index+1, mode: foldr_mode};
+            var $accordion_el = $(accordion_template(context));
             
             // append foldr item to #toc menu
             $accordion_el.appendTo('#toc .ui.vertical.menu').accordion();
             
             // expand foldr item if "expand" is set to its option
-            if(foldr_expand){
-              $accordion_el.accordion('open',0)
-            }
+            //if(foldr_mode){
+            //  $accordion_el.accordion('open',0)
+            //}
           }
           
           // start creating #toc menu
@@ -519,10 +521,10 @@
               //});
             } else {
               // since foldr title is set, start to get links in #toc
-              if(this_row_url.length == 0 || this_row_url === ">"){ // folder 
+              if(this_row_url.length == 0 || this_row_url.match(/^>/)){ // folder 
                 depth = 1
                 add_accordion(row_index, row);
-              }else if(this_row_url === "<"){ // end folder
+              }else if(this_row_url.match(/^</)){ // end folder
                 depth = 0
               }else { // link
                 add_link(row_index, row);
@@ -595,7 +597,7 @@
               return false;
             }
           };
-          $("#toc .ui.accordion .content").filter(children_are_less_or_not).addClass("active").prev(".header").addClass("active");
+          $("#toc .ui.accordion .content").filter(children_are_less_or_not).not(".collapsed-subfoldr").addClass("active").prev(".header").addClass("active");
           
           // change foldr icons for auto activated subfoldrs
           $("#toc .ui.accordion .header.active .icon.folder.closed").hide();
