@@ -425,7 +425,7 @@ block script
           return
         }
 
-        // for gsheet
+        // prepare column A - D for following actions
         if(!row[0]){
           row[0] = "";
         }
@@ -440,61 +440,68 @@ block script
         }
 
         var this_row_url = row[0].trim();
+        var this_row_title = row[1].trim();
 
         // if column A and B is empty, then skip this row 
-        if(this_row_url.length === 0 && row[1].trim().length === 0){
+        if(this_row_url.length === 0 && this_row_title.length === 0){
           return
         }
 
         // if anyone of column A and B is not empty, then parse this row
+        // if foldr title is not set yet, then the content of first non-empty row would be foldr title
         if(!got_title){
-          // if foldr title is not set yet, then the content of first non-empty row would be foldr title
-          // TODO: need opt....
-          $.each(row, function(col_index, col){
-            col = col.trim();
 
-            // get the MAGIC title
-            if(!got_title && col.length > 0) {
-              // second, make the first non-comment content foldr title 
-              $('#topbar .foldr.title .text').text(col);
-              current_foldr_name = col;
-              got_title = true;
+          if(this_row_title.length > 0){
 
-              // detect sheet hide option
-              if(row[2].match(/hide/)) {
-                hide_sheet = true;
-              }
+            // make the first non-comment content foldr title 
+            $('#topbar .foldr.title .text').text(this_row_title);
+            current_foldr_name = this_row_title;
+            got_title = true;
 
-              // detect sheet sort option
-              if(row[2].match(/unsortable/)) {
-                sort_sheet = false;
-              }
-
-              // detect title row index, not using
-              //new_pad_row_index = row_index+2;
-
-              // save current foldr info
-              var current_foldr_history = {
-                foldr_name: col,
-                foldr_id: ethercalc_name
-              };
-
-              // Remove all items in foldr_histories that share the same foldr_id
-              foldr_histories = $.grep(foldr_histories, function(value){
-                return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
-              });
-              // new history on top
-              foldr_histories.unshift(JSON.stringify(current_foldr_history));
-              // add foldr to history
-              localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+            // detect sheet hide option
+            if(row[2].match(/hide/)) {
+              hide_sheet = true;
             }
-          })
+
+            // detect sheet sort option
+            if(row[2].match(/unsortable/)) {
+              sort_sheet = false;
+            }
+
+            // detect title row index, not using
+            //new_pad_row_index = row_index+2;
+
+            // save current foldr info
+            var current_foldr_history = {
+              foldr_name: this_row_title,
+              foldr_id: ethercalc_name
+            };
+
+            // Remove all items in foldr_histories that share the same foldr_id
+            foldr_histories = $.grep(foldr_histories, function(value){
+              return JSON.parse(value).foldr_id !== current_foldr_history.foldr_id;
+            });
+            // new history on top
+            foldr_histories.unshift(JSON.stringify(current_foldr_history));
+            // add foldr to history
+            localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+          }else{
+            return
+          }
+
+          // TODO: need opt....
+          //$.each(row, function(col_index, col){
+          //  col = col.trim();
+          //  // get the MAGIC title
+          //  if(!got_title && col.length > 0) {
+          //  }
+          //});
         } else {
           // since foldr title is set, start to get links in #toc
-          if(this_row_url.length == 0 || row[0] === ">"){ // folder 
+          if(this_row_url.length == 0 || this_row_url === ">"){ // folder 
             depth = 1
             add_accordion(row_index, row);
-          }else if(row[0] === "<"){ // end folder
+          }else if(this_row_url === "<"){ // end folder
             depth = 0
           }else { // link
             add_link(row_index, row);
@@ -503,7 +510,7 @@ block script
               if(iframe_src == "edit"){
                 $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
               }else{
-                $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+                $("title").text(this_row_title+" | "+current_foldr_name+" | hackfoldr");
               }
             }
           }
