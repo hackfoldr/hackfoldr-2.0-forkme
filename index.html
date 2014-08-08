@@ -818,11 +818,6 @@
           }
           history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
           
-          // disable sortable
-          if($("#toc .vertical.menu, #toc .vertical.menu .menu").hasClass("sortable")){
-            $(this).removeClass("sortable").sortable("destroy");
-          }
-          
           // when leaving ethercalc, show edit icon again
           if(event.target.target !== "_blank"){
             $("#topbar .edit.table").show();
@@ -837,6 +832,11 @@
               })[0].nodeValue+" | "+current_foldr_name+" | hackfoldr"
             );
           }
+          
+          // disable sortable
+          //if($("#toc .vertical.menu, #toc .vertical.menu .menu").hasClass("sortable")){
+          //  $(this).removeClass("sortable").sortable("destroy");
+          //}
           
           // for mobile: set toc default display (hidden)
           $("#toc").css("display","");
