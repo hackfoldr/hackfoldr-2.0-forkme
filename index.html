@@ -221,7 +221,7 @@
           //var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
           var link_template = Handlebars.compile(link_template_source);
           
-          var link_label_template_source ='<span class="ui label {{color}}">{{label}}</span>';
+          var link_label_template_source ='<div class="ui label {{color}}">{{label}}</div>';
           var link_label_template = Handlebars.compile(link_label_template_source);
           
           // for link items
@@ -517,7 +517,11 @@
                 add_link(row_index, row);
                 // set initial page title
                 if(this_row_url == iframe_src){
-                  $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+                  if(iframe_src == "edit"){
+                    $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
+                  }else{
+                    $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+                  }
                 }
               }
             }
@@ -805,7 +809,7 @@
           })
         ;
         
-        // when click on a #toc link item
+        // when click on a #nav or #toc link item
         $("#sidebar").on("click tap", "a.link.item", function(event){
           // dynamic url
           var iframe_path = event.target.href;
@@ -814,6 +818,9 @@
           }
           history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
           
+          // disable sortable
+          $("#toc .vertical.menu, #toc .vertical.menu .menu").removeClass("sortable").sortable("destroy");
+          
           // when leaving ethercalc, show edit icon again
           if(event.target.target !== "_blank"){
             $("#topbar .edit.table").show();
@@ -821,8 +828,12 @@
             $("#topbar .add.to.list").hide();
             $("#topbar .submit.segment").hide();
             
-          // reset page title
-          $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
+            // reset page title
+            $("title").text(
+              $(this).contents().filter(function(){ 
+                return this.nodeType == 3;
+              })[0].nodeValue+" | "+current_foldr_name+" | hackfoldr"
+            );
           }
           
           // for mobile: set toc default display (hidden)
@@ -860,6 +871,8 @@
             history.pushState(history_state,'', '/'+ethercalc_name+'/edit');
             // change page title
             $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
+            // inactive #toc items
+            $("#toc a.link.item").removeClass("active");
           }
           // switch icon
           $("#topbar .edit.table").hide();

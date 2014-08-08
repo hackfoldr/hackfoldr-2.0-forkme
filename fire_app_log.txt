@@ -988,4 +988,11 @@
 2014-08-08 14:09:06 identical css/global.css.map 
 2014-08-08 14:12:01 overwrite css/global.css 
 2014-08-08 14:12:02 overwrite css/global.css.map 
+<<<<<<< HEAD
+>>>>>>> master
+=======
+2014-08-08 15:24:40 overwrite css/global.css 
+2014-08-08 15:24:40 identical css/global.css.map 
+2014-08-08 15:25:26 overwrite css/global.css 
+2014-08-08 15:25:26 identical css/global.css.map 
 >>>>>>> master
