@@ -200,7 +200,7 @@ block script
       //var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
 
-      var link_label_template_source ='<span class="ui label {{color}}">{{label}}</span>';
+      var link_label_template_source ='<div class="ui label {{color}}">{{label}}</div>';
       var link_label_template = Handlebars.compile(link_label_template_source);
 
       // for link items
@@ -496,7 +496,11 @@ block script
             add_link(row_index, row);
             // set initial page title
             if(this_row_url == iframe_src){
-              $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+              if(iframe_src == "edit"){
+                $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
+              }else{
+                $("title").text(row[1]+" | "+current_foldr_name+" | hackfoldr");
+              }
             }
           }
         }
@@ -800,8 +804,12 @@ block script
         $("#topbar .add.to.list").hide();
         $("#topbar .submit.segment").hide();
 
-      // reset page title
-      $("title").text($(this).text()+" | "+current_foldr_name+" | hackfoldr");
+        // reset page title
+        $("title").text(
+          $(this).contents().filter(function(){ 
+            return this.nodeType == 3;
+          })[0].nodeValue+" | "+current_foldr_name+" | hackfoldr"
+        );
       }
 
       // for mobile: set toc default display (hidden)
