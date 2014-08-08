@@ -361,6 +361,7 @@ block script
           }else{
             iframe_src = 'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit';
           };
+          $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
           $("#topbar .edit.table").hide();
           $("#topbar .refresh.table").show();
           $("#topbar .add.to.list").show();
@@ -827,7 +828,9 @@ block script
           $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
         }
         // change url
-        history.pushState(history_state,'', '/'+ethercalc_name+'/'+"edit") ;
+        history.pushState(history_state,'', '/'+ethercalc_name+'/edit');
+        // change page title
+        $("title").text("編輯 | "+current_foldr_name+" | hackfoldr");
       }
       // switch icon
       $("#topbar .edit.table").hide();
