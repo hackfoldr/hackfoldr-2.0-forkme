@@ -819,7 +819,9 @@
           history.pushState(history_state,'', '/'+ethercalc_name+'/'+encodeURIComponent(encodeURIComponent(iframe_path))) ;
           
           // disable sortable
-          $("#toc .vertical.menu, #toc .vertical.menu .menu").removeClass("sortable").sortable("destroy");
+          if($("#toc .vertical.menu, #toc .vertical.menu .menu").hasClass("sortable")){
+            $(this).removeClass("sortable").sortable("destroy");
+          }
           
           // when leaving ethercalc, show edit icon again
           if(event.target.target !== "_blank"){
