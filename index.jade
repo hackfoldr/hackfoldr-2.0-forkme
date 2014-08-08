@@ -320,7 +320,7 @@ block script
 
         if(link_label.length > 0){
           // set up label color
-          if(link_label.match(/gray/)){
+          if(link_label.match(/gray/) || link_label.match(/issue/)){
             link_label_color = "gray";
           }else if(link_label.match(/black/)){
             link_label_color = "black";
@@ -340,7 +340,7 @@ block script
             link_label_color = "yellow";
           };
           // set up label content
-          link_label = link_label.replace(link_label_color,"").replace("important","").replace("warning","").replace(":","").trim();
+          link_label = link_label.replace(link_label_color,"").replace("important","").replace("warning","").replace("issue","").replace(":","").trim();
           // append label to link item
           var label_context = {label: link_label, color: link_label_color};
           var $link_label_element = $(link_label_template(label_context));
