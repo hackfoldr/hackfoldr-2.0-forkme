@@ -443,11 +443,6 @@
           // start creating #toc menu
           $.each(rows, function(row_index, row){
           
-            // skip comment rows
-            if(row[0].match(/^#/) || row[1].match(/^#/) || row[2].match(/^#/) || row[3].match(/^#/)){
-              return
-            }
-            
             // prepare column A - D for following actions
             if(!row[0]){
               row[0] = "";
@@ -460,6 +455,11 @@
             }
             if(!row[3]){
               row[3] = "";
+            }
+            
+            // skip comment rows
+            if(row[0].match(/^#/) || row[1].match(/^#/) || row[2].match(/^#/) || row[3].match(/^#/)){
+              return
             }
             
             var this_row_url = row[0].trim();
