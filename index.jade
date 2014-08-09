@@ -97,7 +97,7 @@ block body
                 i.icon.asterisk
           button.ui.submit.button.green.small.add.create create and add to foldr
     nav#toc
-      .ui.fluid.vertical.menu
+      .ui.fluid.vertical.menu.sortable
 
   #wrapper.desktop-expanded-layout
 
@@ -386,8 +386,7 @@ block script
         }
       }
       
-      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" data-content="{{title}}" style="display: none;"></i>{{title}}</div><div class="content ui small menu {{mode}}"></div></div>';
-      var accordion_template = Handlebars.compile(accordion_template_source);
+      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" data-content="{{title}} style="display: none;"></i>{{title}}</div><div class="content ui small sortable menu {{mode}}"></div></div>';      var accordion_template = Handlebars.compile(accordion_template_source);
 
       // for foldr items
       var add_accordion = function(row_index, row){
@@ -586,7 +585,7 @@ block script
       if(current_iframe_url == "edit"){
         if(csv_api_source_type=="ethercalc"){
           if(sort_sheet){
-            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+            $("#toc .sortable").sortable(sort_action);
           }
         }
       }
@@ -854,12 +853,12 @@ block script
     // when click on edit table button
     $("#topbar .edit.table").on("click tap", function(){
       // show sheet
-      if(hide_sheet==false){
+      if(!hide_sheet){
         if(csv_api_source_type=="ethercalc"){
           $("#topbar .edit.table").attr("href",'https://ethercalc.org/'+csv_api_source_id);
           // make foldr items sortable
           if(sort_sheet){
-            $("#toc .vertical.menu, #toc .vertical.menu .menu").addClass("sortable").sortable(sort_action);
+            $("#toc .sortable").sortable(sort_action);
           }
         }else if(csv_api_source_type=="google"){
           $("#topbar .edit.table").attr("href",'https://docs.google.com/spreadsheets/d/'+csv_api_source_id+'/edit');
