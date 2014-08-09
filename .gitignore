@@ -223,3 +223,9 @@ pip-log.txt
 fire_app_log.txt
 .editorconfig
 public/library.html
+
+#############
+## Node.js
+#############
+
+node_modules
