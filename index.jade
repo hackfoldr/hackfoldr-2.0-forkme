@@ -10,17 +10,17 @@ block body
       .ui.borderless.menu
         include white_label-shortcuts-nav
         .ui.dropdown.icon.item.history
-          i.icon.time
+          i.icon.time(data-content="紀錄")
           include foldr_history-menu
         .ui.dropdown.icon.item.about
-          i.icon.help
+          i.icon.help(data-content="說明")
           include help-menu
         a.right.item.expand.button.collapsed.mode.hidden.desktop.only
           i.icon.arrow.right
         a.right.item.collapse.button.expanded.mode.desktop.only
           i.icon.arrow.left
         .right.icon.item.zoom.ui.dropdown
-          i.icon.zoom.in
+          i.icon.zoom.in(data-content="縮放")
           include zoom-menu
 
     //- on mobile / tablet / phone, nav bar content is merged into this bar
@@ -31,10 +31,10 @@ block body
           span.text
         include white_label-shortcuts-topbar
         .ui.dropdown.icon.item.history.tablet.only
-          i.icon.time
+          i.icon.time(data-content="紀錄")
           include foldr_history-menu
         .ui.dropdown.icon.item.about.tablet.only
-          i.icon.help
+          i.icon.help(data-content="說明")
           include help-menu
         a.right.item.show.nav.button.collapsed.mode.mobile.only
           i.icon.arrow.down
@@ -55,14 +55,14 @@ block body
               i.icon.help
               include help-menu
         .right.icon.item.zoom.ui.dropdown.tablet.only
-          i.icon.zoom.in
+          i.icon.zoom.in(data-content="縮放")
           include zoom-menu
         a.right.icon.item.edit.table(target="iframe")
-          i.icon.pencil
+          i.icon.pencil(data-content="編輯")
         a.right.icon.item.refresh.table.hidden
-          i.icon.repeat
+          i.icon.repeat(data-content="更新")
         a.right.icon.item.add.to.list.hidden
-          i.icon.add
+          i.icon.add(data-content="新增")
       .ui.segment.submit.no.margin.hidden.expanded.mode
         .ui.form
           .inline.field
@@ -196,7 +196,7 @@ block script
       // #toc menu items are at root level by default. if depth == 1, they will be in level 1 submenu, which is wrapped inside an semantic ui accordion
       var depth = 0
 
-      var link_template_source ='<a href="{{url}}" target="{{target}}" id="{{id}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
+      var link_template_source ='<a href="{{url}}" target="{{target}}" id="{{id}}" class="{{type}} item"><i class="icon {{icon}}" data-content="{{subject}}"></i>{{subject}}</a>';
       //var link_template_source ='<a href="{{url}}" target="{{target}}" class="{{type}} item"><i class="icon {{icon}}"></i>{{subject}}</a>';
       var link_template = Handlebars.compile(link_template_source);
 
@@ -386,7 +386,7 @@ block script
         }
       }
       
-      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" style="display: none;"></i>{{title}}</div><div class="content ui small menu {{mode}}"></div></div>';
+      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" data-content="{{title}}" style="display: none;"></i>{{title}}</div><div class="content ui small menu {{mode}}"></div></div>';
       var accordion_template = Handlebars.compile(accordion_template_source);
 
       // for foldr items
@@ -590,6 +590,9 @@ block script
           }
         }
       }
+
+      // enable popup
+      $('i.icon').popup();
     }
 
     // prepare to load or refresh csv data
@@ -876,3 +879,6 @@ block script
 
     // add href attr to foldr title
     $("#topbar .foldr.title").attr("href",'/'+ethercalc_name);
+
+    // enable popup
+    $('i.icon').popup();
