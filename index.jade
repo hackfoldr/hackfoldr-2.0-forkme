@@ -16,9 +16,9 @@ block body
           i.icon.help(data-content="說明")
           include help-menu
         a.right.item.expand.button.collapsed.mode.hidden.desktop.only
-          i.icon.arrow.right
+          i.icon.arrow.right(data-content="展開")
         a.right.item.collapse.button.expanded.mode.desktop.only
-          i.icon.arrow.left
+          i.icon.arrow.left(data-content="收合")
         .right.icon.item.zoom.ui.dropdown
           i.icon.zoom.in(data-content="縮放")
           include zoom-menu
@@ -37,11 +37,11 @@ block body
           i.icon.help(data-content="說明")
           include help-menu
         a.right.item.show.nav.button.collapsed.mode.mobile.only
-          i.icon.arrow.down
+          i.icon.arrow.down(data-content="展開")
         a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
-          i.icon.arrow.up
+          i.icon.arrow.up(data-content="收合")
         .right.ui.dropdown.icon.item.meta.phone.only
-          i.icon.ellipsis.vertical
+          i.icon.ellipsis.vertical(data-content="選項")
           .menu
             a.item.edit.table.tiny.only(target="iframe") 編輯
               i.icon.pencil
