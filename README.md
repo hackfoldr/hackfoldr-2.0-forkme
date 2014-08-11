@@ -9,49 +9,30 @@ Using:
 * jQuery
 * Handlebars
 * Tabletop
-* Fire.app
+* Fire.app or gulp.js
 
 Development
 ------------
 
 * development on master branch
-* deploy on gh-pages branch
+* deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)
 
-###Windows
-
-#### Fire.app
+### Fire.app for development
 * development:
     * using Fire.app to watch .jade and .sass
-    * using Github for Windows to sync and commit
-* ~~deploy: .\deploy.bat (on master)~~ It would auto deploy via travis-ci. You only commit on master branch and push.
+    * using Github for Windows or git on linux to sync and commit
 
-#### Gulp.js
+### Gulp.js for development
 * pre-dev:
     * install: [node](http://nodejs.org/)
-    * install: [ruby 2.0.0](rubyinstaller.org)
+    * install: ruby 2.0.0 (use [rubyuinstaller](http://rubyinstaller.org) on windows, use `rvm install 2.0.0` on linux/mac)
     * install sass (`gem install sass --version "3.3.3"`)
     * install compass (`gem install compass --version "1.0.0.alpha.19"`)
     * `npm i`
 * devlopment:
     * `npm run build` (1st time to create `_public` folder)
     * `npm start`
-
-###Mac / Linux
-
-#### Fire.app
-* development: using Fire.app to watch .jade and .sass
-* deploy: .\deploy.sh (on master) (probably, not tested)
-
-#### Gulp.js
-* pre-dev:
-    * install: [node](http://nodejs.org/)
-    * install: ruby 2.0.0(`rvm install 2.0.0`)
-    * install sass (`gem install sass --version "3.3.3"`)
-    * install compass (`gem install compass --version "1.0.0.alpha.19"`)
-    * `npm i`
-* devlopment:
-    * `npm run build` (1st time to create `_public` folder)
-    * `npm start`
+    * open `http://localhost:3000/` to see the result.
 
 
 Mockup / Prototype
