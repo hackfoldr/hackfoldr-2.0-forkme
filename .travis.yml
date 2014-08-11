@@ -1,0 +1,28 @@
+language: node_js
+
+node_js:
+  - '0.10'
+
+before_install:
+  - gem update --system
+  - gem install sass --version "3.3.3"
+  - gem install compass --version "1.0.0.alpha.19"
+  - gem install tilt  --version "1.3.0"
+
+before_script:
+  - chmod +x .travis/after_success.sh
+  - chmod +x ./deploy
+
+script:
+  - gulp build
+
+branches:
+  except:
+    - gh-pages
+
+env:
+  global:
+    - REPO="git@github.com:hackfoldr/hackfoldr-2.0"
+    - secure: "IT1pzPMfW2EQZQxPIXMYtDVrn5psP7yai97aDoQGJzdMCZl9oKmp+jb2MX3503X9IjfoGpWJdu5N71o1aQR27wWWMnmsOJkf/UHUVB43WdyjFik+69OyPxbzq44OU7Ipn89WJut259qBwbrgtX9lYMtRB4pxpsw2nWVkWcu5fl0="
+
+after_success: .travis/after_success.sh

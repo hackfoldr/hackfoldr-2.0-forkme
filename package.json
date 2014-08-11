@@ -1,0 +1,37 @@
+{
+    "name"       : "hackfoldr-2.0",
+    "description": "The New Hackfoldr for MozTW",
+    "version"    : "2.0.0",
+    "contributor": [
+        {
+            "name" : "ETBlue"
+        }
+    ],
+    "scripts": {
+        "build": "gulp build",
+        "start": "gulp dev"
+    },
+    "engines":{
+        "node": "0.10.x"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "LiveScript": "^1.2.0",
+        "gulp": "^3.7.0",
+        "gulp-util": "~2.2.14",
+        "express": "^4.3.1",
+        "connect-livereload": "^0.4.0",
+        "tiny-lr": "0.0.7",
+        "gulp-livereload": "^2.0.0",
+        "gulp-jade": "^0.5.0",
+        "gulp-compass": "1.2.0"
+    },
+    "repository": [
+        {
+            "type": "git",
+            "url" : "https://github.com/hackfoldr/hackfoldr-2.0"
+        }
+    ],
+    "license": "MIT"
+}
