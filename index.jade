@@ -388,7 +388,7 @@ block script
         }
       }
       
-      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" data-content="{{title}} style="display: none;"></i>{{title}}</div><div class="content ui small sortable menu {{mode}}"></div></div>';      var accordion_template = Handlebars.compile(accordion_template_source);
+      var accordion_template_source = '<div class="ui accordion"><div id="{{id}}" class="title header item {{mode}}"><i class="icon folder closed"></i><i class="icon folder open hidden" data-content="{{title}}" style="display: none;"></i>{{title}}</div><div class="content ui small sortable menu {{mode}}"></div></div>';      var accordion_template = Handlebars.compile(accordion_template_source);
 
       // for foldr items
       var add_accordion = function(row_index, row){
