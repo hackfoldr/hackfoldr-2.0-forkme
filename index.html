@@ -169,7 +169,9 @@ var compile_json = function(rows){
     } else if(link_url.match(/^.*.youtube.com\/embed\//)) {
       link_icon = "youtube play";
     } else if(link_url.match(/^.*.youtube.com\//)) {
-      link_icon = "youtube";
+      var startPostition = link_url.indexOf('v=') + 2;
+      link_url = '//www.youtube.com/embed/' + link_url.substring(startPostition, startPostition + 11);
+      link_icon = "youtube play";
     } else if(link_url.match(/^.*.ustream.tv\//)) {
       link_icon = "facetime video";
     } else if(link_url.match(/^.*.www.justin.tv\//)) {
