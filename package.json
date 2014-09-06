@@ -9,7 +9,8 @@
     ],
     "scripts": {
         "build": "gulp build",
-        "start": "gulp dev"
+        "start": "gulp dev",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "engines":{
         "node": "0.10.x"
