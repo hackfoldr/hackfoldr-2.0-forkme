@@ -280,6 +280,8 @@ block script
           var startPostition = link_url.indexOf('v=') + 2;
           link_url = '//www.youtube.com/embed/' + link_url.substring(startPostition, startPostition + 11);
           link_icon = "youtube play";
+        } else if(link_url.match(/^.*.flickr.com\//)) {
+          link_icon = "flickr";
         } else if(link_url.match(/^.*.ustream.tv\//)) {
           link_icon = "facetime video";
         } else if(link_url.match(/^.*.www.justin.tv\//)) {
@@ -550,6 +552,8 @@ block script
         //} else if(link_url.match(/^.*.gov.tw\//)) {
         //  return true;
         } else if(link_url.match(/^.*.www.loomio.org\//)) {
+          return true;
+        } else if(link_url.match(/^.*.flickr.com\//)) {
           return true;
         } else {
           return false;
