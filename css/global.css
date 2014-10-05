@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\000033}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\000033}}
 html {
   font-size: 18px;
   font-family: "微軟正黑體", sans-serif;
@@ -7,19 +7,19 @@ html {
   background-color: #d0d0d0;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\000033}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\000033}}
   html {
     font-size: 16px;
   }
 }
 @media screen and (max-width: 480px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\000033}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\000033}}
   html {
     font-size: 14px;
   }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000313}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000313}}
 html, body, div, nav, section, article, header, footer, h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
@@ -29,169 +29,169 @@ html, body, div, nav, section, article, header, footer, h1, h2, h3, h4 {
   box-sizing: border-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000319}}
 p {
   line-height: 1.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000322}}
 a, a:link {
   text-decoration: none;
   color: inherit;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000328}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000328}}
 .ui.menu {
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000331}}
 .ui.label.white {
   background: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000336}}
 .ui.yellow.label {
   background-color: #f0ad4e !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000339}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000339}}
 .ui.purple.label {
   background-color: #9b96f7 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000342}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000342}}
 .ui.pink.label {
   background-color: #f3a8aa !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000345}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000345}}
 .ui.deep-blue.label {
   background-color: #006dcc !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000348}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000348}}
 .ui.deep-green.label {
   background-color: #5bb75b !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000351}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000351}}
 .ui.deep-purple.label {
   background-color: #564f8a !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000354}}
 .no.margin {
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000357}}
 .float.right {
   float: right;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000360}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000360}}
 .align.right {
   text-align: right;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000363}}
 .one.line.height {
   line-height: 1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000366}}
 .two.line.height {
   line-height: 2em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000369}}
 .indent {
   margin-left: 2rem;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000372}}
 .hidden, .shy {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000375}}
 .inline.block {
   display: inline-block;
 }
 
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000378}}
   .desktop.only {
     display: none !important;
   }
 }
 
 @media screen and (min-width: 1025px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000382}}
   .mobile.only {
     display: none !important;
   }
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000382}}
   .mobile.only {
     display: "";
   }
 }
 
 @media screen and (min-width: 1025px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000388}}
   .tablet.only {
     display: none !important;
   }
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000388}}
   .tablet.only {
     display: "";
   }
 }
 @media screen and (min-width: 641px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000388}}
   .tablet.only {
     display: "";
   }
 }
 @media screen and (max-width: 640px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000388}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000388}}
   .tablet.only {
     display: none !important;
   }
 }
 
 @media screen and (min-width: 641px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000398}}
   .phone.only {
     display: none !important;
   }
 }
 @media screen and (max-width: 640px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\0000398}}
   .phone.only {
     display: "";
   }
 }
 
 @media screen and (min-width: 481px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003104}}
   .tiny.only {
     display: none !important;
   }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003109}}
 .placeholder {
   border: 1px rgba(0, 0, 0, 0.3) dashed;
   height: 3rem;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003115}}
 #sidebar {
   width: 20rem;
   height: 100%;
@@ -212,7 +212,7 @@ a, a:link {
   transition-timing-function: ease;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003115}}
   #sidebar {
     width: 100%;
     height: 2.75rem;
@@ -220,110 +220,110 @@ a, a:link {
   }
 }
 @media screen and (min-width: 1025px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003134}}
   #sidebar.desktop-expanded-layout {
     left: 0;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003136}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003136}}
   #sidebar.desktop-collapsed-layout {
     left: -17rem;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003140}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003140}}
 #sidebar #toc > .ui.menu {
   border-top: 2px rgba(0, 0, 0, 0.5) solid;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003139}}
   #sidebar #toc {
     display: none;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003144}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003144}}
   #sidebar #toc .accordion {
     width: 100%;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003148}}
 #sidebar #toc > .ui.menu, #sidebar #topbar > .ui.menu {
   -moz-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003151}}
 #sidebar #topbar > .ui.menu {
   z-index: 2;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003155}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003155}}
 #sidebar #topbar .title.item {
   font-weight: 700;
   width: 12rem;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003155}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003155}}
   #sidebar #topbar .title.item {
     width: auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003160}}
 #sidebar #topbar .submit.segment {
   background: none;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003160}}
   #sidebar #topbar .submit.segment {
     background: white;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003165}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003165}}
 #sidebar #nav > .ui.menu {
   background-color: rgba(255, 255, 255, 0);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003170}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003170}}
 #sidebar #nav > .menu > .dropdown.about .menu, #sidebar #topbar > .menu > .dropdown.about .menu {
   width: 14rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003173}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003173}}
 #sidebar #nav > .menu > .dropdown.shortcuts .menu, #sidebar #nav > .menu > .dropdown.history .menu, #sidebar #topbar > .menu > .dropdown.shortcuts .menu, #sidebar #topbar > .menu > .dropdown.history .menu {
   width: 14rem;
 }
 @media screen and (max-width: 480px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003175}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003175}}
   #sidebar #nav > .menu > .edit.table, #sidebar #nav > .menu > .refresh.table, #sidebar #topbar > .menu > .edit.table, #sidebar #topbar > .menu > .refresh.table {
     display: none !important;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003180}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003180}}
 #sidebar #nav .dropdown .menu .item i.icon, #sidebar #topbar .dropdown .menu .item i.icon {
   float: right;
   margin-right: 0;
 }
 @media screen and (max-width: 640px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003183}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003183}}
   #sidebar #nav .zoom, #sidebar #topbar .zoom {
     display: none;
   }
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003186}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003186}}
   #sidebar #nav .zoom .menu, #sidebar #topbar .zoom .menu {
     right: 0;
     left: auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003191}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003191}}
 #sidebar #nav .meta > .menu, #sidebar #topbar .meta > .menu {
   right: 0;
   left: auto;
   width: 6rem;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003195}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003195}}
 #sidebar #nav .meta > .menu > .item > .menu, #sidebar #topbar .meta > .menu > .item > .menu {
   right: 100%;
   left: auto !important;
   width: 14rem;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003200}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003200}}
 #wrapper {
   position: absolute;
   left: 0;
@@ -340,7 +340,7 @@ a, a:link {
   transition-timing-function: ease;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003200}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003200}}
   #wrapper {
     padding-top: 2.75rem;
     padding-left: 0;
@@ -348,16 +348,16 @@ a, a:link {
   }
 }
 @media screen and (min-width: 1025px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003217}}
   #wrapper.desktop-expanded-layout {
     padding-left: 20rem;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003219}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003219}}
   #wrapper.desktop-collapsed-layout {
     padding-left: 3rem;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003222}}
 #wrapper .frame {
   position: relative;
   width: 100%;
@@ -367,7 +367,7 @@ a, a:link {
   bottom: 0;
   right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003231}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003231}}
 #wrapper #iframe {
   -moz-box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
@@ -381,17 +381,17 @@ a, a:link {
   background-color: #f9f9f9;
 }
 @media screen and (max-width: 1024px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003231}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003231}}
   #wrapper #iframe {
     z-index: 0;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003246}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003246}}
 #wrapper .normal.size.frame {
   width: 100%;
   height: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003249}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003249}}
 #wrapper .normal.size#iframe {
   -ms-zoom: 1;
   -moz-transform: scale(1);
@@ -401,12 +401,12 @@ a, a:link {
   -o-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003259}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003259}}
 #wrapper .large.size.frame {
   width: 76%;
   height: 76%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003262}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003262}}
 #wrapper .large.size#iframe {
   -ms-zoom: 1.3;
   -moz-transform: scale(1.3);
@@ -416,12 +416,12 @@ a, a:link {
   -o-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003272}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003272}}
 #wrapper .larger.size.frame {
   width: 66%;
   height: 66%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003275}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003275}}
 #wrapper .larger.size#iframe {
   -ms-zoom: 1.5;
   -moz-transform: scale(1.5);
@@ -432,7 +432,7 @@ a, a:link {
   -webkit-transform-origin: 0 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/maker\.moztw\.org\/sass\/global\.sass}line{font-family:\00003285}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/ETBlue\/Documents\/GitHub\/hackfoldr-2\.0\/sass\/global\.sass}line{font-family:\00003285}}
 #sidebar .ui.accordion > .content {
   padding: 0;
 }

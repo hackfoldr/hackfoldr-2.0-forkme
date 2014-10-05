@@ -10,17 +10,17 @@ block body
       .ui.borderless.menu
         include white_label-shortcuts-nav
         .ui.dropdown.icon.item.history
-          i.icon.time(data-content="紀錄")
+          i.icon.time
           include foldr_history-menu
         .ui.dropdown.icon.item.about
-          i.icon.help(data-content="說明")
+          i.icon.help
           include help-menu
         a.right.item.expand.button.collapsed.mode.hidden.desktop.only
           i.icon.arrow.right(data-content="展開")
         a.right.item.collapse.button.expanded.mode.desktop.only
           i.icon.arrow.left(data-content="收合")
         .right.icon.item.zoom.ui.dropdown
-          i.icon.zoom.in(data-content="縮放")
+          i.icon.zoom.in
           include zoom-menu
 
     //- on mobile / tablet / phone, nav bar content is merged into this bar
@@ -31,17 +31,17 @@ block body
           span.text
         include white_label-shortcuts-topbar
         .ui.dropdown.icon.item.history.tablet.only
-          i.icon.time(data-content="紀錄")
+          i.icon.time
           include foldr_history-menu
         .ui.dropdown.icon.item.about.tablet.only
-          i.icon.help(data-content="說明")
+          i.icon.help
           include help-menu
         a.right.item.show.nav.button.collapsed.mode.mobile.only
           i.icon.arrow.down(data-content="展開")
         a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
           i.icon.arrow.up(data-content="收合")
         .right.ui.dropdown.icon.item.meta.phone.only
-          i.icon.ellipsis.vertical(data-content="選項")
+          i.icon.ellipsis.vertical
           .menu
             a.item.edit.table.tiny.only(target="iframe") 編輯
               i.icon.pencil
@@ -55,14 +55,14 @@ block body
               i.icon.help
               include help-menu
         .right.icon.item.zoom.ui.dropdown.tablet.only
-          i.icon.zoom.in(data-content="縮放")
+          i.icon.zoom.in
           include zoom-menu
         a.right.icon.item.edit.table(target="iframe")
           i.icon.pencil(data-content="編輯")
         a.right.icon.item.refresh.table.hidden
           i.icon.repeat(data-content="更新")
         a.right.icon.item.add.to.list.hidden
-          i.icon.add(data-content="新增")
+          i.icon.add
       .ui.segment.submit.no.margin.hidden.expanded.mode
         .ui.form
           .inline.field
@@ -280,6 +280,8 @@ block script
           var startPostition = link_url.indexOf('v=') + 2;
           link_url = '//www.youtube.com/embed/' + link_url.substring(startPostition, startPostition + 11);
           link_icon = "youtube play";
+        } else if(link_url.match(/^.*.flickr.com\//)) {
+          link_icon = "flickr";
         } else if(link_url.match(/^.*.ustream.tv\//)) {
           link_icon = "facetime video";
         } else if(link_url.match(/^.*.www.justin.tv\//)) {
@@ -550,6 +552,8 @@ block script
         //} else if(link_url.match(/^.*.gov.tw\//)) {
         //  return true;
         } else if(link_url.match(/^.*.www.loomio.org\//)) {
+          return true;
+        } else if(link_url.match(/^.*.flickr.com\//)) {
           return true;
         } else {
           return false;
