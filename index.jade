@@ -428,15 +428,23 @@ block script
         // prepare column A - D for following actions
         if(!row[0]){
           row[0] = "";
+        } else {
+          row[0] = row[0].toString();
         }
         if(!row[1]){
           row[1] = "";
+        } else {
+          row[1] = row[1].toString();
         }
         if(!row[2]){
           row[2] = "";
+        } else {
+          row[2] = row[2].toString();
         }
         if(!row[3]){
           row[3] = "";
+        } else {
+          row[3] = row[3].toString();
         }
 
         // skip comment rows
@@ -445,7 +453,8 @@ block script
         }
 
         var this_row_url = row[0].trim();
-        var this_row_title = row[1].trim();
+        var this_row_title = row[1].toString().trim();
+        console.log(row[0]);
 
         // if column A and B is empty, then skip this row 
         if(this_row_url.length === 0 && this_row_title.length === 0){
