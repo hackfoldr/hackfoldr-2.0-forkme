@@ -439,6 +439,10 @@ block script
           row[3] = "";
         }
 
+        row = row.map(function (content) {
+          return content.toString();
+        });
+
         // skip comment rows
         if(row[0].match(/^#/) || row[1].match(/^#/) || row[2].match(/^#/) || row[3].match(/^#/)){
           return
@@ -446,6 +450,7 @@ block script
 
         var this_row_url = row[0].trim();
         var this_row_title = row[1].trim();
+        console.log(row[0]);
 
         // if column A and B is empty, then skip this row 
         if(this_row_url.length === 0 && this_row_title.length === 0){
