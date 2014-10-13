@@ -26,8 +26,8 @@ Development
 * pre-dev:
     * install: [node](http://nodejs.org/)
     * install: ruby 2.0.0 (use [rubyuinstaller](http://rubyinstaller.org) on windows, use `rvm install 2.0.0` on linux/mac)
-    * install sass (`gem install sass --version "3.3.3"`)
-    * install compass (`gem install compass --version "1.0.0.alpha.19"`)
+    * install sass (`gem install sass --version "3.4.5"`)
+    * install compass (`gem install compass --version "1.0.1"`)
     * `npm i`
 * devlopment:
     * `npm run build` (1st time to create `_public` folder)
