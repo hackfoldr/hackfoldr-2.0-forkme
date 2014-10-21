@@ -14,7 +14,7 @@ rm -rf _public
 # XXX: use --reference when not in shallow clone
 #git clone $REPO --reference . -b gh-pages _public
 git clone $REPO -b gh-pages _public
-
+rm -rf _public/css
 REV=`git describe --always`
 BUILD=git-$REV ./node_modules/.bin/gulp build
 cd _public
