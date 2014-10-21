@@ -1,4 +1,4 @@
-require! <[gulp gulp-util express connect-livereload gulp-livereload path gulp-compass gulp-jade]>
+require! <[gulp gulp-util express connect-livereload gulp-livereload path gulp-compass gulp-jade gulp-plumber]>
 
 app = express!
 
@@ -6,11 +6,14 @@ build_path = '_public'
 
 gulp.task 'sass', ->
     gulp.src 'sass/*.sass'
+        .pipe gulp-plumber errorHandler: (error) ->
+            gulp-util.log gulp-util.colors.red error.message
         .pipe gulp-compass {sass: 'sass', css: "#{build_path}/css", sourcemap: 'ture'}
         .pipe gulp.dest "#{build_path}/css"
 
 gulp.task 'jade', ->
     gulp.src '*.jade'
+        .pipe gulp-plumber!
         .pipe gulp-jade!
         .pipe gulp.dest "#{build_path}"
 
