@@ -9,7 +9,7 @@ gulp.task 'sass', ->
     .pipe gulp-plumber errorHandler: (error) ->
       gulp-util.log gulp-util.colors.red error.message
     .pipe gulp-compass {sass: 'sass', css: "#{build_path}/css", sourcemap: 'ture'}
-    .pipe gulp.dest "#{build_path}"
+    .pipe gulp.dest "#{build_path}/css"
 
 gulp.task 'jade', ->
   gulp.src '*.jade'
