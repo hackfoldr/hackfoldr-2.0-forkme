@@ -8,9 +8,8 @@ git:
 
 before_install:
   - gem update --system
-  - gem install sass --version "3.4.5" --no-document
-  - gem install compass --version "1.0.1" --no-document
-  - gem install tilt  --version "1.4.1" --no-document
+  - gem install compass --no-document
+  - gem install tilt --version "1.4.1" --no-document
 
 before_script:
   - chmod +x .travis/after_success.sh
