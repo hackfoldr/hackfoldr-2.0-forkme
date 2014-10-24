@@ -13,6 +13,7 @@ Using:
 
 Development
 ------------
+[![devDependency Status](https://david-dm.org/hackfoldr/hackfoldr-2.0/dev-status.svg?style=flat-square)](https://david-dm.org/hackfoldr/hackfoldr-2.0#info=devDependencies)
 
 * development on master branch
 * deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)
