@@ -31,7 +31,6 @@ Development
     * install compass (`gem install compass`)
     * `npm i`
 * devlopment:
-    * `npm run build` (1st time to create `_public` folder)
     * `npm start`
     * open `http://localhost:3000/` to see the result.
 

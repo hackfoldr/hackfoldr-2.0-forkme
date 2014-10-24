@@ -8,9 +8,9 @@
     }
   ],
   "scripts": {
-    "build": "gulp build",
-    "start": "gulp dev",
-    "test": "gulp build"
+    "build": "gulp build --require LiveScript",
+    "start": "gulp dev --require LiveScript",
+    "test": "gulp build --require LiveScript"
   },
   "engines": {
     "node": "0.10.x"

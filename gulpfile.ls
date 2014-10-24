@@ -12,13 +12,13 @@ gulp.task 'sass', ->
     .pipe gulp.dest "#{build_path}/css"
 
 gulp.task 'jade', ->
-  gulp.src '*.jade'
+  gulp.src './views/*.jade'
     .pipe gulp-plumber!
     .pipe gulp-jade!
     .pipe gulp.dest "#{build_path}"
 
 gulp.task 'html', ->
-  gulp.src '*.html'
+  gulp.src './views/backup/*.html'
     .pipe gulp.dest "#{build_path}"
 
 gulp.task 'assets', ->
@@ -38,8 +38,8 @@ gulp.task 'server', ->
 gulp.task 'watch', ->
   gulp-livereload.listen silent: true
   gulp.watch 'sass/*.sass', <[sass]> .on \change, gulp-livereload.changed
-  gulp.watch './*.jade', <[jade]> .on \change, gulp-livereload.changed
-  gulp.watch './*.html', <[html]> .on \change, gulp-livereload.changed
+  gulp.watch './views/*.jade', <[jade]> .on \change, gulp-livereload.changed
+  gulp.watch './views/backup/*.html', <[html]> .on \change, gulp-livereload.changed
   gulp.watch 'js/*js', <[js]> .on \change, gulp-livereload.changed
 
 gulp.task 'build', <[jade sass html js assets]>
