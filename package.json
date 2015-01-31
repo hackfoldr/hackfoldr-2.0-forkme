@@ -22,8 +22,8 @@
     "express": "^4.3.1",
     "gulp": "^3.7.0",
     "gulp-compass": "^2.0.0",
-    "gulp-jade": "^0.9.0",
-    "gulp-livereload": "^2.0.0",
+    "gulp-jade": "^0.11.0",
+    "gulp-livereload": "^3.6.0",
     "gulp-plumber": "^0.6.6",
     "gulp-util": "^3.0.1"
   },
