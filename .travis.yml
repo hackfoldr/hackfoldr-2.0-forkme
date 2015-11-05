@@ -24,7 +24,7 @@ branches:
 
 env:
   global:
-    - REPO="git@github.com:hackfoldr/hackfoldr-2.0"
-    - secure: "IT1pzPMfW2EQZQxPIXMYtDVrn5psP7yai97aDoQGJzdMCZl9oKmp+jb2MX3503X9IjfoGpWJdu5N71o1aQR27wWWMnmsOJkf/UHUVB43WdyjFik+69OyPxbzq44OU7Ipn89WJut259qBwbrgtX9lYMtRB4pxpsw2nWVkWcu5fl0="
+    - REPO=""
+    - secure: ""
 
 after_success: .travis/after_success.sh
