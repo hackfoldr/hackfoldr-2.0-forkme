@@ -108,7 +108,7 @@ block script
   script.
     // prepare to handle url
     var paths = location.pathname.split('/') || [];
-    var ethercalc_name     = paths[1] || "welcome-to-hackfoldr";
+    var ethercalc_name     = paths[1] || "___DEFAULT_ETHERCALC_PATH___";
     var current_iframe_url = paths[2] ? unescape(unescape(paths[2])) : null;
     var history_state={};
     // prepare to handle backend data (from ethercalc or google spreadsheet)
@@ -749,7 +749,7 @@ block script
       var new_hackpad_title = $("#topbar .form .new.pad.title").val();
       //var new_hackpad_id = encodeURIComponent(new_hackpad_title.slice(0,8));
       var new_hackpad_id = Math.random().toString(36);
-      var new_hackpad_url = "https://g0v.hackpad.com/"+new_hackpad_id;
+      var new_hackpad_url = "https://___YOUR_HACKPAD_URL___.hackpad.com/"+new_hackpad_id;
       var new_menu_item = '<a href="'+new_hackpad_url+'" target="iframe" class="link item"><i class="icon text file outline"></i>'+new_hackpad_title+'</a>';
       // add new hackpad info to foldr
       if(new_hackpad_title.length > 0){
