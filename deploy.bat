@@ -3,7 +3,7 @@ if not defined FOUND goto NOGIT
 
 git checkout gh-pages
 git merge master
-call jade . -o . --pretty
+call jade views/{index,404}.jade -o . -pretty
 git add .
 git commit -m 'deploy'
 git pull
