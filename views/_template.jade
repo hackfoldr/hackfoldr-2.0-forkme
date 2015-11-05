@@ -1,0 +1,68 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.3.11), angularjs(1.2.3), bootstrap(3.0)/semantic-ui(0.9.3/0.9.5)
+//- var usecdn = false
+//- var useog = false
+//- var lib = { tabletop: true, jquery_ui: true, jquery: true, d3js: false, angular: false, bootstrap: false, semantic: true }
+//- var assets = "/assets"
+//- var thumbnail = "http://dummy.thumbnail"
+html
+  head
+    meta(charset="utf-8")
+
+    // Favicon
+    link(rel='icon', href='/assets/img/favicon/favicon.ico', type='image/x-icon')
+    link(rel='shortcut icon', href='/assets/img/favicon/favicon.ico', type='image/x-icon')
+
+    // For iOS
+    meta(name="viewport",content="width=device-width, initial-scale=1")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    link(rel="apple-touch-icon-precomposed" href="/assets/img/app-icon/icon-60.png")
+    link(rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/app-icon/icon-76.png")
+    link(rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/app-icon/icon-60@2x.png")
+    link(rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/app-icon/icon-76@2x.png")
+    
+    // libraries
+    //-include library.jade
+
+    //-script(type="text/javascript",src="/js/global.js")
+    script(type="text/javascript",src="/js/csv.js")
+    // handlebars
+    script(type="text/javascript",src="/js/handlebars-v1.3.0.js")
+    // tabletop.js
+    script(type="text/javascript",src="/assets/tabletop/tabletop.js")
+    // jquery
+    script(type="text/javascript",src="/assets/jquery/jquery-2.1.1.min.js")
+    // jquery_ui
+    script(type="text/javascript",src="/assets/jquery-ui/1.11.0.custom/jquery-ui.min.js")
+    // d3js
+    //-script(type="text/javascript",src="/assets/d3js/3.3.11/d3.v3.min.js")
+    // angular
+    //-script(type="text/javascript",src="/assets/angular/1.2.3/angular.min.js")
+    // bootstrap
+    //-link(rel="stylesheet",type="text/css",href="/assets/bootstrap/3.0.2/css/bootstrap.min.css")
+    //-script(type="text/javascript",src="/assets/bootstrap/3.0.2/js/bootstrap.min.js")
+    // semantic ui
+    link(rel="stylesheet",type="text/css",href="/assets/semantic-ui/0.19.0/css/semantic.min.css")
+    script(type="text/javascript",src="/assets/semantic-ui/0.19.0/javascript/semantic.min.js")
+
+      
+    //-meta(http-equiv="X-UA-Compatible",content="IE=edge")
+    //-meta(name="description",content="")
+    //-link(rel="stylesheet",href="css/normalize.css")
+    //-link(rel="stylesheet",href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700")
+    link(rel="stylesheet",href="/css/global.css")
+    //-script(src="/js/vendor/tablesort.js")
+    block head
+    title
+      block title
+      | hackfoldr
+
+  body
+
+    block body
+
+    #script
+      script.
+        window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')
+      block script
+
