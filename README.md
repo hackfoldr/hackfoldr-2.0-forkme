@@ -3,7 +3,7 @@ The New Hackfoldr
 
 Organize gdoc and hackpad documents for project.
 
-## Why?
+### Why?
 
 We need a way to organize many dynamic documents for every projects.
 
@@ -14,7 +14,7 @@ Hackpad collections are great too, but we also want to include spreadsheets as o
 So we build this small single-page static web application, that reads a list of url from an EtherCalc spreadsheet, rendering it in a way similar to a google docs folder.  If the document supports read-only mode, we use that by default when it is opened by the user, and provide an additional edit link.
 
 
-## Supported document types
+### Supported document types
 
 * Google Docs
 * Google Spreadsheets
@@ -25,7 +25,7 @@ So we build this small single-page static web application, that reads a list of 
 * Links
 
 
-# Sample folder
+## Sample folder
 
 http://folder.moztw.org/hackfolder_template
 
