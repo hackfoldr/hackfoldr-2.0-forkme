@@ -545,7 +545,7 @@ block script
           return true;
         } else if(link_url.match(/^.*.github.com\//)) {
           return true;
-        } else if(link_url.match(/^.*.drive.google.com\//)) {
+        } else if(link_url.match(/^.*drive.google.com\/(?!.*\/preview$)/)) {
           return true;
         } else if(link_url.match(/^.*.facebook.com\//)) {
           return true;
