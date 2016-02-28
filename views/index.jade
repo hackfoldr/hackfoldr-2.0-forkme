@@ -614,13 +614,16 @@ block script
         Tabletop.init({
           key: csv_api_source_id,
           callback: function(data, tabletop){
+            var columnNames = tabletop.models[tabletop.model_names[0]].column_names
             data = data.map(function (o) {
-              result = [];
-              result[0] = o.url || "";
-              result[1] = o.title || "";
-              result[2] = o.foldrexpand || "";
-              result[3] = o["編輯註解"] || "";
-              result[4] = o.hints || "";
+              var result = ['', '', '', '', '']
+
+              columnNames.forEach(function(columnName, idx){
+                if(o[columnName]) {
+                  result[idx] = o[columnName];
+                }
+              });
+
               return result;
             });
             compile_json(data);
