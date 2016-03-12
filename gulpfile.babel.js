@@ -21,7 +21,7 @@ gulp.task('sass', () =>
 );
 
 gulp.task('jade', () =>
-  gulp.src('views/*.jade')
+  gulp.src(['views/index.jade', 'views/404.jade'])
     .pipe(plumber())
     .pipe(jade())
     .pipe(gulp.dest(`${build_path}`))

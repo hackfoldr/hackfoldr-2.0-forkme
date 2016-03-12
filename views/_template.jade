@@ -25,9 +25,9 @@ html
     //-include library.jade
 
     //-script(type="text/javascript",src="/js/global.js")
-    script(type="text/javascript",src="/js/csv.js")
+    script(type="text/javascript",src="/assets/csv.js")
     // handlebars
-    script(type="text/javascript",src="/js/handlebars-v1.3.0.js")
+    script(type="text/javascript",src="/assets/handlebars-v1.3.0.js")
     // tabletop.js
     script(type="text/javascript",src="/assets/tabletop/tabletop.js")
     // jquery
@@ -61,8 +61,4 @@ html
 
     block body
 
-    #script
-      script.
-        window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')
-      block script
-
+    script(type="text/javascript", src="/js/index.js")
