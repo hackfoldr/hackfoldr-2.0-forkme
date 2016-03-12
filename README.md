@@ -30,13 +30,13 @@ So we build this small single-page static web application, that reads a list of 
 http://folder.moztw.org/hackfolder_template
 
 
-# Hosting your own Hackfoldr 
+# Hosting your own Hackfoldr
 [Please follow the toturial](https://g0v.hackpad.com/Hackfoldr-2.0-forkme) to set up your own hackfoldr 2.0 instance
 
 
 # Development
 
-[![devDependency Status](https://david-dm.org/hackfoldr/hackfoldr-2.0/dev-status.svg?style=flat-square)](https://david-dm.org/hackfoldr/hackfoldr-2.0#info=devDependencies)
+[![devDependency Status](https://david-dm.org/hackfoldr/hackfoldr-2.0-forkme/dev-status.svg?style=flat-square)](https://david-dm.org/hackfoldr/hackfoldr-2.0-forkme#info=devDependencies)
 
 * development on master branch
 * <del>deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)</del>
