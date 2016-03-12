@@ -42,11 +42,6 @@ http://folder.moztw.org/hackfolder_template
 * <del>deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)</del>
 ^^^ temporary broken ^^^
 
-### Developing with Fire.app
-
-* development:
-    * using Fire.app to watch .jade and .sass
-    * using Github for Windows or git on linux to sync and commit
 
 ### Developing with Gulp.js
 
@@ -57,7 +52,7 @@ http://folder.moztw.org/hackfolder_template
     * `npm i`
 * devlopment:
     * `npm start`
-    * open `http://localhost:3000/` to see the result.
+    * open `http://localhost:3000/` to see the result. You can use `http://localhost:3000/hackfolder_template` to development.
 
 
 # License
