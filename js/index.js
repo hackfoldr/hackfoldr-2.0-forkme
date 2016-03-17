@@ -1,3 +1,8 @@
+
+import storage from './storage';
+
+import ZoomButton from './components/ZoomButton';
+
 // prepare to handle url
 var paths = location.pathname.split('/') || [];
 var ethercalc_name     = paths[1] || "___DEFAULT_ETHERCALC_PATH___";
@@ -13,9 +18,10 @@ var sort_sheet = true;
 // prepare to handle iframe content
 var current_foldr_name = "";
 var iframe_src;
+
 // user preferences saved in local storage
-var foldr_histories = JSON.parse(localStorage.getItem("hackfoldr")) || [];
-var foldr_scale = JSON.parse(localStorage.getItem("hackfoldr-scale")) || "";
+var foldr_histories = storage.getFoldrHistory();
+var foldr_scale = storage.getFoldrScale();
 
 // check where the csv will come from, ethercalc or gsheet?
 if(ethercalc_name.length < 40){
@@ -385,7 +391,7 @@ var compile_json = function(rows){
         // new history on top
         foldr_histories.unshift(JSON.stringify(current_foldr_history));
         // add foldr to history
-        localStorage.setItem("hackfoldr", JSON.stringify(foldr_histories));
+        storage.setFoldrHistory(foldr_histories);
       }else{
         return
       }
@@ -551,43 +557,27 @@ $("#nav .collapse.button").on("click tap", function(){
   $("#sidebar, #wrapper").addClass("desktop-collapsed-layout").removeClass("desktop-expanded-layout");
   $(".expanded.mode").hide();
   $(".collapsed.mode").not(".tablet.only").show();
-  });
+});
 $("#nav .expand.button").on("click tap", function(){
   $("#sidebar, #wrapper").addClass("desktop-expanded-layout").removeClass("desktop-collapsed-layout");
   $(".expanded.mode").not(".tablet.only").css("display","");
   $(".collapsed.mode").hide();
-  });
+});
 
 // sidebar show nav buttons
 $("#topbar .hide.nav.button").on("click tap", function(){
   $(".expanded.mode").hide();
   $(".collapsed.mode").not(".desktop.only").show();
   $("#toc").slideToggle();
-  });
+});
 $("#topbar .show.nav.button").on("click tap", function(){
   $(".expanded.mode").not(".desktop.only").not(".ui.segment.submit").css("display","block");
   $(".collapsed.mode").hide();
   $("#toc").slideToggle();
-  });
-
-// firefox fix for iframe initial size
-$("#wrapper .frame").addClass("normal size");
+});
 
 // zoom in button
-$(".frame, #iframe").addClass(foldr_scale + " size");
-var set_scale = function(scale){
-  $(".frame, #iframe").removeClass("normal large larger").addClass(scale+" size");
-  localStorage.setItem("hackfoldr-scale", JSON.stringify(scale));
-};
-$("#nav, #topbar").on("click tap", ".zoom.dropdown .normal", function(){
-  set_scale("normal");
-});
-$("#nav, #topbar").on("click tap", ".zoom.dropdown .large", function(){
-  set_scale("large");
-});
-$("#nav, #topbar").on("click tap", ".zoom.dropdown .larger", function(){
-  set_scale("larger");
-});
+ZoomButton.register();
 
 // history button
 $("#nav .history, #topbar .history").on("click tap", function(){
