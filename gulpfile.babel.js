@@ -8,9 +8,19 @@ import sass    from 'gulp-sass';
 import jade    from 'gulp-jade';
 import plumber from 'gulp-plumber';
 
+import source     from 'vinyl-source-stream';
+import browserify from 'browserify';
+import babelify   from 'babelify';
+
 const app = express();
 
 const build_path = '_public';
+
+let production = false;
+
+if (util.env.env === 'production') {
+  production = true;
+}
 
 gulp.task('sass', () =>
   gulp.src('sass/*.sass')
@@ -35,8 +45,16 @@ gulp.task('assets', () =>
     .pipe(refresh())
 );
 
+let config = {
+  transform: [[babelify, {presets: ['es2015']}]],
+  debug: !production,
+  fullPaths: !production
+};
+
 gulp.task('js',() =>
-  gulp.src('js/*.js')
+  browserify('js/index.js', config)
+    .bundle()
+    .pipe(source('index.js'))
     .pipe(gulp.dest(`${build_path}/js`))
     .pipe(refresh())
 );

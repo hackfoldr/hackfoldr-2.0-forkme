@@ -426,7 +426,7 @@ var compile_json = function(rows){
   // auto new window, and auto new window icon
   var new_window_icon = "<i class='icon forward mail'></i>";
   var open_link_in_new_window_or_not = function(){
-    link_url = $(this).attr("href");
+    let link_url = $(this).attr("href");
     if(link_url.match(/^.*.plus.google.com\//)) {
       return true;
     } else if(link_url.match(/^.*.kktix.cc\//)) {
@@ -460,7 +460,7 @@ var compile_json = function(rows){
 
   // auto highlight active items and expand parent accordion
   var link_is_current_url_or_not = function(){
-    link_url = $(this).attr("href");
+    let link_url = $(this).attr("href");
     if(link_url == iframe_src){
       return true;
     } else {
