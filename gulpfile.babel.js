@@ -4,7 +4,7 @@ import express from 'express';
 import connect from 'connect-livereload';
 import refresh from 'gulp-refresh';
 import path    from 'path';
-import compass from 'gulp-compass';
+import sass    from 'gulp-sass';
 import jade    from 'gulp-jade';
 import plumber from 'gulp-plumber';
 
@@ -15,7 +15,8 @@ const build_path = '_public';
 gulp.task('sass', () =>
   gulp.src('sass/*.sass')
     .pipe(plumber({errorHandler: (error) => util.log(util.colors.red, error.message)}))
-    .pipe(compass({sass: 'sass', css: `${build_path}/css`, sourcemap: 'ture'}))
+    .pipe(sass({includePaths: 'node_modules/compass-mixins/lib'})
+      .on('error', sass.logError))
     .pipe(gulp.dest(`${build_path}/css`))
     .pipe(refresh())
 );

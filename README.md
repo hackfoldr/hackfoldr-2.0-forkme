@@ -47,8 +47,6 @@ http://folder.moztw.org/hackfolder_template
 
 * pre-dev:
     * install: [node](http://nodejs.org/)
-    * install: ruby 2.0.0 (use [rubyuinstaller](http://rubyinstaller.org) on windows, use `rvm install 2.0.0` on linux/mac)
-    * install compass (`gem install compass`)
     * `npm i`
 * devlopment:
     * `npm start`
