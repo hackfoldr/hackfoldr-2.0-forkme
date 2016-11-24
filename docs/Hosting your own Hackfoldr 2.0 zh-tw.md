@@ -120,6 +120,6 @@ Hackfoldr 使用 ethercalc.org 的線上表單來動態收集內容，表單中�
 
 ## 開發
 
-請參考 [這份文件](https://g0v.hackpad.com/Developing-Hackfoldr-2.0-nIlIQRMVfyc) 或 [README](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/README.md) 來貢獻本專案。
+請參考 [這份文件](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Developing%20Hackfoldr%202.0%20zh-tw.md) 或 [README](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/README.md) 來貢獻本專案。
 
 

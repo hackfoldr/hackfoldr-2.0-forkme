@@ -117,4 +117,4 @@ Be patient and waiting for domain name record to be active. It shouldn't cost yo
 
 ## Development
 
-Please refer to [this docs](https://g0v.hackpad.com/Developing-Hackfoldr-2.0-nIlIQRMVfyc) (in Chinese for now) or [README](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/README.md) for contributing Hackfoldr-beta project.
+Please refer to [this docs](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Developing%20Hackfoldr%202.0%20zh-tw.md) (in Chinese for now) or [README](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/README.md) for contributing Hackfoldr-beta project.
