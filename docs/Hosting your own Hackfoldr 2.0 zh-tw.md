@@ -1,73 +1,105 @@
-﻿Hackfoldr 2.0 教學 - 架設自己的 Hackfoldr
+Hackfoldr 2.0 教學 - 架設自己的 Hackfoldr
 ===
 
 *In other languages:*
 
-- [English tutorial](http://g0v.hackpad.com/Hackfoldr-2.0-forkme)
+- [English tutorial](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Hosting%20your%20own%20Hackfoldr%202.0.md)
+- [中文版](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Hosting%20your%20own%20Hackfoldr%202.0%20zh-tw.md)
 
+
+## Hackfoldr 是什麼
+
+Hackfoldr 讓你在協作開源專案時，方便收集散落網路各地的文件。
+
+範例 folder： http://beta.hackfoldr.org/hackfolder_template
+
+### 如何運作
+
+Hackfoldr 使用 ethercalc.org 的線上表單來動態收集內容，表單中的每一行都代表一個連結。你還可以設定連結要開新分頁、子資料夾、或標上彩色標籤。
 
 ## 白牌打包
 
+### 自架 hackfoldr 的好處
 
-只要
-- 擁有一個頂層網址
-- 擁有一個 github 帳號
+- 使用自己的網址，自訂 folder 首頁的預設內容
 
-就可以 fork 屬於自己的 hackfoldr。
+    例如： http://beta.hackfoldr.org/ 連結到  ethercalc.org/welcome-to-hackfoldr   
+    而 http://folder.moztw.org/ 連結到 ethercalc.org/moztw ，收集所有關於 MozTW 社群的文件
 
-自架 hackfoldr 的好處：
-- 可自訂首頁打開的預設 foldr
 - 可打開隱藏的快捷選單，把常用連結內建到 hackfoldr 導覽列
 - 可自訂關聯的 hackpad 站台
 
 ## 步驟 ##
 
+### 第零步
+
+你需要下列東西以繼續架設自己的 hackfoldr
+
+- 準備好一個網址
+- 擁有一個 github 帳號
+
 ### fork github repo
 
-到 https://github.com/hackfoldr/hackfoldr-2.0-forkme 按右上角 Fork 按鈕
+1. 到 https://github.com/hackfoldr/hackfoldr-2.0-forkme 
 
-
-### 切換到 gh-pages branch
-
-以下都在 `gh-pages` Branch 內操作才有效
-![](https://hackpad-attachments.imgix.net/g0v.hackpad.com_G7idRJqbG3I_p.41199_1455509979648_Screen%20Shot%202016-02-15%20at%2012.18.21%20PM.png?fit=max&w=882 "title")
+2. 按右上角的 Fork 按鈕
 
 ### 修改 CNAME 檔案
 
-內容改成你想使用的網址，範例： https://github.com/hackfoldr/hackfoldr-2.0/blob/gh-pages/CNAME
+1. 先打開你剛 fork 的全新 github 專案頁面
+
+2. 從左上的 Branch 下拉選單，切換到 `gh-pages` 分支
+
+	我們使用 github 的 project page，而不是 user page 或 organization page，所以顯示成頁面的分支是 gh-pages，而不是 master  
+![](imgs/gh-pages-branch.png)
+
+3. 點開根目錄的 CNAME 檔案
+
+4. 點選右上角的「鉛筆」按鈕編輯 CNAME 檔案內容
+
+5. 將內容改成你欲使用的網址
+
+   請確定此檔案內只包含單一行網址，範例： https://github.com/hackfoldr/hackfoldr-2.0/blob/gh-pages/CNAME
 
 
 ### 使用域名管理服務 (DNS) 設定網址
 
 - 例如 amazon 的 router 53
 
+        name: _YOUR_DOMAIN_NAME_.
+        type: CNAME
+        value: _YOUR_GITHUB_REPO_NAME_.github.io 
+        evaluate target: -
+        health check id: -
+        ttl: 300
+  
+  範例      
+
         name: hack.etblue.tw.
         type: CNAME
         value: etblue.github.io
         evaluate target: -
         health check id: -
-        ttl: 300
+        ttl: 300   
 
 - 假若是 cloudflare
-
-  [Cloudflare guide]( http://blog.cloudflare.com/introducing-pagerules-url-forwarding/)
 
   - 設定 `Cname` 到 `etblue.github.io`
   - 設定 `Page Rule`，
     `http://etblue.github.io/+` forward到 `http://etblue.github.io`
 
+  [Cloudflare guide]( http://blog.cloudflare.com/introducing-pagerules-url-forwarding/)
 
-### 等待域名生效
 
-一般來說不會太久，十分鐘之類的，除非 TTL 設定成超長時間
-
-### 等待期間，可先自訂你的 hackfoldr
+### 自訂你的 hackfoldr
 
 1. 複製 [ethercalc 範例表單](https://ethercalc.org/hackfolder_template) 到一個你喜歡的新網址去
 
-2. 打開你的 repo，切換到 gh-pages branch
+2. 打開你的 repo，切換到 `gh-pages` 分支
 
-3. 打開 `index.html` 檔案，按鉛筆按鈕編輯，畫面會類似這樣： https://github.com/hackfoldr/hackfoldr-2.0/blob/gh-pages/index.html
+3. 打開 `index.html` 檔案，按鉛筆按鈕編輯  
+
+   畫面會類似這樣： https://github.com/hackfoldr/hackfoldr-2.0/blob/gh-pages/index.html
 
 4. 依樣畫葫蘆做這幾件事情
 
@@ -81,90 +113,13 @@
 
     - [將剛才在 index.html 的修改全數複製到 404.html](https://github.com/moztw/hackfoldr-moztw/commit/dba706726b0cb0004e74ad9ff5cf9a816367deb8)（直接整份檔案複製貼上即可）
 
-注意這裡是用 github 的 project page 而不是 user page 或organization page，所以顯示成 page 的是 gh-pages 而不是 master
 
+### 完成了！ 
 
-## 使用 master branch 開發
+現在只需要耐心等待域名生效。一般來說不會太久，十分鐘之類的，除非 TTL 設定成超長時間。
 
-如果你想要用 jade、sass 以比較有效率的方式編輯源碼，可回 master branch，但就需要另外設定開發環境。有兩種環境同時都可以作用
+## 開發
 
-### 前製作業
+請參考 [這份文件](https://g0v.hackpad.com/Developing-Hackfoldr-2.0-nIlIQRMVfyc) 或 [README](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/README.md) 來貢獻本專案。
 
-不管使用以下哪種開發環境，都要安裝 [node.js](http://nodejs.org/)
-
-### 開發環境
-
-#### fire.app
-
-可參考 [Fire.app Jade Windows](https://g0v.hackpad.com/FK7eBR4BdAj) 
-
-1. 安裝 fire.app
-2. 安裝 jade
-
-#### gulp.js
-
-1. 安裝 ruby
-
-   - mac / linux
-
-         rvm install 2.0.0
-
-   - windows
-
-     [rubyuinstaller](    rubyuinstaller)
-
-2. 安裝 compass
-
-       gem install compass
-
-3. 安裝其他專案需要的東西
-
-       npm i
-
-4. 啟動 local server
-
-       npm start
-
-5. 預覽
-
-   http://localhost:3000/
-
-
-### 開發時使用自動 deploy
-
-在 master 開發完後需要 deploy 到 gh-pages 才會生效。
-
-deploy 的方法有兩種：
-
-1. 在 master 產生出 .html .css 後，手動下 git 指令 merge 到 gh-pages（it works，但不推薦）
-
-2. 讓程式自動幫我們跑 deploy 指令（it works smart，推薦）
-
-
-兩種 deploy 方式中，自動 deploy 又分兩種：
-
-1. 半自動 deploy script
-
-2. 全自動 travis ci
-
-目前 hackfoldr 2.0 是採用 travis ci 做全自動 deploy，但筆者不會用，所以只介紹半自動 script ...
-
-#### 半自動 deploy script
-
-- windows
-
-      deploy.bat
-
-- mac
-
-      deploy.sh
-
-#### 全自動 travis ci
-
-想要使用 travis ci 的話，repo 裡的 travis ci 的 key 要改成你自己的才會生效。替你的 repo 設定 travis ci 需要做以下步驟：
-
-參考 comment 生成 key
-https://github.com/hackfoldr/hackfoldr-2.0/blob/master/.travis/after_success.sh
-
-( [Lee](https://g0v.hackpad.com/ep/profile/v6ozRKwVLwr) 待補)
 

@@ -31,7 +31,7 @@ http://folder.moztw.org/hackfolder_template
 
 
 # Hosting your own Hackfoldr
-[Please follow the toturial](https://g0v.hackpad.com/Hackfoldr-2.0-forkme) to set up your own hackfoldr 2.0 instance
+[Please follow the toturial](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Hosting%20your%20own%20Hackfoldr%202.0.md) to set up your own hackfoldr 2.0 instance
 
 
 # Development

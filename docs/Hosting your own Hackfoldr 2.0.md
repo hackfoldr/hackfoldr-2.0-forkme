@@ -1,10 +1,10 @@
-﻿Tutorial: Hosting your own Hackfoldr 2.0
+Tutorial: Hosting your own Hackfoldr 2.0
 ===
 
 *In other languages:*
 
-- [English tutorial](http://g0v.hackpad.com/Hackfoldr-2.0-forkme)
-- [中文版](http://g0v.hackpad.com/Hackfoldr-2.0-forkme)
+- [English tutorial](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Hosting%20your%20own%20Hackfoldr%202.0.md)
+- [中文版](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/master/docs/Hosting%20your%20own%20Hackfoldr%202.0%20zh-tw.md)
 
 ## What is Hackfoldr 2.0
 
@@ -50,6 +50,7 @@ You will need the following to proceed:
 1. Go to your shiny new  repo
 
 2. Switch to `gh-pages` branch at top left branch dropdown button 
+   ![](imgs/gh-pages-branch.png)
 
 3. Click and open CNAME file in root directory
 
@@ -66,12 +67,22 @@ Add a CNAME record of your domain, and set the destination to `_YOUR_GITHUB_ACCO
 
 - Example for Amazon Router 53
 
-  - name: _YOUR_DOMAIN_NAME_
-    eg., folder.moztw.org
-  - type: CNAME
-    value: _YOUR_GITHUB_ACCOUNT_.github.io
-    eg., moztw.github.io
-  - ttl: 300
+        name: _YOUR_DOMAIN_NAME_.
+        type: CNAME
+        value: _YOUR_GITHUB_REPO_NAME_.github.io 
+        evaluate target: -
+        health check id: -
+        ttl: 300
+  
+  Example,  
+
+        name: folder.moztw.org.
+        type: CNAME
+        value: moztw.github.io
+        evaluate target: -
+        health check id: -
+        ttl: 300   
+  
 
 - Example for Cloudflare
 
@@ -90,7 +101,7 @@ Add a CNAME record of your domain, and set the destination to `_YOUR_GITHUB_ACCO
 
    Thanks Github for their wonderful [Project Page](https://help.github.com/articles/user-organization-and-project-pages/#project-pages) feature, save us from renting own server for host hackfolder.
 
-- Edit `index.html` file and adjust the following settings
+3. Edit `index.html` file and adjust the following settings
 
   - Change the linked ethercalc SLUG on [line 3](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/gh-pages/index.html#L3)
   
