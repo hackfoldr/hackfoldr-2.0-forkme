@@ -8,13 +8,13 @@ Tutorial: Hosting your own Hackfoldr 2.0
 
 ## What is Hackfoldr 2.0
 
-Hackfoldr is a convenience web folder to store links for your collaborated OSS projects.
+Hackfoldr is a convenience web folder to store links for your collaborative open source projects.
 
 A sample folder - http://beta.hackfoldr.org/hackfolder_template
 
 ### How does it work
 
-The hackfoldr use ethercalc.org sheet as live configating file. Every row of the sheet represent a link. You can also set the link to open in new window, add subfolder, or append colored label.
+Each hackfoldr uses an ethercalc.org spreadsheet as its live configuration file. Each row of the spreadsheet represents a link. You can also set each link with supplementary properties. For example, to open in a new window, act as a subfolder, or tag with colored labels.
 
 ## Hosting your own Hackfoldr
 
