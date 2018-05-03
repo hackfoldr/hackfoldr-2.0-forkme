@@ -110,6 +110,8 @@ Add a CNAME record of your domain, and set the destination to `_YOUR_GITHUB_ACCO
   - If you would like to use hackpad page generate feature, adjust default hackpad site on [line 644](https://github.com/hackfoldr/hackfoldr-2.0-forkme/blob/gh-pages/index.html#L644) 
 
   - Clone everything from index.html to 404.html
+  
+  - Enable "Enforce HTTPS" under your Github repo's setting pafge to ensure user's privacy.
 
 ### You've done all the works! 
 
