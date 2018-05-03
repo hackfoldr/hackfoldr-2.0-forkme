@@ -113,6 +113,7 @@ Hackfoldr 使用 ethercalc.org 的線上表單來動態收集內容，表單中�
 
     - [將剛才在 index.html 的修改全數複製到 404.html](https://github.com/moztw/hackfoldr-moztw/commit/dba706726b0cb0004e74ad9ff5cf9a816367deb8)（直接整份檔案複製貼上即可）
 
+    - 在 Github repo 的「Settings」中，啟動「Enforce HTTPS」功能，以保護用戶隱私
 
 ### 完成了！ 
 
