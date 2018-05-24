@@ -10,17 +10,17 @@ block body
       .ui.borderless.menu
         include white_label-shortcuts-nav
         .ui.dropdown.icon.item.history
-          i.icon.time
+          i.icon.time(id="desktop-recent")
           include foldr_history-menu
         .ui.dropdown.icon.item.about
-          i.icon.help
+          i.icon.help(id="desktop-help")
           include help-menu
         a.right.item.expand.button.collapsed.mode.hidden.desktop.only
-          i.icon.arrow.right(data-content="展開")
+          i.icon.arrow.right(id="desktop-expand", data-content="展開")
         a.right.item.collapse.button.expanded.mode.desktop.only
-          i.icon.arrow.left(data-content="收合")
+          i.icon.arrow.left(id="desktop-collapse", data-content="收合")
         .right.icon.item.zoom.ui.dropdown
-          i.icon.zoom.in
+          i.icon.zoom.in(id="desktop-zoom")
           include zoom-menu
 
     //- on mobile / tablet / phone, nav bar content is merged into this bar
@@ -31,15 +31,15 @@ block body
           span.text
         include white_label-shortcuts-topbar
         .ui.dropdown.icon.item.history.tablet.only
-          i.icon.time
+          i.icon.time(id="mobile-recent")
           include foldr_history-menu
         .ui.dropdown.icon.item.about.tablet.only
-          i.icon.help
+          i.icon.help(id="mobile-help")
           include help-menu
         a.right.item.show.nav.button.collapsed.mode.mobile.only
-          i.icon.arrow.down(data-content="展開")
+          i.icon.arrow.down(id="mobile-expand", data-content="展開")
         a.right.item.hide.nav.button.expanded.mode.hidden.mobile.only
-          i.icon.arrow.up(data-content="收合")
+          i.icon.arrow.up(id="mobile-collapse", data-content="收合")
         .right.ui.dropdown.icon.item.meta.phone.only
           i.icon.ellipsis.vertical
           .menu
@@ -55,14 +55,14 @@ block body
               i.icon.help
               include help-menu
         .right.icon.item.zoom.ui.dropdown.tablet.only
-          i.icon.zoom.in
+          i.icon.zoom.in(id="mobile-zoom")
           include zoom-menu
         a.right.icon.item.edit.table(target="iframe")
-          i.icon.pencil(data-content="編輯")
+          i.icon.pencil(id="edit", data-content="編輯")
         a.right.icon.item.refresh.table.hidden
-          i.icon.repeat(data-content="更新")
+          i.icon.repeat(id="update", data-content="更新")
         a.right.icon.item.add.to.list.hidden
-          i.icon.add
+          i.icon.add(id="add")
       .ui.segment.submit.no.margin.hidden.expanded.mode
         .ui.form
           .inline.field
