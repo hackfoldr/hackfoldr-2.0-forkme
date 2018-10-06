@@ -14,6 +14,7 @@ import replace from 'gulp-replace';
 const app = express();
 
 const build_path = '_public';
+const deploy_path = './';
 
 gulp.task('sass', () =>
   gulp.src('sass/*.sass')
@@ -61,8 +62,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('inlinesource', function () {
-  return gulp.src(`${build_path}/index.html`)
-    // .pipe(debug())
+  return gulp.src([`${build_path}/index.html`, `${build_path}/404.html`])
     // .pipe(debug(path.resolve(`${build_path}`)))
     .pipe(replace(/<script type="text\/javascript" src="\/(js\/index.js)"><\/script>/g, '<div id="script"><script inline type="text/javascript" src="$1"></script></div>'))
     /* // uncommand to inline all scripts / css 
@@ -77,7 +77,7 @@ gulp.task('inlinesource', function () {
       compress: false,
       rootpath: path.resolve(`${build_path}`)
     }))
-    .pipe(gulp.dest(`${build_path}/out`));
+    .pipe(gulp.dest(`${deploy_path}`));
 });
 
 gulp.task('build', ['jade', 'sass', 'js', 'assets']);
