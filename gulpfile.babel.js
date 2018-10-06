@@ -7,6 +7,9 @@ import path    from 'path';
 import sass    from 'gulp-sass';
 import jade    from 'gulp-jade';
 import plumber from 'gulp-plumber';
+import inlinesource from 'gulp-inline-source';
+import debug   from 'gulp-debug-streams';
+import replace from 'gulp-replace';
 
 const app = express();
 
@@ -57,6 +60,28 @@ gulp.task('watch', () => {
   gulp.watch('js/*js', ['js']);
 });
 
+gulp.task('inlinesource', function () {
+  return gulp.src(`${build_path}/index.html`)
+    // .pipe(debug())
+    // .pipe(debug(path.resolve(`${build_path}`)))
+    .pipe(replace(/<script type="text\/javascript" src="\/(js\/index.js)"><\/script>/g, '<div id="script"><script inline type="text/javascript" src="$1"></script></div>'))
+    /* // uncommand to inline all scripts / css 
+      .pipe(replace(/<script type="text\/javascript" src="\/(.*?.js)">/g, '<script inline type="text/javascript" src="$1">'))
+      .pipe(replace(/<link rel="stylesheet" (type="text\/css" )??href="\/(.*?.css)">/g, '<link inline rel="stylesheet" type="text/css" href="$2">'))
+    */
+    /* // for debug 
+      .pipe(replace(/<link rel="stylesheet" (type="text\/css" )??href="\/(.*?.css)">/g, function(match, p1, offset, string) { console.log(match); }))
+      .pipe(replace(/<script type="text\/javascript" src="\/(.*?.js)">/g, function(match, p1, offset, string) { console.log(match); }))
+    */
+    .pipe(inlinesource({
+      compress: false,
+      rootpath: path.resolve(`${build_path}`)
+    }))
+    .pipe(gulp.dest(`${build_path}/out`));
+});
+
 gulp.task('build', ['jade', 'sass', 'js', 'assets']);
 gulp.task('dev', ['build', 'server', 'watch']);
+gulp.task('deploy', ['build', 'inlinesource']);
+
 gulp.task('default', ['build']);

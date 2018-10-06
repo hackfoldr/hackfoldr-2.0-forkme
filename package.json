@@ -15,7 +15,9 @@
   "engines": {
     "node": "0.10.x"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gulp-debug-streams": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
@@ -25,9 +27,11 @@
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
+    "gulp-inline-source": "^3.2.0",
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.1.0",
     "gulp-refresh": "^1.1.0",
+    "gulp-replace": "^1.0.0",
     "gulp-sass": "^2.2.0",
     "gulp-util": "^3.0.8"
   },
