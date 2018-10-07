@@ -74,8 +74,8 @@ gulp.task('inlinesource', function () {
     .pipe(gulp.dest(`${deploy_path}`));
 });
 
-gulp.task('build', ['jade', 'sass', 'js', 'assets']);
-gulp.task('dev', ['build', 'server', 'watch']);
-gulp.task('deploy', ['build', 'inlinesource']);
+gulp.task('build', gulp.parallel('jade', 'sass', 'js', 'assets'));
+gulp.task('dev', gulp.series('build', 'server', 'watch'));
+gulp.task('deploy', gulp.series('build', 'inlinesource'));
 
-gulp.task('default', ['build']);
+gulp.task('default', gulp.series('build'));
