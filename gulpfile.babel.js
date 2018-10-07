@@ -7,10 +7,13 @@ import path    from 'path';
 import sass    from 'gulp-sass';
 import jade    from 'gulp-jade';
 import plumber from 'gulp-plumber';
+import inlinesource from 'gulp-inline-source';
+import replace from 'gulp-replace';
 
 const app = express();
 
 const build_path = '_public';
+const deploy_path = './';
 
 gulp.task('sass', () =>
   gulp.src('sass/*.sass')
@@ -57,6 +60,22 @@ gulp.task('watch', () => {
   gulp.watch('js/*js', ['js']);
 });
 
-gulp.task('build', ['jade', 'sass', 'js', 'assets']);
-gulp.task('dev', ['build', 'server', 'watch']);
-gulp.task('default', ['build']);
+gulp.task('inlinesource', function () {
+  return gulp.src([`${build_path}/index.html`, `${build_path}/404.html`])
+    .pipe(replace(/<script type="text\/javascript" src="\/(js\/index.js)"><\/script>/g, '<div id="script"><script inline type="text/javascript" src="$1"></script></div>'))
+    /* // uncommand to inline all scripts / css 
+      .pipe(replace(/<script type="text\/javascript" src="\/(.*?.js)">/g, '<script inline type="text/javascript" src="$1">'))
+      .pipe(replace(/<link rel="stylesheet" (type="text\/css" )??href="\/(.*?.css)">/g, '<link inline rel="stylesheet" type="text/css" href="$2">'))
+    */
+    .pipe(inlinesource({
+      compress: false,
+      rootpath: path.resolve(`${build_path}`)
+    }))
+    .pipe(gulp.dest(`${deploy_path}`));
+});
+
+gulp.task('build', gulp.parallel('jade', 'sass', 'js', 'assets'));
+gulp.task('dev', gulp.series('build', 'server', 'watch'));
+gulp.task('deploy', gulp.series('build', 'inlinesource'));
+
+gulp.task('default', gulp.series('build'));

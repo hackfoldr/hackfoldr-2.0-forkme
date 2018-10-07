@@ -1,8 +1,7 @@
 git checkout gh-pages
 git merge master
-jade views/{index,404}.jade -o . -pretty
-git add .
+gulp deploy
+git add index.html 
+git add 404.html
 git commit -m 'deploy'
-git pull
-git push
-git checkout master
+echo "I'll no longer pull and push for you, please push with causion on which remote you'd like to."
