@@ -39,7 +39,7 @@ http://folder.moztw.org/hackfolder_template
 [![devDependency Status](https://david-dm.org/hackfoldr/hackfoldr-2.0-forkme/dev-status.svg?style=flat-square)](https://david-dm.org/hackfoldr/hackfoldr-2.0-forkme#info=devDependencies)
 
 * development on master branch
-* <del>deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)</del>
+* ~~deploy on gh-pages branch (It would auto deploy via travis-ci. You only commit on master branch and push.)~~  
 ^^^ temporary broken ^^^
 
 
